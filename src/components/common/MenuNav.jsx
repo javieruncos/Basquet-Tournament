@@ -13,45 +13,44 @@ const MenuNav = () => {
           <a href="/" className="text-xl font-bold">
             MiLogo
           </a>
-
           {/* Enlaces de Navegación para Desktop */}
           <ul className="hidden md:flex  space-x-6">
             <li>
               <a
                 href="/"
-                className="hover:text-gray-300 transition-colors duration-300"
+                className="hover:text-amber-300 transition-colors duration-300"
               >
                 Inicio
               </a>
             </li>
             <li>
               <a
-                href="/about"
-                className="hover:text-gray-300 transition-colors duration-300"
+                href="/noticias"
+                className="hover:text-amber-300 transition-colors duration-300"
               >
                 Noticias
               </a>
             </li>
             <li>
               <a
-                href="/services"
-                className="hover:text-gray-300 transition-colors duration-300"
+                href="/partidos"
+                className="hover:text-amber-300 transition-colors duration-300"
               >
                 Partidos
               </a>
             </li>
             <li>
               <a
-                href="/contact"
-                className="hover:text-gray-300 transition-colors duration-300"
+                href="/resultados"
+                className="hover:text-amber-300 transition-colors duration-300"
               >
                 Resultados
               </a>
             </li>
             <li>
               <a
-                href="/contact"
-                className="hover:text-gray-300 transition-colors duration-300"
+                href="/tabla"
+                className="hover:text-amber-300 transition-colors duration-300"
               >
                 Tabla 
               </a>
@@ -155,26 +154,34 @@ const MenuNav = () => {
           </li>
           <li>
             <a
-              href="/about"
-              className="block hover:text-gray-300 transition-colors duration-300"
+              href="/noticias"
+              className="block hover:text-amber-300 transition-colors duration-300"
             >
-              Acerca de
+             Noticias
             </a>
           </li>
           <li>
             <a
-              href="/services"
-              className="block hover:text-gray-300 transition-colors duration-300"
+              href="/partidos"
+              className="block hover:text-amber-300 transition-colors duration-300"
             >
-              Servicios
+              Partidos
             </a>
           </li>
           <li>
             <a
-              href="/contact"
-              className="block hover:text-gray-300 transition-colors duration-300"
+              href="/resultados"
+              className="block hover:text-amber-300 transition-colors duration-300"
             >
-              Contacto
+              Resultados
+            </a>
+          </li>
+          <li>
+            <a
+              href="/tabla"
+              className="block hover:text-amber-300 transition-colors duration-300"
+            >
+              Tabla
             </a>
           </li>
         </ul>
