@@ -1,11 +1,12 @@
 import "./App.css";
+import MenuNav from "./components/common/MenuNav";
 
 function App() {
   
   return (
     <>
-      <div>
-        <h1 className=" text-2xl font-bold">Basquet Tournament</h1>
+      <div className="App">
+         <MenuNav></MenuNav>
       </div>
     </>
   );
