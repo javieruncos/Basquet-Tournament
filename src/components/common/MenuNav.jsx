@@ -7,14 +7,12 @@ const MenuNav = () => {
 
   return (
     <nav className="bg-black text-white p-4 shadow-md border-b border-gray-500">
-      <div className="container mx-auto flex md:justify-start justify-between items-center gap-10">
-        <div className="w-full flex justify-start gap-20 items-center">
-          {/* Logo o Nombre de la Marca */}
+      <div className="container mx-auto flex lg:justify-start justify-between items-center gap-10">
+        <div className="lg:w-full w-auto flex justify-start lg:gap-20 gap-4 items-center">
           <a href="/" className="text-xl font-bold">
             MiLogo
           </a>
-          {/* Enlaces de Navegación para Desktop */}
-          <ul className="hidden md:flex  space-x-6">
+          <ul className="hidden lg:flex  space-x-6">
             <li>
               <a
                 href="/"
@@ -57,13 +55,13 @@ const MenuNav = () => {
             </li>
           </ul>
         </div>
-        <div className="md:flex md:items-center gap-10 hidden">
+        <div className="lg:flex lg:items-center gap-10 hidden">
           <TextField
             id="outlined-search"
             label="Buscar"
             type="search"
             size="small"
-            className="w-70"
+            className="lg:w-70 w-sm"
             sx={{
               input: {
                 color: "gray",
@@ -82,7 +80,7 @@ const MenuNav = () => {
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "gray",
-                  borderWidth: "1px !important", // fuerza el ancho
+                  borderWidth: "1px !important", 
                   borderRadius: "10px",
                 },
                 "&:hover fieldset": {
@@ -99,14 +97,12 @@ const MenuNav = () => {
 
           <a href="*" className="text-sm w-30 text-center px-3 py-2.5 bg-amber-400 rounded-md">Iniciar Sesion</a>
         </div>
-        {/* Botón de Hamburguesa para móvil */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="focus:outline-none"
           >
             {isOpen ? (
-              // Ícono de Cierre (X)
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -122,7 +118,6 @@ const MenuNav = () => {
                 ></path>
               </svg>
             ) : (
-              // Ícono de Hamburguesa
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -141,8 +136,7 @@ const MenuNav = () => {
           </button>
         </div>
       </div>
-      {/* Menú Desplegable para Móvil */}
-      <div className={`${isOpen ? "block" : "hidden"} md:hidden mt-4`}>
+      <div className={`${isOpen ? "block" : "hidden"} lg:hidden mt-4`}>
         <ul className="flex flex-col items-start space-y-4">
           <li>
             <a
@@ -210,7 +204,7 @@ const MenuNav = () => {
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "gray",
-                  borderWidth: "1px !important", // fuerza el ancho
+                  borderWidth: "1px !important", 
                   borderRadius: "10px",
                 },
                 "&:hover fieldset": {
