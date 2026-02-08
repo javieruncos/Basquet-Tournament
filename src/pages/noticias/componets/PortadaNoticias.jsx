@@ -9,8 +9,8 @@ const PortadaNoticias = () => {
         className="object-cover w-full h-full"
       />
       <div className="h-full w-full absolute top-0 left-0 bg-black/60">
-        <div className="pt-20 w-180 px-10 flex flex-col justify-start gap-4 absolute top-0 left-0">
-          <h1 className="text-8xl text-white">Torneo regional Amateur</h1>
+        <div className="pt-20 md:w-180 px-10 flex flex-col justify-start gap-4 absolute top-0 left-0 text-center md:text-left">
+          <h1 className="text-5xl md:text-8xl  text-white">Torneo regional Amateur</h1>
           <p className="text-gray-400">
             El Torneo Regional Amateur celebra el talento y el compromiso de los
             equipos de la región. Un espacio donde el básquet amateur crece, se

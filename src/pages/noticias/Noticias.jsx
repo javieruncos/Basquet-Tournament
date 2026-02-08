@@ -3,7 +3,7 @@ import PortadaNoticias from './componets/PortadaNoticias';
 
 const Noticias = () => {
     return (
-        <div className='px-10 main-container'>
+        <div className='md:px-10 main-container'>
             <PortadaNoticias></PortadaNoticias>
         </div>
     );
