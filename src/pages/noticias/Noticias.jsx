@@ -1,6 +1,6 @@
 import React from "react";
-import PortadaNoticias from "./componets/PortadaNoticias";
-import CardNoticias from "./componets/CardNoticias";
+import PortadaNoticias from "./components/PortadaNoticias";
+import CardNoticias from "./components/CardNoticias";
 
 const Noticias = () => {
   const filtros = ["Todos", "Masculino", "Femenino", "Juveniles"];
