@@ -1,5 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React from "react";
+import CardReultados from "./components/CardReultados";
 
 const Resultados = () => {
   const filter = [
@@ -10,21 +11,21 @@ const Resultados = () => {
     "Final",
   ];
   return (
-    <div className="md:px-10 main-container pt-15">
-      <div className="flex flex-col gap-2">
+    <div className="md:px-10 px-5 main-container pt-15">
+      <div className="flex flex-col gap-2 px-5">
         <h1 className="text-7xl">Resultados</h1>
         <p>Torneo Regional Amateur de Basquet - Temporada 2026</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 px-4 md:px-0.5 w-190 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4 md:px-0 w-full mt-6">
         {filter.map((f) => (
-          <button className="py-2 px-2 bg-[#191919] rounded-md hover:bg-amber-300 hover:text-black transition duration-300 ease-in-out">
+          <button key={f} className="py-2 px-2 bg-[#191919] rounded-md hover:bg-amber-300 hover:text-black transition duration-300 ease-in-out">
             {f}
           </button>
         ))}
       </div>
-      <div className="h-50 md:h-90 lg:h-23  w-full py-5 bg-[#191919] mt-10 grid grid-col-1 md:grid-cols-1 lg:grid-cols-2 gap-3  rounded-md">
-        <div className="flex gap-4 px-10 items-center">
-          <FormControl className="w-50  text-white">
+      <div className="w-full py-10  bg-[#191919] mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
+        <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
+          <FormControl className="w-full md:w-60 text-white">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -74,7 +75,7 @@ const Resultados = () => {
           <TextField
             label="Fecha"
             type="date"
-            className="w-50"
+            className="w-full md:w-60"
             InputLabelProps={{
               shrink: true,
               sx: { color: "white", "&.Mui-focused": { color: "white" } },
@@ -96,8 +97,8 @@ const Resultados = () => {
               }}
           />
         </div>
-        <div className="flex justify-end px-10">
-          <FormControl className="w-50">
+        <div className="flex justify-center lg:justify-end px-4 lg:px-10 w-full lg:w-auto">
+          <FormControl className="w-full md:w-60">
             <Select
               id="demo-simple-select"
               displayEmpty
@@ -142,6 +143,12 @@ const Resultados = () => {
             </Select>
           </FormControl>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 my-6">
+          <CardReultados></CardReultados>
+          <CardReultados></CardReultados>
+          <CardReultados></CardReultados>
+          <CardReultados></CardReultados>
       </div>
     </div>
   );
