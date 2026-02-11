@@ -4,6 +4,7 @@ import MenuNav from "./components/common/MenuNav";
 import Noticias from "./pages/noticias/Noticias";
 import Resultados from "./pages/resultados/Resultados";
 import DetalleResultado from "./pages/detalleResultado/DetalleResultado";
+import ClubesPage from "./pages/clubes/ClubesPage";
 
 function App() {
   
@@ -15,7 +16,8 @@ function App() {
          <Routes>
           <Route path="/noticias" element={<Noticias></Noticias>}></Route>
           <Route path="/resultados" element={<Resultados></Resultados>}></Route>
-          <Route path="/" element={<DetalleResultado></DetalleResultado>}></Route>
+          <Route path="/detalle:id" element={<DetalleResultado></DetalleResultado>}></Route>
+          <Route path="/" element={<ClubesPage></ClubesPage>}></Route>
          </Routes>
       </div>
     </BrowserRouter>
