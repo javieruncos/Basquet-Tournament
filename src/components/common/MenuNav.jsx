@@ -12,11 +12,11 @@ const MenuNav = () => {
           <a href="/" className="text-xl font-bold">
             MiLogo
           </a>
-          <ul className="hidden lg:flex  space-x-6">
+          <ul className="hidden lg:flex  space-x-6 numberFonts">
             <li>
               <a
                 href="/"
-                className="hover:text-amber-300 transition-colors duration-300"
+                className="hover:text-amber-300 transition-colors duration-300 "
               >
                 Inicio
               </a>
@@ -24,7 +24,7 @@ const MenuNav = () => {
             <li>
               <a
                 href="/noticias"
-                className="hover:text-amber-300 transition-colors duration-300"
+                className="hover:text-amber-300 transition-colors duration-300 "
               >
                 Noticias
               </a>
@@ -95,7 +95,7 @@ const MenuNav = () => {
             }}
           />
 
-          <a href="*" className="text-sm w-30 text-center px-3 py-2.5 bg-amber-400 rounded-md">Iniciar Sesion</a>
+          <a href="*" className="text-sm w-40 text-center px-3 py-2.5 bg-amber-400 rounded-md numberFonts">Iniciar Sesion</a>
         </div>
         <div className="lg:hidden">
           <button
@@ -137,7 +137,7 @@ const MenuNav = () => {
         </div>
       </div>
       <div className={`${isOpen ? "block" : "hidden"} lg:hidden mt-4`}>
-        <ul className="flex flex-col items-start space-y-4">
+        <ul className="flex flex-col items-start space-y-4 numberFonts">
           <li>
             <a
               href="/"
@@ -165,7 +165,7 @@ const MenuNav = () => {
           <li>
             <a
               href="/resultados"
-              className="block hover:text-amber-300 transition-colors duration-300"
+              className="block hover:text-amber-300 transition-colors duration-300 numberFonts"
             >
               Resultados
             </a>
@@ -218,7 +218,7 @@ const MenuNav = () => {
               },
             }}
           />
-            <a href="*" className="text-sm w-30 text-center px-3 py-2 bg-amber-400 rounded-md">Iniciar Sesion</a>
+            <a href="*" className="text-sm w-30 text-center px-3 py-2 bg-amber-400 rounded-md numberFonts">Iniciar Sesion</a>
         </div>
       </div>
     </nav>
