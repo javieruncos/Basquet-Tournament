@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaMapMarkerAlt, FaHome } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaHome ,FaBasketballBall} from 'react-icons/fa';
 
 const DetallesPartido = () => {
   // Datos simulados. En el futuro, estos datos vendrían de props o una API.
@@ -20,19 +20,21 @@ const DetallesPartido = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          {/* <FaWhistle className="text-yellow-400 text-3xl shrink-0" /> */}
-          <div>
-            <p className="text-gray-500 uppercase text-sm font-semibold tracking-wider">Árbitros</p>
-            <p className="font-bold text-base">{referees.join(', ')}</p>
-          </div>
-        </div>
+        
 
         <div className="flex items-center gap-4">
           <FaHome className="text-yellow-400 text-3xl shrink-0" />
           <div>
             <p className="text-gray-500 uppercase text-sm font-semibold tracking-wider">Local</p>
             <p className="font-bold text-base uppercase">{homeTeam}</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <FaBasketballBall className="text-yellow-400 text-3xl shrink-0"/>
+          <div>
+            <p className="text-gray-500 uppercase text-sm font-semibold tracking-wider">Árbitros</p>
+            <p className="font-bold text-base">{referees.join(', ')}</p>
           </div>
         </div>
 

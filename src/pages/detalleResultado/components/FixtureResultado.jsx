@@ -11,7 +11,7 @@ const fixtureResultado = () => {
         </div>
         <div className="flex flex-col gap-4 h-auto w-full ">
           <div className="h-auto  md:h-20 w-full bg-[#222222] rounded-md flex flex-col md:flex-row justify-between items-center overflow-hidden py-10 md:py-0">
-            <div className="h-full w-full flex flex-col md:flex-row items-center px-3 gap-2 md:gap-5 font-bold text-sm lg:text-xl uppercase md:lowercase md:text-lg">
+            <div className="h-full w-full flex flex-col md:flex-row items-center px-3 gap-5 md:gap-5 font-bold text-sm lg:text-xl uppercase md:lowercase lg:uppercase md:text-lg">
               <span className="numberFonts text-gray-400">03 ABR</span>
               <div className="flex gap-2 text-center items-center">
                 <span>Est. Experimental</span>
