@@ -4,7 +4,7 @@ import { FaBasketballBall } from "react-icons/fa";
 const fixtureResultado = () => {
   return (
     <div className="h-auto w-full grid grid-cols-1 md:grid-cols-4 gap-5 my-10">
-      <div className="bg-[#171717] h-full w-full col-span-2 md:col-span-4 lg:col-span-3 rounded-md px-5 py-5">
+      <div className="bg-[#171717] bg-dark-gradient h-full w-full col-span-2 md:col-span-4 lg:col-span-3 rounded-md px-5 py-5">
         <div className="flex gap-4 h-15  w-full items-center">
           <FaCalendarAlt className="text-2xl text-yellow-400 mb-1" />
           <h2 className="text-2xl md:text-3xl">Proximos Encuentros</h2>
@@ -28,7 +28,7 @@ const fixtureResultado = () => {
           </div>
         </div>
       </div>
-      <div className="bg-[#171717] h-full w-full rounded-md py-5 px-2 md:col-span-4 lg:col-span-1">
+      <div className="bg-dark-gradient h-full w-full rounded-md py-5 px-2 md:col-span-4 lg:col-span-1">
         <div className="flex gap-4 h-15  w-full items-center px-5 justify-center md:justify-center lg:justify-start lg:mb-0 md:mb-5 ">
           <FaBasketballBall className="text-2xl text-yellow-400 mb-1" />
           <h2 className="text-2xl md:text-3xl">Maximo Anotador</h2>

@@ -27,3 +27,7 @@ h1,h2,h3,h4,h5,h6 {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+.bg-dark-gradient {
+  background: linear-gradient(to bottom right, #1e1e1e, transparent);
+}

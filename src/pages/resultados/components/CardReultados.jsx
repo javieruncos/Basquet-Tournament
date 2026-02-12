@@ -2,7 +2,7 @@ import React from "react";
 
 const CardReultados = () => {
   return (
-    <div className="h-auto lg:h-75  w-full bg-[#191919] rounded-md">
+    <div className="h-auto lg:h-75  w-full bg-dark-gradient rounded-md">
       <div className="p-4 flex gap-6 items-center justify-between lg:justify-start">
         <span className="bg-amber-300 px-2 py-1 rounded-md text-black">
           Finalizado

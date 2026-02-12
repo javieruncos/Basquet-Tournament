@@ -12,7 +12,7 @@ const EstadisticasEquipos = () => {
   ];
 
   return (
-    <div className="bg-[#171717] rounded-md p-5 mb-10">
+    <div className=" bg-dark-gradient bg rounded-md p-5 mb-10">
       <h3 className="text-3xl mb-6 border-l-4 border-yellow-400 pl-3">Estadísticas de Equipo</h3>
       <div className="flex flex-col gap-6">
         {stats.map((stat, index) => (
