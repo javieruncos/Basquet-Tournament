@@ -4,23 +4,23 @@ import { FaCalendarAlt } from "react-icons/fa";
 
 const PortadaClub = () => {
     return (
-       <div className=" h-130 w-full gap-5 bg-dark-gradient rounded-md relative border border-white/10 overflow-hidden">
+       <div className=" h-auto md:h-130 w-full gap-5 bg-dark-gradient rounded-2xl relative border border-white/10 overflow-hidden">
         <img
           src={portada}
-          className="object-cover w-full h-full radial-gradient(circle at center, rgba(250,204,21,0.15) 0%, transparent 70%);"
+          className="absolute top-0 left-0 object-cover w-full h-full radial-gradient(circle at center, rgba(250,204,21,0.15) 0%, transparent 70%);"
           alt=""
         />
         <div
-          className="h-full w-full bg-black/70  absolute top-0 left-0 
+          className="h-full w-full bg-black/80 relative md:absolute top-0 left-0 
         grid grid-cols-1 md:grid-cols-2 gap-5"
         >
-          <div className="h-full w-full  pt-10 px-10 z-10">
-            <span className="text-amber-300">
+          <div className="h-full w-full py-10 px-5 md:pt-10 md:px-10 z-10">
+            <span className="text-amber-300 numberFonts">
               Club oficial - Temporada 2026 - Torneo Regional Amateur
             </span>
             <div className="py-3">
-              <h1 className="text-7xl">Estacion Experimental</h1>
-              <p className="text-amber-300 text-2xl">Posicion actual  #3 en la tabla</p>
+              <h1 className="text-4xl md:text-7xl">Estacion Experimental</h1>
+              <p className="text-amber-300 text-xl numberFonts">Posicion actual  #3 en la tabla</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-5">
                <div className="h-40 w-full  numberFonts rounded-md backdrop-blur bg-white/5 border border-white/10">
@@ -28,7 +28,7 @@ const PortadaClub = () => {
                   <span>Victorias</span>
                 </div>
                 <div className="text-center">
-                  <span className=" text-6xl">3</span>
+                  <span className="text-4xl md:text-6xl">3</span>
                 </div>
               </div>
               <div className="h-40 w-full  numberFonts rounded-md backdrop-blur bg-white/5 border border-white/10">
@@ -36,7 +36,7 @@ const PortadaClub = () => {
                   <span>Derrotas</span>
                 </div>
                 <div className="text-center">
-                  <span className=" text-6xl">3</span>
+                  <span className="text-4xl md:text-6xl">3</span>
                 </div>
               </div>
               <div className="h-40 w-full  numberFonts rounded-md backdrop-blur bg-white/5 border border-white/10">
@@ -44,21 +44,21 @@ const PortadaClub = () => {
                   <span>Promedio</span>
                 </div>
                 <div className="text-center">
-                  <span className=" text-6xl">%3</span>
+                  <span className="text-4xl md:text-6xl">%3</span>
                 </div>
               </div>
             </div>
-            <div className="h-20 w-full backdrop-blur bg-white/5 border border-white/10 mt-5 rounded-md flex items-center gap-5 px-5">
+            <div className="h-auto py-4 md:py-0 md:h-20 w-full backdrop-blur bg-white/5 border border-white/10 mt-5 rounded-md flex flex-col md:flex-row items-center gap-2 md:gap-5 px-5">
              <FaCalendarAlt className="text-3xl text-amber-300"></FaCalendarAlt>  
-             <p className="text-xl">Proximo encuentro vs Est. Experimental</p>
+             <p className="text-xl text-center md:text-left">Proximo encuentro vs Est. Experimental</p>
              <span className="text-xl text-amber-300">12/12/2026</span>
             </div>
           </div>
-          <div className="h-full w-full  overflow-hidden relative flex justify-center items-center">
+          <div className="h-0  md:h-full w-full overflow-hidden relative flex justify-center items-center ">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Escudo_del_Club_Estaci%C3%B3n_Experimental_Tucum%C3%A1n.svg"
               alt="club"
-              className="h-100  object-cover"
+              className="h-40 md:h-100 object-cover hidden md:block"
             />
           </div>
         </div>
