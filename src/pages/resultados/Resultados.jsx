@@ -23,7 +23,7 @@ const Resultados = () => {
           </button>
         ))}
       </div>
-      <div className="w-full py-10  bg-[#191919] mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
+      <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
         <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
           <FormControl className="w-full md:w-60 text-white">
             <InputLabel

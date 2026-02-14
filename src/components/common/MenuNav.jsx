@@ -53,6 +53,14 @@ const MenuNav = () => {
                 Tabla 
               </a>
             </li>
+            <li>
+              <a
+                href="/clubes"
+                className="hover:text-amber-300 transition-colors duration-300"
+              >
+                Clubes 
+              </a>
+            </li>
           </ul>
         </div>
         <div className="lg:flex lg:items-center gap-10 hidden">
