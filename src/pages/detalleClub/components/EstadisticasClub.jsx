@@ -9,7 +9,7 @@ const EstadisticasClub = () => {
       <div className=" h-auto w-full grid grid-cols-1 lg:grid-cols-4 gap-4">
         <div className="lg:col-span-3 h-auto numberFonts">
           <div className="h-auto w-full mt-5 bg-dark-gradient rounded-md overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px] md:min-w-full">
+            <table className="w-full text-left border-collapse min-w-150 md:min-w-full">
               <thead className="bg-[#222222] text-gray-400">
                 <tr>
                   <th className="py-3 px-4 md:px-5 font-medium">Fecha</th>
@@ -58,7 +58,7 @@ const EstadisticasClub = () => {
             <div className="px-4  flex items-center justify-between">
               <p className="text-xl numberFonts">Estadisticas</p>
             </div>
-            <div className="h-auto w-full  mt-3 border-t border-b border-white/20 numberFonts">
+            <div className="h-auto w-full  mt-3 border-t  border-white/20 numberFonts p-2">
               <div className="py-5 px-5 border-b border-white/20 flex items-center justify-between">
                 <span className="text-amber-300">Jugados</span>
                 <span>3</span>
