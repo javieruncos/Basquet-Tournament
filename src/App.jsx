@@ -7,6 +7,7 @@ import DetalleResultado from "./pages/detalleResultado/DetalleResultado";
 import ClubesPage from "./pages/clubes/ClubesPage";
 import ClubDetalle from "./pages/detalleClub/ClubDetalle";
 import Fixture from "./pages/fixture/Fixture";
+import BoxScore from "./pages/Box/BoxScore";
 
 function App() {
   
@@ -21,7 +22,8 @@ function App() {
           <Route path="/detalle/:id" element={<DetalleResultado></DetalleResultado>}></Route>
           <Route path="/clubes" element={<ClubesPage></ClubesPage>}></Route>
           <Route path="/club/:id" element={<ClubDetalle></ClubDetalle>}></Route>
-          <Route path="/" element={<Fixture></Fixture>}></Route>
+          <Route path="/fixture" element={<Fixture></Fixture>}></Route>
+          <Route path="/" element={<BoxScore></BoxScore>}></Route>
          </Routes>
       </div>
     </BrowserRouter>
