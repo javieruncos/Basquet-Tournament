@@ -8,6 +8,8 @@ import ClubesPage from "./pages/clubes/ClubesPage";
 import ClubDetalle from "./pages/detalleClub/ClubDetalle";
 import Fixture from "./pages/fixture/Fixture";
 import BoxScore from "./pages/Box/BoxScore";
+import Inicio from "./pages/home/Inicio";
+
 
 function App() {
   
@@ -23,7 +25,8 @@ function App() {
           <Route path="/clubes" element={<ClubesPage></ClubesPage>}></Route>
           <Route path="/club/:id" element={<ClubDetalle></ClubDetalle>}></Route>
           <Route path="/fixture" element={<Fixture></Fixture>}></Route>
-          <Route path="/" element={<BoxScore></BoxScore>}></Route>
+          <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
+          <Route path="/" element={<Inicio></Inicio>}></Route>
          </Routes>
       </div>
     </BrowserRouter>
