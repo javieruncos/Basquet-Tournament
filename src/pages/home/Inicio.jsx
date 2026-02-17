@@ -1,17 +1,28 @@
 import PortadaInicio from "./components/PortadaInicio";
 import CardNoticias from "../../pages/noticias/components/CardNoticias";
+import jugadores from "../../assets/images/jugadores.png"
+import { FaPlus } from "react-icons/fa";
 
 export const Inicio = () => {
   return (
     <div className="bg-[#0b0b0b] text-white">
       <PortadaInicio />
+      
       <section className="py-20 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
-              Próximos <span className="text-amber-300">Partidos</span>
-            </h2>
-            <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+          <div className="mb-12 flex justify-between items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
+                Próximos <span className="text-amber-300">Partidos</span>
+              </h2>
+              <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+            </div>
+            <button className="text-amber-300 hover:text-white transition-colors font-bold uppercase tracking-widest text-sm border-b border-amber-300 pb-1 whitespace-nowrap ml-4 flex items-center gap-2">
+              <span className="hidden md:inline">Ver Calendario</span>
+              <span className="md:hidden bg-amber-300 text-black p-1 rounded-full">
+                <FaPlus size={12} />
+              </span>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -80,137 +91,50 @@ export const Inicio = () => {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
-              Noticias <span className="text-amber-300">Destacadas</span>
-            </h2>
-            <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f] overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="mb-12 flex justify-between items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
+                Noticias <span className="text-amber-300">Destacadas</span>
+              </h2>
+              <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+            </div>
+            <button className="text-amber-300 hover:text-white transition-colors font-bold uppercase tracking-widest text-sm border-b border-amber-300 pb-1 whitespace-nowrap ml-4 flex items-center gap-2">
+              <span className="hidden md:inline">Ver Todas</span>
+              <span className="md:hidden bg-amber-300 text-black p-1 rounded-full">
+                <FaPlus size={12} />
+              </span>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((n) => (
+            {[1, 2, 3,4,5,6].map((n) => (
               <CardNoticias key={n} />
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8 ">
+       <section className="py-20 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
-              Tabla de <span className="text-amber-300">Posiciones</span>
-            </h2>
-            <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
-          </div>
-
-          <div className="overflow-x-auto bg-[#1a1a1a] border border-white/5 rounded-2xl ">
-            <table className="w-full text-left border-collapse">
-              <thead className="bg-white/5">
-                <tr>
-                  {["Pos", "Equipo", "PJ", "PG", "PP", "PTS"].map((h) => (
-                    <th
-                      key={h}
-                      className="p-4 text-amber-300 uppercase text-sm tracking-widest text-center"
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {[1, 2, 3, 4, 5].map((pos) => (
-                  <tr
-                    key={pos}
-                    className="border-b border-white/5 hover:bg-white/10 transition"
-                  >
-                    <td className="p-4 text-center font-bold text-lg">{pos}</td>
-
-                    <td className="p-4">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Escudo_del_Club_Estaci%C3%B3n_Experimental_Tucum%C3%A1n.svg"
-                          className="w-8 h-8"
-                        />
-                        <span className="uppercase font-bold text-sm">
-                          Equipo {pos}
-                        </span>
-                      </div>
-                    </td>
-
-                    <td className="p-4 text-center">10</td>
-                    <td className="p-4 text-center text-green-400">8</td>
-                    <td className="p-4 text-center text-red-400">2</td>
-
-                    <td className="p-4 text-center font-bold text-amber-300 text-lg">
-                      18
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f]">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
-              Líderes de la <span className="text-amber-300">Temporada</span>
-            </h2>
-            <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+          <div className="mb-12 flex justify-between items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
+                Líderes de la <span className="text-amber-300">Temporada</span>
+              </h2>
+              <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+            </div>
+            <button className="text-amber-300 hover:text-white transition-colors font-bold uppercase tracking-widest text-sm border-b border-amber-300 pb-1 whitespace-nowrap ml-4 flex items-center gap-2">
+              <span className="hidden md:inline">Ver Estadísticas</span>
+              <span className="md:hidden bg-amber-300 text-black p-1 rounded-full">
+                <FaPlus size={12} />
+              </span>
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {["Puntos", "Rebotes", "Asistencias"].map((stat) => (
-              //   <div
-              //     key={stat}
-              //     className="
-              //     bg-[#1a1a1a]
-              //     border border-white/5
-              //     rounded-2xl
-              //     p-6
-              //     text-center
-              //     shadow-md shadow-black/40
-              //     hover:scale-[1.02]
-              //     hover:shadow-2xl
-              //     transition-all
-              //   "
-              //   >
-              //     <span className="text-amber-300 text-xs font-bold uppercase tracking-widest">
-              //       {stat}
-              //     </span>
-
-              //     <div className="relative mx-auto my-6 w-28 h-28">
-              //       <img
-              //         src="https://media.istockphoto.com/id/525345961/es/foto/afro-americano-hombre-con-pelota-de-baloncesto.jpg"
-              //         className="w-full h-full object-cover rounded-full border-4 border-amber-300 shadow-lg"
-              //       />
-              //       <div className="absolute -bottom-2 -right-2 bg-amber-300 text-black font-bold px-2 py-1 rounded">
-              //         #23
-              //       </div>
-              //     </div>
-
-              //     <h3 className="text-xl font-bold uppercase">
-              //       Nombre Jugador
-              //     </h3>
-
-              //     <p className="text-gray-400 text-sm mb-4">
-              //       EQUIPO EJEMPLO
-              //     </p>
-
-              //     <div className="text-4xl font-extrabold">
-              //       24.5 <span className="text-sm text-gray-500">PROM</span>
-              //     </div>
-
-              //     <button className="mt-6 text-xs font-bold uppercase tracking-widest text-amber-300 hover:text-white transition">
-              //       Ver Perfil
-              //     </button>
-              //   </div>
               <div className="w-full rounded-2xl overflow-hidden bg-[#1a1a1a] shadow-2xl shadow-black/60  transition-all duration-300">
                 <div className="relative h-80">
                   <img
@@ -278,12 +202,80 @@ export const Inicio = () => {
           </div>
         </div>
       </section>
+
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#0f0f0f] ">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12 flex justify-between items-center">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
+                Tabla de <span className="text-amber-300">Posiciones</span>
+              </h2>
+              <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
+            </div>
+            <button className="text-amber-300 hover:text-white transition-colors font-bold uppercase tracking-widest text-sm border-b border-amber-300 pb-1 whitespace-nowrap ml-4 flex items-center gap-2">
+              <span className="hidden md:inline">Ver Tabla Completa</span>
+              <span className="md:hidden bg-amber-300 text-black p-1 rounded-full">
+                <FaPlus size={12} />
+              </span>
+            </button>
+          </div>
+
+          <div className="overflow-x-auto bg-[#1a1a1a] border border-white/5 rounded-2xl shadow-xl">
+            <table className="w-full text-left border-collapse min-w-150">
+              <thead className="bg-white/5">
+                <tr>
+                  {["Pos", "Equipo", "PJ", "PG", "PP", "PTS"].map((h) => (
+                    <th
+                      key={h}
+                      className="p-3 md:p-5 text-amber-300 uppercase text-xs md:text-sm tracking-widest text-center font-bold"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {[1, 2, 3, 4, 5].map((pos) => (
+                  <tr
+                    key={pos}
+                    className="border-b border-white/5 hover:bg-white/10 transition"
+                  >
+                    <td className="p-3 md:p-5 text-center font-bold text-base md:text-lg">{pos}</td>
+
+                    <td className="p-3 md:p-5">
+                      <div className="flex items-center justify-center gap-3">
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Escudo_del_Club_Estaci%C3%B3n_Experimental_Tucum%C3%A1n.svg"
+                          className="w-6 h-6 md:w-8 md:h-8 object-contain"
+                        />
+                        <span className="uppercase font-bold text-xs md:text-sm whitespace-nowrap">
+                          Equipo {pos}
+                        </span>
+                      </div>
+                    </td>
+
+                    <td className="p-3 md:p-5 text-center text-sm md:text-base">10</td>
+                    <td className="p-3 md:p-5 text-center text-green-400 text-sm md:text-base">8</td>
+                    <td className="p-3 md:p-5 text-center text-red-400 text-sm md:text-base">2</td>
+
+                    <td className="p-3 md:p-5 text-center font-bold text-amber-300 text-base md:text-lg">
+                      18
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 border-y border-white/5 bg-[#0b0b0b]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-600 text-xs font-bold uppercase tracking-[0.3em] mb-8">
             Main Partners
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-40 hover:opacity-100 transition-opacity duration-500">
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24">
             {["SPALDING", "GATORADE", "NIKE", "TISSOT"].map((brand) => (
               <h3
                 key={brand}
