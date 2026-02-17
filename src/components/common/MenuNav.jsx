@@ -1,65 +1,58 @@
 import React, { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { Link } from "react-router-dom";
 
 const MenuNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-black/40 text-white p-4 shadow-md border-b border-gray-500  fixed w-full z-10">
+    <nav className="bg-black/80 backdrop-blur-md text-white p-4 shadow-md border-b border-white/10 fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto flex lg:justify-start justify-between items-center gap-10">
         <div className="lg:w-full w-auto flex justify-start lg:gap-20 gap-4 items-center">
-          <a href="/" className="text-xl font-bold">
-            MiLogo
-          </a>
+          <Link to="/" className="text-2xl font-bold uppercase tracking-wider">
+            Basket<span className="text-amber-300">Tour</span>
+          </Link>
           <ul className="hidden lg:flex  space-x-6 numberFonts">
             <li>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="hover:text-amber-300 transition-colors duration-300 "
               >
                 Inicio
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/noticias"
+              <Link
+                to="/noticias"
                 className="hover:text-amber-300 transition-colors duration-300 "
               >
                 Noticias
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/partidos"
+              <Link
+                to="/fixture"
                 className="hover:text-amber-300 transition-colors duration-300"
               >
-                Partidos
-              </a>
+                Fixture
+              </Link>
             </li>
             <li>
-              <a
-                href="/resultados"
+              <Link
+                to="/resultados"
                 className="hover:text-amber-300 transition-colors duration-300"
               >
                 Resultados
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/tabla"
-                className="hover:text-amber-300 transition-colors duration-300"
-              >
-                Tabla 
-              </a>
-            </li>
-            <li>
-              <a
-                href="/clubes"
+              <Link
+                to="/clubes"
                 className="hover:text-amber-300 transition-colors duration-300"
               >
                 Clubes 
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -147,44 +140,36 @@ const MenuNav = () => {
       <div className={`${isOpen ? "block" : "hidden"} lg:hidden mt-4`}>
         <ul className="flex flex-col items-start space-y-4 numberFonts">
           <li>
-            <a
-              href="/"
+            <Link
+              to="/"
               className="block hover:text-gray-300 transition-colors duration-300"
             >
               Inicio
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/noticias"
+            <Link
+              to="/noticias"
               className="block hover:text-amber-300 transition-colors duration-300"
             >
              Noticias
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/partidos"
+            <Link
+              to="/fixture"
               className="block hover:text-amber-300 transition-colors duration-300"
             >
-              Partidos
-            </a>
+              Fixture
+            </Link>
           </li>
           <li>
-            <a
-              href="/resultados"
+            <Link
+              to="/resultados"
               className="block hover:text-amber-300 transition-colors duration-300 numberFonts"
             >
               Resultados
-            </a>
-          </li>
-          <li>
-            <a
-              href="/tabla"
-              className="block hover:text-amber-300 transition-colors duration-300"
-            >
-              Tabla
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="flex items-start flex-col-reverse gap-7 mt-5">
