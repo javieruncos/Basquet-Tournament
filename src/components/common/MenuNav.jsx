@@ -6,7 +6,7 @@ const MenuNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-black text-white p-4 shadow-md border-b border-gray-500">
+    <nav className="bg-black/40 text-white p-4 shadow-md border-b border-gray-500  fixed w-full z-10">
       <div className="container mx-auto flex lg:justify-start justify-between items-center gap-10">
         <div className="lg:w-full w-auto flex justify-start lg:gap-20 gap-4 items-center">
           <a href="/" className="text-xl font-bold">

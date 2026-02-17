@@ -1,13 +1,14 @@
 import Portada from "../../../assets/images/portadaInicio.png";
+import jugadores from "../../../assets/images/jugadores.png";
 
 const PortadaInicio = () => {
   return (
-    <section className="relative h-142.5 overflow-hidden flex items-center px-6 md:px-16 bg-[#171717] text-white">
+    <section className="relative h-162.5 overflow-hidden flex items-center px-6 md:px-16 bg-[#171717] text-white">
       <div className="absolute inset-0 z-0">
         <img
-          src={Portada}
+          src={jugadores}
           alt="Fondo"
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-30 "
         />
         <div className="absolute inset-0 bg-linear-to-r from-black via-black/60 to-transparent"></div>
       </div>
@@ -34,13 +35,6 @@ const PortadaInicio = () => {
           </span>
           <div className="absolute inset-0 bg-white translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
         </button>
-      </div>
-      <div className="absolute right-0 md:right-10 bottom-0 z-20 pointer-events-none">
-        <img
-          src="https://www.valenciabasket.com/public/Image/2025/9/1kamtaylor586x760_Retrato.png"
-          alt="Jugador de basket"
-          className="h-120 md:h-122 object-contain drop-shadow-2xl filter brightness-110 contrast-110 hidden md:block"
-        />
       </div>
     </section>
   );
