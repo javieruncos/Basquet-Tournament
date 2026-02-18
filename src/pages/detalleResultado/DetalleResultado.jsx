@@ -7,7 +7,7 @@ import DetallesPartido from './components/DetallesPartido';
 
 const DetalleResultado = () => {
     return (
-        <div className='pt-5 px-3 md:p-10 px'>
+        <div className='pt-5 px-3 md:pt-20 px'>
           <PortadaDetalle></PortadaDetalle>
           <div className='grid grid-cols-2 md:grid-cols-4 mt-10 gap-5 md:gap-3 lg:gap-10 mb-10'>
             <div className='h-35 lg:h-40 w-full bg-dark-gradient rounded-md'>
