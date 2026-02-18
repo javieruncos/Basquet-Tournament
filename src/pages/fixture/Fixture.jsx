@@ -1,9 +1,8 @@
-import { FormControl,InputLabel,MenuItem,Select,} from "@mui/material";
-
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const Fixture = () => {
   return (
-    <div className="p-10 px-3 lg:px-10 lg:pt-20">
+    <div className="p-10 px-3 lg:px-10 lg:pt-30">
       <div>
         <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
@@ -18,8 +17,8 @@ const Fixture = () => {
           <h1 className="text-5xl lg:text-7xl">Fixture Del Torneo</h1>
           <p className="text-amber-300">Temporada 2026 - Regional Amateur</p>
         </div>
-        <div className="flex gap-4 mt-10">
-          <FormControl className="w-full md:w-60 text-white">
+        <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4  rounded-md px-10">
+          <FormControl className="w-full md:w-60 text-white ">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -117,32 +116,25 @@ const Fixture = () => {
               <MenuItem value={50}>Final</MenuItem>
             </Select>
           </FormControl>
-          <FormControl className="w-full md:w-60 text-white">
-            <InputLabel
-              id="demo-simple-select-label"
-              className="text-white"
-              sx={{ color: "white", "&.Mui-focused": { color: "white" } }}
-            >
-              Categorias
-            </InputLabel>
+          <FormControl className="w-full md:w-60">
             <Select
-              labelId="demo-simple-select-label"
               id="demo-simple-select"
-              label="Equipos"
-              className="bg-[#171717] rounded-md"
+              displayEmpty
+              defaultValue=""
+              className="bg-amber-300"
               sx={{
-                color: "white",
+                color: "black",
                 "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#313131",
+                  borderColor: "black",
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#313131",
+                  borderColor: "black",
                 },
                 "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#313131 !important",
+                  borderColor: "black !important",
                 },
                 "& .MuiSvgIcon-root": {
-                  color: "white",
+                  color: "black",
                 },
               }}
               MenuProps={{
@@ -160,7 +152,10 @@ const Fixture = () => {
                 },
               }}
             >
-              <MenuItem value={10}>Masculino</MenuItem>
+              <MenuItem value="" disabled>
+                Categoria
+              </MenuItem>
+              <MenuItem value={10}>Primera</MenuItem>
               <MenuItem value={20}>Femenino</MenuItem>
               <MenuItem value={30}>Juveniles</MenuItem>
             </Select>
@@ -171,17 +166,19 @@ const Fixture = () => {
         <div className="col-span-3 h-auto numberFonts">
           <div className="h-auto w-full bg-dark-gradient rounded-md overflow-x-auto border border-white/10">
             <table className="w-full text-left border-collapse min-w-full">
-              <thead className="bg-[#222222] text-gray-400">
+              <thead className="bg-[#222222] ">
                 <tr>
                   <th className="py-4 px-6 font-medium w-1/3">Equipos</th>
-                  <th className="py-4 px-6 font-medium text-center w-20">
-                    Resultado
-                  </th>
                   <th className="py-4 px-6 font-medium text-center">
                     Fecha/Hora
                   </th>
+                  <th className="py-4 px-6 font-medium text-center w-20">
+                    Sede/localia
+                  </th>
                   <th className="py-4 px-6 font-medium text-center">Estado</th>
-                  <th className="py-4 px-6 font-medium text-center w-24">Informacion</th>
+                  <th className="py-4 px-6 font-medium text-center w-24">
+                    Informacion
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-white">
@@ -225,25 +222,23 @@ const Fixture = () => {
                     </td>
                     <td className="py-6 px-6">
                       <div className="flex flex-col gap-4 items-center">
-                        <span className="bg-white/10 px-3 py-1 rounded text-xl font-bold w-14 text-center">
-                          85
-                        </span>
-                        <span className="bg-white/10 px-3 py-1 rounded text-xl font-bold w-14 text-center">
-                          72
-                        </span>
+                        <div className="text-xs text-white  flex flex-col gap-2 ">
+                          <span className="text-amber-300">24/06/2026</span>
+                          <span>20:30 hs.</span>
+                        </div>
                       </div>
                     </td>
                     <td className="py-10 px-6 f">
-                      <div className="flex justify-center items-center gap-4">
+                      <div className="flex flex-col gap-4 items-center">
                         <div className="text-xs text-gray-400  flex flex-col gap-2 ">
-                          <span>24/06/2026</span>
-                          <span>20:30 hs.</span>
+                          <span className="text-white">Estadio unico</span>
+                          <span>CAEE.</span>
                         </div>
                       </div>
                     </td>
                     <td className="py-6 px-6 text-center">
                       <span className="text-[13px] uppercase tracking-wider  text-amber-300 px-2 py-1">
-                        Final
+                        Programado
                       </span>
                     </td>
                     <td className="py-6 px-6">
