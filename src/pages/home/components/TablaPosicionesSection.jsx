@@ -16,7 +16,7 @@ const TablaPosicionesSection = () => {
             </button>
           </div>
 
-          <div className="overflow-x-auto bg-white/3 backdrop-blur-3xl border border-white/10 rounded-md shadow-xl">
+          <div className="overflow-x-auto bg-white/5 backdrop-blur-3xl border border-white/10 rounded-md shadow-xl">
             <table className="w-full text-left border-collapse min-w-150">
               <thead className="bg-white/5">
                 <tr>

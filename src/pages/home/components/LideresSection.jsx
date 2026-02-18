@@ -46,7 +46,7 @@ const LideresSection = () => {
                          </div>
                        </div>
                        <div className="h-2 bg-amber-300"></div>
-                       <div className=" bg-white/3 backdrop-blur-3xl   p-6 border border-white/10">
+                       <div className=" bg-white/5 backdrop-blur-3xl   p-6 border border-white/10">
                          <div className="grid grid-cols-3 text-center text-white divide-x divide-amber-300">
                            <div className="pb-6">
                              <p className="text-2xl font-extrabold numberFonts">27</p>

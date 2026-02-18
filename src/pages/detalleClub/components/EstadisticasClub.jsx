@@ -8,7 +8,7 @@ const EstadisticasClub = () => {
       </div>
       <div className=" h-auto w-full grid grid-cols-1 lg:grid-cols-4 gap-4">
         <div className="lg:col-span-3 h-auto numberFonts">
-          <div className="h-auto w-full mt-5 bg-dark-gradient rounded-md overflow-x-auto">
+          <div className="h-auto w-full mt-5 bg-white/5 backdrop-blur rounded-md overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-150 md:min-w-full">
               <thead className="bg-[#222222] text-gray-400">
                 <tr>
@@ -22,31 +22,31 @@ const EstadisticasClub = () => {
                 <tr className="border-b border-white/20">
                   <td className="py-4 px-4 md:px-5 text-amber-300">10/10/2026</td>
                   <td className="py-4 px-4 md:px-5 text-amber-300">Est. Experimental</td>
-                  <td className="py-4 px-4 md:px-5 text-amber-300">80</td>
+                  <td className="py-4 px-4 md:px-5 text-amber-300">80 - 75</td>
                   <td className="py-4 px-4 md:px-5 text-amber-300">Victoria</td>
                 </tr>
                 <tr className="border-b border-white/20">
                   <td className="py-4 px-4 md:px-5">17/10/2026</td>
                   <td className="py-4 px-4 md:px-5">Avellaneda Central</td>
-                  <td className="py-4 px-4 md:px-5">75</td>
+                  <td className="py-4 px-4 md:px-5">75 - 60</td>
                   <td className="py-4 px-4 md:px-5">Derrota</td>
                 </tr>
                 <tr className="border-b border-white/20">
                   <td className="py-4 px-4 md:px-5">24/10/2026</td>
                   <td className="py-4 px-4 md:px-5">Huracan BB</td>
-                  <td className="py-4 px-4 md:px-5">92</td>
+                  <td className="py-4 px-4 md:px-5">92 - 90</td>
                   <td className="py-4 px-4 md:px-5">Victoria</td>
                 </tr>
                 <tr className="border-b border-white/20">
                   <td className="py-4 px-4 md:px-5">31/10/2026</td>
                   <td className="py-4 px-4 md:px-5">Belgrano</td>
-                  <td className="py-4 px-4 md:px-5">88</td>
+                  <td className="py-4 px-4 md:px-5">88 - 58</td>
                   <td className="py-4 px-4 md:px-5">Victoria</td>
                 </tr>
                 <tr className="border-b border-white/20">
                   <td className="py-4 px-4 md:px-5">07/11/2026</td>
                   <td className="py-4 px-4 md:px-5">Talleres</td>
-                  <td className="py-4 px-4 md:px-5">70</td>
+                  <td className="py-4 px-4 md:px-5">70 - 50</td>
                   <td className="py-4 px-4 md:px-5">Derrota</td>
                 </tr>
               </tbody>
@@ -54,7 +54,7 @@ const EstadisticasClub = () => {
           </div>
         </div>
         <div className="col-span-1  h-auto">
-          <div className="h-auto bg-dark-gradient mt-5  rounded-md  py-3">
+          <div className="h-auto bg-white/5 backdrop-blur-3xl mt-5  rounded-md  py-3">
             <div className="px-4  flex items-center justify-between">
               <p className="text-xl numberFonts">Estadisticas</p>
             </div>

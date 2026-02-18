@@ -164,7 +164,7 @@ const Fixture = () => {
       </div>
       <div className=" gap-5 mt-10">
         <div className="col-span-3 h-auto numberFonts">
-          <div className="h-auto w-full bg-dark-gradient rounded-md overflow-x-auto border border-white/10">
+          <div className="h-auto w-full bg-black/5 backdrop-blur rounded-md overflow-x-auto border border-white/10">
             <table className="w-full text-left border-collapse min-w-full">
               <thead className="bg-[#222222] ">
                 <tr>

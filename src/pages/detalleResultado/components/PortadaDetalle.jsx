@@ -2,9 +2,9 @@ import portada from "../../../assets/images/stadium.png";
 
 const PortadaDetalle = () => {
   return (
-    <div className="min-h-60 md:h-90 lg:h-120 w-full rounded-md border-gray-400/30 border bg-[#171717] relative flex flex-col">
+    <div className="min-h-60 md:h-90 lg:h-120 w-full rounded-md border-gray-400/30  bg-[#171717] relative flex flex-col">
       <img
-        src={portada}
+        src="https://objetos.estaticos-marca.com/assets/multimedia/imagenes/2016/04/08/14600951269464.jpg"
         className="absolute inset-0 w-full h-full object-cover overflow-hidden rounded-md"
       />
       <div className="relative z-10 bg-black/85 min-h-60 h-full overflow-hidden rounded-md flex flex-col">
@@ -37,7 +37,7 @@ const PortadaDetalle = () => {
               <span className="text-amber-300">-</span>
               <span>74</span>
             </div>
-            <span className="text-gray-400 mt-2 uppercase tracking-widest md:tracking-[0.5em] text-xs md:text-base numberFonts text-center">
+            <span className="text-amber-300 mt-2 uppercase tracking-widest md:tracking-[0.5em] text-xs md:text-base numberFonts text-center">
               Finalizado
             </span>
           </div>

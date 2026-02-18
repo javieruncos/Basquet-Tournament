@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProximosResultSection = () => {
     return (
-         <section className="pt-20 px-5 sm:px-6 lg:px-8">
+         <section className="pt-10 px-5 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                   <div className="mb-12 flex justify-between items-center">
                     <div>
@@ -19,7 +19,7 @@ const ProximosResultSection = () => {
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {[1, 2, 3, 4,5,6].map((item) => (
                       <div key={item} className="w-full rounded-2xl p-1">
-                        <div className="bg-white/3 backdrop-blur-3xl border border-white/10  hover:bg-white/10 transition-all duration-300 shadow-xl rounded-md p-6 text-white relative overflow-hidden group hover:border-amber-300/30 ">
+                        <div className="bg-white/5 backdrop-blur-3xl border border-white/10  hover:bg-white/10 transition-all duration-300 shadow-xl rounded-md p-6 text-white relative overflow-hidden group hover:border-amber-300/30 ">
                           <p className="text-center text-xs text-amber-300 mb-4 tracking-[0.2em] uppercase font-bold numberFonts">
                             Regional Amateur
                           </p>

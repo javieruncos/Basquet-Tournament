@@ -23,7 +23,7 @@ function App() {
           <Route path="/resultados" element={<Resultados></Resultados>}></Route>
           <Route path="/detalle" element={<DetalleResultado></DetalleResultado>}></Route>
           <Route path="/clubes" element={<ClubesPage></ClubesPage>}></Route>
-          <Route path="/club/:id" element={<ClubDetalle></ClubDetalle>}></Route>
+          <Route path="/club" element={<ClubDetalle></ClubDetalle>}></Route>
           <Route path="/fixture" element={<Fixture></Fixture>}></Route>
           <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
           <Route path="/" element={<Inicio></Inicio>}></Route>

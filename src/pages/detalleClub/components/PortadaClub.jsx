@@ -5,13 +5,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 const PortadaClub = () => {
     return (
        <div className=" h-auto md:h-130 w-full gap-5 bg-dark-gradient rounded-2xl relative border border-white/10 overflow-hidden">
-        <img
-          src={portada}
-          className="absolute top-0 left-0 object-cover w-full h-full radial-gradient(circle at center, rgba(250,204,21,0.15) 0%, transparent 70%);"
-          alt=""
-        />
         <div
-          className="h-full w-full bg-black/80 relative md:absolute top-0 left-0 
+          className="h-full w-full bg-black/50 relative md:absolute top-0 left-0 
         grid grid-cols-1 md:grid-cols-2 gap-5"
         >
           <div className="h-full w-full py-10 px-5 md:pt-10 md:px-10 z-10">

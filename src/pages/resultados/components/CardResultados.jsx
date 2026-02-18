@@ -2,7 +2,7 @@ import React from "react";
 
 const CardReultados = () => {
   return (
-    <div class="bg-white/3 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl p-5">
+    <div class="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl p-5">
       <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
         <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
        Fase Regular
