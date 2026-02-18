@@ -23,9 +23,7 @@ const ResultadosSection = () => {
        
                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                    {[1, 2, 3, 4].map((item) => (
-                     <div key={item} className="bg-white/3 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl">
                        <CardResultados />
-                     </div>
                    ))}
                  </div>
                </div>

@@ -3,6 +3,15 @@ import PortadaNoticias from "./components/PortadaNoticias";
 import CardNoticias from "./components/CardNoticias";
 import SponsorCTA from "./components/SponsorCTA";
 import Sponsor from "../../components/common/Sponsor";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import ResultadosSection from "../home/components/ResultadosSection";
+import ProximosResultSection from "../home/components/ProximosResultSection";
 
 const Noticias = () => {
   const filtros = ["Todos", "Masculino", "Femenino", "Juveniles"];
@@ -10,36 +19,143 @@ const Noticias = () => {
   return (
     <div className="md:px-0 main-container">
       <PortadaNoticias></PortadaNoticias>
-      
-      <div className="pt-20 flex flex-col md:flex-row md:items-center justify-between gap-6 px-5 lg:px-10">
-        <div className="flex flex-wrap gap-3">
-          {filtros.map((f, index) => (
-            <button 
-              key={index} 
-              className={`px-6 py-2 rounded-md text-sm font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer border-2 ${index === 0 ? 'bg-amber-400 border-amber-400 text-black' : 'bg-transparent border-gray-700 text-gray-400 hover:border-amber-400 hover:text-amber-400'}`}
+
+      <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
+        <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
+          <FormControl className="w-full md:w-60 text-white">
+            <InputLabel
+              id="demo-simple-select-label"
+              className="text-white"
+              sx={{ color: "white", "&.Mui-focused": { color: "white" } }}
             >
-              {f}
-            </button>
-          ))}
+              Equipos
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Equipos"
+              sx={{
+                color: "white",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#313131",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#313131",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "#313131 !important",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    bgcolor: "#191919",
+                    color: "white",
+                    "& .MuiMenuItem-root": {
+                      bgcolor: "#191919",
+                      "&:hover": {
+                        bgcolor: "#333",
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            label="Fecha"
+            type="date"
+            className="w-full md:w-60"
+            InputLabelProps={{
+              shrink: true,
+              sx: { color: "white", "&.Mui-focused": { color: "white" } },
+            }}
+            sx={{
+              "& .MuiInputBase-input": { color: "white", colorScheme: "dark" },
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#313131",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#313131",
+              },
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                {
+                  borderColor: "#313131 !important",
+                },
+              "& .MuiSvgIcon-root": {
+                color: "white",
+              },
+            }}
+          />
         </div>
-        <div className="text-gray-500 text-sm font-medium italic">
-          Mostrando: <span className="text-amber-400">Todas las categorías</span>
+        <div className="flex justify-center lg:justify-end px-4 lg:px-10 w-full lg:w-auto">
+          <FormControl className="w-full md:w-60">
+            <Select
+              id="demo-simple-select"
+              displayEmpty
+              defaultValue=""
+              className="bg-amber-300"
+              sx={{
+                color: "black",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "black",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "black",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "black !important",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "black",
+                },
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    bgcolor: "#191919",
+                    color: "white",
+                    "& .MuiMenuItem-root": {
+                      bgcolor: "#191919",
+                      "&:hover": {
+                        bgcolor: "#333",
+                      },
+                    },
+                  },
+                },
+              }}
+            >
+              <MenuItem value="" disabled>
+                Categorias
+              </MenuItem>
+              <MenuItem value={10}>Primera</MenuItem>
+              <MenuItem value={20}>Femenino</MenuItem>
+              <MenuItem value={30}>Juveniles</MenuItem>
+            </Select>
+          </FormControl>
         </div>
       </div>
-
-      <hr className="border-gray-800 my-8" />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-15">
         <CardNoticias></CardNoticias>
         <CardNoticias></CardNoticias>
         <CardNoticias></CardNoticias>
         <CardNoticias></CardNoticias>
         <CardNoticias></CardNoticias>
         <CardNoticias></CardNoticias>
+      </div>
+      <div className="">
+        <ProximosResultSection />
       </div>
       <div className="mt-20">
-      <SponsorCTA />
-      <Sponsor></Sponsor>
+        <SponsorCTA />
+        <Sponsor></Sponsor>
       </div>
     </div>
   );

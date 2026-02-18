@@ -27,10 +27,7 @@ const PortadaNoticias = () => {
         <p className="text-gray-300 text-sm md:text-lg max-w-xl leading-relaxed border-l-4 border-amber-400 pl-4">
           Mantente al día con los resultados, crónicas de partidos y todo lo que sucede en el Torneo Regional Amateur de Tucumán.
         </p>
-        <button className="group relative px-6 py-3 md:px-8 md:py-4 bg-amber-400 text-black font-black uppercase tracking-widest text-xs md:text-sm w-fit overflow-hidden transition-transform hover:scale-105 skew-x-[-10deg]">
-          <span className="relative z-10 skew-x-10 inline-block">Suscribirse</span>
-          <div className="absolute inset-0 bg-white translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out"></div>
-        </button>
+       
       </div>
     </div>
   );
