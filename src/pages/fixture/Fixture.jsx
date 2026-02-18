@@ -3,7 +3,7 @@ import { FormControl,InputLabel,MenuItem,Select,} from "@mui/material";
 
 const Fixture = () => {
   return (
-    <div className="p-10 px-3 lg:px-10">
+    <div className="p-10 px-3 lg:px-10 lg:pt-20">
       <div>
         <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>

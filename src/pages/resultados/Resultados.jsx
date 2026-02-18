@@ -11,9 +11,9 @@ const Resultados = () => {
     "Final",
   ];
   return (
-    <div className="md:px-10 px-5 main-container pt-15">
+    <div className="md:px-10 px-5 main-container mt-30">
       <div className="flex flex-col gap-2 px-5">
-        <h1 className="text-7xl">Resultados</h1>
+        <h1 className="text-7xl">Resultados Destacados</h1>
         <p>Torneo Regional Amateur de Basquet - Temporada 2026</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4 md:px-0 w-full mt-6">
@@ -144,7 +144,7 @@ const Resultados = () => {
           </FormControl>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-5 my-6">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-3   py-6">
           <CardReultados></CardReultados>
           <CardReultados></CardReultados>
           <CardReultados></CardReultados>
