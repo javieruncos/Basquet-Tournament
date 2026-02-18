@@ -2,7 +2,7 @@ import React from "react";
 
 const CardNoticias = () => {
   return (
-    <div className="h-150 lg:h-130 md:h-130 flex flex-col my-3 bg-dark-gradient rounded-md overflow-hidden">
+    <div className="h-150 lg:h-130 md:h-130 flex flex-col my-1  rounded-md overflow-hidden">
       <div className="h-70 md:h-50 w-full relative">
         <img
           src="https://images.pexels.com/photos/31169292/pexels-photo-31169292.jpeg"
@@ -10,9 +10,9 @@ const CardNoticias = () => {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="h-60 md:h-20 py-6  flex flex-col gap-4  grow px-5">
+      <div className="h-60 md:h-20 py-6  flex flex-col gap-2  grow ">
         <span className="text-amber-300">Sabado 10/10/2026</span>
-        <h3 className="text-3xl line-clamp-2">
+        <h3 className="text-2xl line-clamp-2">
           Victoria en el Clasico regional amateur , fecha 4 
         </h3>
         <p className="text-sm line-clamp-4">

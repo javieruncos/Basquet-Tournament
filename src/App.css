@@ -2,7 +2,7 @@
 
 .App{
   font-family: "Roboto", sans-serif;
-  background-color: black;
+  background-color:black;
   color: white;
   display: flex;
   flex-direction: column;

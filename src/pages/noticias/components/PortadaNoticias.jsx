@@ -2,30 +2,32 @@ import React from "react";
 
 const PortadaNoticias = () => {
   return (
-    <div className="mt-10  bg-red-500 h-125 rounded-xl relative">
-      <img
-        src="https://images.pexels.com/photos/31169292/pexels-photo-31169292.jpeg"
-        alt=""
-        className="object-cover w-full h-full"
-      />
-      <div className="h-full w-full absolute top-0 left-0 bg-black/60">
-        <div className="pt-20 md:w-180 px-10 flex flex-col justify-start gap-4 absolute top-0 left-0 text-center md:text-center lg:text-left">
-          <h1 className="text-5xl md:text-8xl  text-white">Torneo regional Amateur</h1>
-          <p className="text-gray-400">
-            El Torneo Regional Amateur celebra el talento y el compromiso de los
-            equipos de la región. Un espacio donde el básquet amateur crece, se
-            comparte y se vive en cada jornada.
-          </p>
-          <div className="mt-5">
-            <button className="px-10 py-5 bg-amber-300 border-2 hover:bg-[#191919] hover:text-white transition duration-300 ease-in-out rounded-md cursor-pointer hover:border-amber-300 hover:border-2">
-              Descubre Noticias Destacadas
-            </button>
-          </div>
-        </div>
-        <div className="px-5 py-1 bg-black w-40 text-white border-l-4 border-yellow-400 absolute right-20 top-20 hidden lg:block">
-          <span className="text-sm text-gray-500">Temporada</span>
-          <p className="text-2xl">2026</p>
-        </div>
+    <div className="mt-10 h-125 rounded-xl relative overflow-hidden bg-[#171717]">
+      {/* Background Image with Gradient Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://images.pexels.com/photos/31169292/pexels-photo-31169292.jpeg"
+          alt="Portada Noticias"
+          className="object-cover w-full h-full opacity-40"
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-black via-black/70 to-transparent"></div>
+      </div>
+
+      {/* Decorative Diagonal Elements (Home Style) */}
+      <div className="absolute top-0 -left-20 h-full w-40 bg-amber-400/10 skew-x-45 z-10 border-r border-amber-400/20"></div>
+
+      {/* Content */}
+      <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16 max-w-4xl gap-6">
+        <span className="text-amber-400 font-bold tracking-[0.3em] uppercase text-sm animate-pulse">
+          Actualidad & Novedades
+        </span>
+        <h1 className="text-5xl md:text-8xl font-black uppercase italic leading-none tracking-tighter text-white">
+          Noticias del <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-amber-500">Torneo</span>
+        </h1>
+        <p className="text-gray-300 text-sm md:text-lg max-w-xl leading-relaxed border-l-4 border-amber-400 pl-4">
+          Mantente al día con los resultados, crónicas de partidos y todo lo que sucede en el Torneo Regional Amateur de Tucumán.
+        </p>
+       
       </div>
     </div>
   );
