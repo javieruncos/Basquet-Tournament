@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React from "react";
-import CardReultados from "./components/CardReultados";
+import CardResultados from "./components/CardResultados";
 
 const Resultados = () => {
   const filter = [
@@ -145,10 +145,10 @@ const Resultados = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-3   py-6">
-          <CardReultados></CardReultados>
-          <CardReultados></CardReultados>
-          <CardReultados></CardReultados>
-          <CardReultados></CardReultados>
+          <CardResultados></CardResultados>
+          <CardResultados></CardResultados>
+          <CardResultados></CardResultados>
+          <CardResultados></CardResultados>
       </div>
     </div>
   );
