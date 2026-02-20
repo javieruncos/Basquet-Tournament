@@ -71,12 +71,13 @@ const NoticiasAdmin = () => {
                     >
                       <FaEye size={14} />
                     </button>
-                    <button
+                    <Link
+                      to={`/admin/noticias/editar/${noticia._id}`}
                       className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors"
                       title="Editar"
                     >
                       <FaEdit size={14} />
-                    </button>
+                    </Link>
                     <button
                       className="p-2 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-colors"
                       title="Eliminar"

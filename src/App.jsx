@@ -45,6 +45,7 @@ function App() {
               <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
               <Route path="clubesAdmin" element={<ClubesAdmin />} />
                <Route path="noticias/crear" element={<FormNoticias />} />
+               <Route path="noticias/editar/:id" element={<FormNoticias />} />
             </Route>
           </Routes>
         </div>
