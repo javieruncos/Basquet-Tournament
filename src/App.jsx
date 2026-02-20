@@ -14,10 +14,13 @@ import NoticiasAdmin from "./pages/admin/components/NoticiasAdmin";
 import FixtureAdmin from "./pages/admin/components/FixtureAdmin";
 import ResultadosAdmin from "./pages/admin/components/ResultadosAdmin";
 import ClubesAdmin from "./pages/admin/ClubesAdmin";
+import { NewsContextProvider } from "./context/useNewsContext";
+import FormNoticias from "./pages/admin/components/forms/FormNoticias";
 
 function App() {
   return (
     <>
+    <NewsContextProvider>
       <BrowserRouter>
         <div className="App">
           <MenuNav></MenuNav>
@@ -41,10 +44,12 @@ function App() {
               <Route path="fixtureAdmin" element={<FixtureAdmin />} />
               <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
               <Route path="clubesAdmin" element={<ClubesAdmin />} />
+               <Route path="noticias/crear" element={<FormNoticias />} />
             </Route>
           </Routes>
         </div>
       </BrowserRouter>
+      </NewsContextProvider>
     </>
   );
 }
