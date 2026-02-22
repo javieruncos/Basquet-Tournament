@@ -12,12 +12,21 @@ import Swal from "sweetalert2";
 const FormNoticias = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [preview, setPreview] = useState(null);
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  const imageFile = watch("image");
+
+  useEffect(() => {
+    if (imageFile && imageFile[0]) {
+      setPreview(URL.createObjectURL(imageFile[0]));
+    }
+  }, [imageFile]);
 
   useEffect(() => {
     if (id) {
@@ -29,7 +38,9 @@ const FormNoticias = () => {
           content: data.content,
           tags: data.tags,
           published: data.published,
+          id: data._id,
         });
+        setPreview(data.image?.url);
       });
     }
   }, [id, reset]);
@@ -51,12 +62,12 @@ const FormNoticias = () => {
     // Tags como array
     if (data.tags) {
       if (Array.isArray(data.tags)) {
-        data.tags.forEach((tag) => formData.append("tags[]", tag));
+        data.tags.forEach((tag) => formData.append("tags", tag));
       } else {
         data.tags
           .split(",")
           .map((tag) => tag.trim())
-          .forEach((tag) => formData.append("tags[]", tag));
+          .forEach((tag) => formData.append("tags", tag));
       }
     }
 
@@ -77,7 +88,9 @@ const FormNoticias = () => {
         });
       }
       reset();
-      navigate("/admin/noticias");
+      navigate("/admin/noticias", {
+        state: { update: true },
+      });
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -198,12 +211,22 @@ const FormNoticias = () => {
               placeholder="https://ejemplo.com/foto.jpg"
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
               {...register("image", {
-                required: "La URL de la imagen es obligatoria",
+                required: id ? false : "La imagen es obligatoria",
               })}
             />
-            {errors.imageUrl && (
+            {preview && (
+              <div className="mb-4 h-30 w-30 flex items-center">
+                <img
+                  src={preview}
+                  alt="Imagen actual"
+                  className="w-full max-h-64 object-cover rounded-lg"
+                />
+              </div>
+            )}
+
+            {errors.image && (
               <span className="text-red-500 text-[10px] font-bold uppercase">
-                {errors.imageUrl.message}
+                {errors.image.message}
               </span>
             )}
           </div>
@@ -290,7 +313,7 @@ const FormNoticias = () => {
           </button>
           <button
             type="button"
-            // onClick={() => navigate('/admin/noticias')}
+            onClick={() => navigate('/admin/noticias')}
             className="px-8 border border-white/10 font-bold uppercase py-4 rounded-xl hover:bg-white/5 transition-all tracking-widest text-sm"
           >
             Cancelar

@@ -1,10 +1,22 @@
-import React, { use, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FaEdit, FaTrash, FaPlus, FaEye } from "react-icons/fa";
 import NewsContext from "../../../context/useNewsContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { getNoticias } from "../../../services/NewsService";
 
 const NoticiasAdmin = () => {
-  const { noticias } = useContext(NewsContext);
+  const { noticias, setNoticias } = useContext(NewsContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state?.update) {
+      getNoticias().then((data) => {
+        setNoticias(data);
+        navigate(location.pathname, { replace: true, state: null });
+      });
+    }
+  }, [location.state, navigate, setNoticias]);
 
   return (
     <div className="space-y-6">
@@ -17,7 +29,10 @@ const NoticiasAdmin = () => {
             Crea, edita y elimina las noticias del portal
           </p>
         </div>
-        <Link to="/admin/noticias/crear" className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
+        <Link
+          to="/admin/noticias/crear"
+          className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors"
+        >
           <FaPlus /> Nueva Noticia
         </Link>
       </div>
@@ -41,7 +56,7 @@ const NoticiasAdmin = () => {
                 className="hover:bg-white/5 transition-colors"
               >
                 <td className="p-4 text-gray-400 font-mono text-sm">
-                  #{noticia.id}
+                  #{noticia._id}
                 </td>
                 <td className="p-4 font-bold text-sm">{noticia.title}</td>
                 <td className="p-4">
@@ -55,7 +70,7 @@ const NoticiasAdmin = () => {
                 <td className="p-4">
                   <span
                     className={`text-[10px] uppercase font-black px-2 py-1 rounded-full ${
-                      noticia.published === "Publicado"
+                      noticia.published
                         ? "bg-green-500/20 text-green-400"
                         : "bg-amber-500/20 text-amber-400"
                     }`}

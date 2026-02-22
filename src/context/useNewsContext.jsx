@@ -22,7 +22,7 @@ export  const NewsContextProvider = ({children}) => {
     },[])
 
     return (
-      <NewsContext.Provider value={{ noticias, loading, error }}>
+      <NewsContext.Provider value={{ noticias, loading, error,setNoticias }}>
         {children}
       </NewsContext.Provider>
     );

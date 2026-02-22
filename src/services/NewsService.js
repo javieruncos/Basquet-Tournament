@@ -38,6 +38,7 @@ export const editarNoticia = async (id, formData) => {
 export const obtenerNoticiaID = async (id) => {
   try {
     const response = await api.get(`/${id}`);
+    console.log(response.data);
     return response.data;
     } catch (error) {
     console.error("Error al obtener noticia por ID:", error.message);
