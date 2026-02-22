@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaTrophy, FaEdit, FaTrash, FaPlus, FaChartBar } from 'react-icons/fa';
+import TournamentContext from '../../../context/TournamentContext';
+import { Link } from 'react-router-dom';
 
 const ResultadosAdmin = () => {
-    const resultados = [
-        { id: 1, local: "CAEE", visitante: "TTF", scoreLocal: 85, scoreVisitante: 78, fecha: "20/05/2026", estado: "Finalizado" },
-        { id: 2, local: "Club A", visitante: "Club B", scoreLocal: 92, scoreVisitante: 95, fecha: "19/05/2026", estado: "Finalizado" },
-        { id: 3, local: "Independiente", visitante: "Talleres", scoreLocal: 0, scoreVisitante: 0, fecha: "22/05/2026", estado: "Pendiente" },
-    ];
+    const { fixture } = useContext(TournamentContext);
 
     return (
         <div className="space-y-6">
@@ -17,9 +15,9 @@ const ResultadosAdmin = () => {
                     </h2>
                     <p className="text-gray-400 text-xs md:text-sm">Carga marcadores y gestiona las estadísticas de los partidos</p>
                 </div>
-                <button className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
+                <Link to="/admin/resultadosAdmin/fixture" className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
                     <FaPlus /> Cargar Resultado
-                </button>
+                </Link>
             </div>
 
             <div className="bg-white/5 border border-white/10 rounded-xl overflow-x-auto">
@@ -34,21 +32,21 @@ const ResultadosAdmin = () => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
-                        {resultados.map((res) => (
+                        {fixture.map((res) => (
                             <tr key={res.id} className="hover:bg-white/5 transition-colors">
                                 <td className="p-4 text-sm text-gray-400">{res.fecha}</td>
                                 <td className="p-4">
                                     <div className="flex items-center gap-2 font-bold text-sm">
-                                        <span>{res.local}</span>
+                                        <span>{res.local?.name}</span>
                                         <span className="text-amber-300 text-[10px]">VS</span>
-                                        <span>{res.visitante}</span>
+                                        <span>{res.visitante?.name}</span>
                                     </div>
                                 </td>
                                 <td className="p-4">
                                     <div className="flex justify-center items-center gap-3 font-mono font-black text-lg">
-                                        <span className={res.scoreLocal > res.scoreVisitante ? "text-green-400" : ""}>{res.scoreLocal}</span>
+                                        <span className={res.resultado.total?.local > res.resultado.total?.visitante ? "text-green-400" : ""}>{res.resultado.total?.local}</span>
                                         <span className="text-gray-600">-</span>
-                                        <span className={res.scoreVisitante > res.scoreLocal ? "text-green-400" : ""}>{res.scoreVisitante}</span>
+                                        <span className={res.resultado.total?.visitante > res.total?.local ? "text-green-400" : ""}>{res.resultado.total?.visitante}</span>
                                     </div>
                                 </td>
                                 <td className="p-4">
@@ -77,7 +75,7 @@ const ResultadosAdmin = () => {
                         ))}
                     </tbody>
                 </table>
-                {resultados.length === 0 && (
+                {fixture.length === 0 && (
                     <div className="p-10 text-center text-gray-500">
                         No hay resultados registrados.
                     </div>
