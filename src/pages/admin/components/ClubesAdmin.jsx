@@ -1,40 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   FaPlus,
   FaEdit,
   FaTrash,
   FaSearch,
-  FaShieldAlt,
-  FaMapMarkerAlt,
 } from "react-icons/fa";
+import ClubesContext from "../../../context/ClubesContext";
 
 const ClubesAdmin = () => {
-  const clubes = [
-    {
-      id: 1,
-      nombre: "Estación Experimental",
-      siglas: "CAEE",
-      ciudad: "Las Talitas",
-      estadio: "El Coloso",
-      fundacion: "1940",
-    },
-    {
-      id: 2,
-      nombre: "Talleres de Tafí",
-      siglas: "TTF",
-      ciudad: "Tafí Viejo",
-      estadio: "La Leonera",
-      fundacion: "1915",
-    },
-    {
-      id: 3,
-      nombre: "Independiente",
-      siglas: "IND",
-      ciudad: "San Miguel",
-      estadio: "Estadio Rojo",
-      fundacion: "1920",
-    },
-  ];
+  const {clubes} = useContext(ClubesContext);
 
   return (
     <div className="space-y-6">
@@ -75,9 +49,8 @@ const ClubesAdmin = () => {
             <tr className="bg-white/5 text-amber-300 uppercase text-xs tracking-widest font-bold">
               <th className="p-4">Escudo</th>
               <th className="p-4">Club / Siglas</th>
-              <th className="p-4">Ciudad</th>
-              <th className="p-4">Estadio</th>
-              <th className="p-4">Fundación</th>
+              <th className="p-4">ID/Identificador</th>
+              <th className="p-4">nombre abreviado</th>
               <th className="p-4 text-center">Acciones</th>
             </tr>
           </thead>
@@ -86,35 +59,30 @@ const ClubesAdmin = () => {
               <tr key={club.id} className="hover:bg-white/5 transition-colors">
                 <td className="p-4">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                    <FaShieldAlt className="text-amber-300" />
+                    <img src={club.logo.url} alt="escudo" className="h-7 w-7" />
                   </div>
                 </td>
                 <td className="p-4">
                   <div className="flex flex-col">
-                    <span className="font-bold text-sm">{club.nombre}</span>
-                    <span className="text-[10px] text-amber-300 font-black">
-                      {club.siglas}
-                    </span>
+                    <span className="font-bold text-sm">{club.name}</span>
                   </div>
                 </td>
-                <td className="p-4 text-sm text-gray-300">{club.ciudad}</td>
+                <td className="p-4 text-sm text-gray-300 ">
+                  {club._id}
+                </td>
                 <td className="p-4">
                   <div className="flex items-center gap-2 text-sm">
-                    <FaMapMarkerAlt className="text-amber-300 text-[10px]" />
-                    {club.estadio}
+                    {club.shortname}
                   </div>
-                </td>
-                <td className="p-4 font-mono text-xs text-gray-400">
-                  {club.fundacion}
                 </td>
                 <td className="p-4">
                   <div className="flex justify-center gap-2">
-                    <button
+                    <Link to={`/resultadoAdmin/${club._id}`}
                       className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors"
                       title="Editar"
                     >
                       <FaEdit size={14} />
-                    </button>
+                    </Link>
                     <button
                       className="p-2 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-colors"
                       title="Eliminar"

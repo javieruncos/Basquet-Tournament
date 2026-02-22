@@ -13,17 +13,22 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import NoticiasAdmin from "./pages/admin/components/NoticiasAdmin";
 import FixtureAdmin from "./pages/admin/components/FixtureAdmin";
 import ResultadosAdmin from "./pages/admin/components/ResultadosAdmin";
-import ClubesAdmin from "./pages/admin/ClubesAdmin";
+import ClubesAdmin from "./pages/admin/components/ClubesAdmin";
 import { NewsContextProvider } from "./context/NewsContext";
 import FormNoticias from "./pages/admin/components/forms/FormNoticias";
 import { TournamentContextProvider } from "./context/TournamentContext";
+import { ClubesContextProvider } from "./context/ClubesContext";
 import FormResultados from "./pages/admin/components/forms/FormResultados";
+import { Form } from "react-hook-form";
 
 function App() {
   return (
     <>
       <NewsContextProvider>
         <TournamentContextProvider>
+          <ClubesContextProvider>
+
+         
           <BrowserRouter>
             <div className="App">
               <MenuNav></MenuNav>
@@ -58,6 +63,10 @@ function App() {
                   <Route path="clubesAdmin" element={<ClubesAdmin />} />
                   <Route path="noticias/crear" element={<FormNoticias />} />
                   <Route
+                    path="resultadosAdmin/editar/:id"
+                    element={<FormResultados />}
+                  />
+                  <Route
                     path="noticias/editar/:id"
                     element={<FormNoticias />}
                   />
@@ -65,6 +74,7 @@ function App() {
               </Routes>
             </div>
           </BrowserRouter>
+          </ClubesContextProvider>
         </TournamentContextProvider>
       </NewsContextProvider>
     </>

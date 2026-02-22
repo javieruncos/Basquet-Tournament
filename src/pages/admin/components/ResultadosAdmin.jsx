@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { FaTrophy, FaEdit, FaTrash, FaPlus, FaChartBar } from 'react-icons/fa';
 import TournamentContext from '../../../context/TournamentContext';
 import { Link } from 'react-router-dom';
+import ClubesContext from '../../../context/ClubesContext';
 
 const ResultadosAdmin = () => {
     const { fixture } = useContext(TournamentContext);
@@ -25,6 +26,7 @@ const ResultadosAdmin = () => {
                     <thead>
                         <tr className="bg-white/5 text-amber-300 uppercase text-xs tracking-widest font-bold">
                             <th className="p-4">Fecha</th>
+                            <th className="p-4">Hora</th>
                             <th className="p-4">Partido</th>
                             <th className="p-4 text-center">Marcador</th>
                             <th className="p-4">Estado</th>
@@ -35,6 +37,7 @@ const ResultadosAdmin = () => {
                         {fixture.map((res) => (
                             <tr key={res.id} className="hover:bg-white/5 transition-colors">
                                 <td className="p-4 text-sm text-gray-400">{res.fecha}</td>
+                                <td className="p-4 text-sm text-gray-400">{res.hora}</td>
                                 <td className="p-4">
                                     <div className="flex items-center gap-2 font-bold text-sm">
                                         <span>{res.local?.name}</span>
@@ -60,9 +63,9 @@ const ResultadosAdmin = () => {
                                 </td>
                                 <td className="p-4">
                                     <div className="flex justify-center gap-2">
-                                        <button className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors" title="Editar Marcador">
+                                        <Link to={`editar/${res._id}`}className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors" title="Editar Marcador">
                                             <FaEdit size={14} />
-                                        </button>
+                                        </Link>
                                         <button className="p-2 hover:bg-green-500/20 hover:text-green-400 rounded-lg transition-colors" title="Cargar Boxscore">
                                             <FaChartBar size={14} />
                                         </button>
