@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   crearNoticia,
   editarNoticia,
+  eliminarNoticia,
   obtenerNoticiaID,
 } from "../../../../services/NewsService";
 import Swal from "sweetalert2";
@@ -13,6 +14,18 @@ const FormNoticias = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [preview, setPreview] = useState(null);
+
+  const swalCustomConfig = {
+    background: "#111",
+    color: "#fff",
+    confirmButtonColor: "#fbbf24", // amber-400
+    cancelButtonColor: "#333",
+    customClass: {
+      popup: "border border-white/10 rounded-2xl",
+      title: "font-black uppercase tracking-tighter",
+    },
+  };
+
   const {
     register,
     watch,
@@ -73,33 +86,45 @@ const FormNoticias = () => {
 
     try {
       if (id) {
-        await editarNoticia(id, formData);
-        await Swal.fire({
-          icon: "success",
-          title: "Noticia editada",
-          text: "Se editó correctamente",
+        // 🔥 CONFIRMAR EDICIÓN
+        const result = await Swal.fire({
+          title: "¿Confirmar edición?",
+          text: "Se actualizarán los datos de la noticia",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Sí, actualizar",
+          cancelButtonText: "Cancelar",
+          ...swalCustomConfig,
         });
-      } else {
-        await crearNoticia(formData);
+
+        if (!result.isConfirmed) return;
+
+        await editarNoticia(id, formData);
+
         await Swal.fire({
           icon: "success",
-          title: "Noticia creada",
-          text: "Se creó correctamente",
+          title: "Noticia actualizada",
+          text: "Los cambios se guardaron correctamente",
+          ...swalCustomConfig,
         });
       }
+
       reset();
+
       navigate("/admin/noticias", {
         state: { update: true },
       });
     } catch (error) {
-      console.error(error);
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "No se pudo guardar la noticia",
+        ...swalCustomConfig,
       });
     }
   };
+
+ 
 
   return (
     <div className="bg-black/90 border border-white/10 rounded-2xl p-6 w-full  mx-auto shadow-2xl">
@@ -313,7 +338,7 @@ const FormNoticias = () => {
           </button>
           <button
             type="button"
-            onClick={() => navigate('/admin/noticias')}
+            onClick={() => navigate("/admin/noticias")}
             className="px-8 border border-white/10 font-bold uppercase py-4 rounded-xl hover:bg-white/5 transition-all tracking-widest text-sm"
           >
             Cancelar

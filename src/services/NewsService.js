@@ -14,7 +14,6 @@ export const getNoticias = async () => {
   }
 };
 
-
 export const crearNoticia = async (formData) => {
   try {
     const response = await api.post("/", formData);
@@ -24,7 +23,6 @@ export const crearNoticia = async (formData) => {
     throw new Error("No se pudo crear la noticia");
   }
 }
-
 
 export const editarNoticia = async (id, formData) => {
   try {
@@ -43,5 +41,14 @@ export const obtenerNoticiaID = async (id) => {
     } catch (error) {
     console.error("Error al obtener noticia por ID:", error.message);
     throw new Error("No se pudo obtener la noticia");
+  }
+}
+
+export const eliminarNoticia = async (id) => {
+  try {
+    const response = await api.delete(`/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("No se pudo eliminar la noticia");
   }
 }

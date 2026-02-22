@@ -20,36 +20,37 @@ import FormNoticias from "./pages/admin/components/forms/FormNoticias";
 function App() {
   return (
     <>
-    <NewsContextProvider>
-      <BrowserRouter>
-        <div className="App">
-          <MenuNav></MenuNav>
-          <Routes>
-            <Route path="/noticias" element={<Noticias></Noticias>}></Route>
-            <Route
-              path="/resultados"
-              element={<Resultados></Resultados>}
-            ></Route>
-            <Route
-              path="/detalle"
-              element={<DetalleResultado></DetalleResultado>}
-            ></Route>
-            <Route path="/clubes" element={<ClubesPage></ClubesPage>}></Route>
-            <Route path="/club" element={<ClubDetalle></ClubDetalle>}></Route>
-            <Route path="/fixture" element={<Fixture></Fixture>}></Route>
-            <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
-            <Route path="/inicio" element={<Inicio></Inicio>}></Route>
-            <Route path="/admin" element={<AdminLayout></AdminLayout>}>
-              <Route path="noticias" element={<NoticiasAdmin />} />
-              <Route path="fixtureAdmin" element={<FixtureAdmin />} />
-              <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
-              <Route path="clubesAdmin" element={<ClubesAdmin />} />
-               <Route path="noticias/crear" element={<FormNoticias />} />
-               <Route path="noticias/editar/:id" element={<FormNoticias />} />
-            </Route>
-          </Routes>
-        </div>
-      </BrowserRouter>
+      <NewsContextProvider>
+        <BrowserRouter>
+          <div className="App">
+            <MenuNav></MenuNav>
+            <Routes>
+              <Route path="/noticias" element={<Noticias></Noticias>}></Route>
+              <Route
+                path="/resultados"
+                element={<Resultados></Resultados>}
+              ></Route>
+              <Route
+                path="/detalle"
+                element={<DetalleResultado></DetalleResultado>}
+              ></Route>
+              <Route path="/clubes" element={<ClubesPage></ClubesPage>}></Route>
+              <Route path="/club" element={<ClubDetalle></ClubDetalle>}></Route>
+              <Route path="/fixture" element={<Fixture></Fixture>}></Route>
+              <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
+              <Route path="/inicio" element={<Inicio></Inicio>}></Route>
+              <Route path="/admin" element={<AdminLayout></AdminLayout>}>
+                <Route index element={<NoticiasAdmin />} />
+                <Route path="noticias" element={<NoticiasAdmin />} />
+                <Route path="fixtureAdmin" element={<FixtureAdmin />} />
+                <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
+                <Route path="clubesAdmin" element={<ClubesAdmin />} />
+                <Route path="noticias/crear" element={<FormNoticias />} />
+                <Route path="noticias/editar/:id" element={<FormNoticias />} />
+              </Route>
+            </Routes>
+          </div>
+        </BrowserRouter>
       </NewsContextProvider>
     </>
   );
