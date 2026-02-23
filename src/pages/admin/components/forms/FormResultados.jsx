@@ -7,6 +7,7 @@ import {
   FaClock,
   FaCalendarAlt,
   FaUser,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import ClubesContext from "../../../../context/ClubesContext";
@@ -17,6 +18,7 @@ import {
 } from "../../../../services/FixtureService";
 import TournamentContext from "../../../../context/TournamentContext";
 import { Block } from "@mui/icons-material";
+import Swal from "sweetalert2";
 
 const FormResultados = () => {
   const { fixture, setFixture } = useContext(TournamentContext);
@@ -34,7 +36,25 @@ const FormResultados = () => {
   const { fields: cuartosFields } = useFieldArray({
     control,
     name: "resultado.cuartos",
+    rules: {
+      minLength: 4,
+      maxLength: 4,
+    },
+    defaultValues: Array(4).fill({ local: 0, visitante: 0 }),
   });
+  
+  const { fields: estadisticasFields } = useFieldArray({
+    control,
+    name: "estadisticasJugadores",
+  });
+
+
+  const swalCustomConfig = {
+    background: "#111",
+    color: "#fff",
+    confirmButtonColor: "#fbbf24",
+    cancelButtonColor: "#333",
+  }
 
   useEffect(() => {
     obtenerFixtureID(id).then((data) => {
@@ -45,54 +65,84 @@ const FormResultados = () => {
         fecha: formatDate(data?.fecha),
         hora: data?.hora,
         estado: data?.estado,
-        local: data?.local,
-        visitante: data?.visitante,
-        resultado: data?.resultado,
+        local: data?.local._id,
+        visitante: data?.visitante._id,
+        resultado: {
+          ...data?.resultado,
+          cuartos: data?.resultado?.cuartos?.length === 4 
+            ? data.resultado.cuartos 
+            : Array(4).fill({ local: 0, visitante: 0 })
+        },
+        fase: data?.fase,
+        jornada: data?.jornada,
+        arbitro1: data?.arbitro1,
+        arbitro2: data?.arbitro2,
+        arbitro3: data?.arbitro3,
+        estadio: data?.estadio,
         ganador: data?.ganador,
         mvp: data?.mvp,
+        estadisticasJugadores: data?.estadisticasJugadores || [],
         id: data._id,
       });
     });
   }, [id, reset]);
 
-  const onSubmit = async (data) => {
-    console.log("Datos del partido:", data);
-    if (id) {
-      // 🔥 CONFIRMAR EDICIÓN
-      const result = await Swal.fire({
-        title: "¿Confirmar edición?",
-        text: "Se actualizará el resultado del partido",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sí, actualizar",
-        cancelButtonText: "Cancelar",
-        ...swalCustomConfig,
-      });
-
-      if (!result.isConfirmed) return;
-
-      await editarFixture(id, data);
-
-      await Swal.fire({
-        icon: "success",
-        title: "Resultado actualizado",
-        text: "Los cambios se guardaron correctamente",
-        ...swalCustomConfig,
-      });
-    }
-
-    reset();
-
-    navigate("/admin/resultadosAdmin", {
-      state: { update: true },
-    });
-
-    // Aquí iría la lógica para conectar con FixtureService
-    crearFixture(data).then((res) => {
-      console.log(res);
-      setFixture([...fixture, res]);
-    });
-  };
+   const onSubmit = async (data) => {
+      try {
+        // ✏️ MODO EDICIÓN
+        if (id) {
+          const result = await Swal.fire({
+            title: "¿Confirmar edición?",
+            text: "Se actualizará el resultado del partido",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, actualizar",
+            cancelButtonText: "Cancelar",
+            ...swalCustomConfig,
+          });
+  
+          if (!result.isConfirmed) return;
+  
+          await editarFixture(id, data);
+  
+          await Swal.fire({
+            icon: "success",
+            title: "Resultado actualizado",
+            text: "Los cambios se guardaron correctamente",
+            ...swalCustomConfig,
+          });
+  
+          navigate("/admin/resultadosAdmin", {
+            state: { update: true },
+          });
+  
+          return; // 🔥 CLAVE: salir para no crear otro
+        }
+  
+        // ➕ MODO CREACIÓN
+        await crearFixture(data);
+  
+        await Swal.fire({
+          icon: "success",
+          title: "Partido Programado",
+          text: "El encuentro se ha registrado correctamente",
+          ...swalCustomConfig,
+        });
+  
+        navigate("/admin/fixtureAdmin");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: id
+            ? "No se pudo actualizar el partido"
+            : "No se pudo programar el partido",
+          ...swalCustomConfig,
+        });
+      }
+  
+      console.log(data);
+    };
 
   return (
     <div className="bg-black/90 border border-white/10 rounded-2xl p-6 w-full max-w-5xl mx-auto shadow-2xl">
@@ -148,7 +198,82 @@ const FormResultados = () => {
               <option value="Finalizado" className="bg-[#111]">
                 Finalizado
               </option>
+              <option value="Cancelado" className="bg-[#111]">
+                Cancelado
+              </option>
+              <option value="Suspendido" className="bg-[#111]">
+                Suspendido
+              </option>
             </select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
+              Fase
+            </label>
+            <select
+              {...register("fase")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            >
+              <option value="Regular" className="bg-[#111]">Regular</option>
+              <option value="Octavos" className="bg-[#111]">Octavos</option>
+              <option value="Cuartos" className="bg-[#111]">Cuartos</option>
+              <option value="SemiFinal" className="bg-[#111]">SemiFinal</option>
+              <option value="Final" className="bg-[#111]">Final</option>
+            </select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
+              Jornada
+            </label>
+            <input
+              type="number"
+              {...register("jornada")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Sede y Árbitros */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
+              <FaMapMarkerAlt /> Estadio
+            </label>
+            <input
+              type="text"
+              {...register("estadio")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
+              Árbitro 1
+            </label>
+            <input
+              type="text"
+              {...register("arbitro1")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
+              Árbitro 2
+            </label>
+            <input
+              type="text"
+              {...register("arbitro2")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
+              Árbitro 3
+            </label>
+            <input
+              type="text"
+              {...register("arbitro3")}
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
+            />
           </div>
         </div>
 
@@ -294,20 +419,38 @@ const FormResultados = () => {
                   <th className="p-2">REB</th>
                   <th className="p-2">AST</th>
                   <th className="p-2">FLT</th>
+                  <th className="p-2">ROB</th>
+                  <th className="p-2">TAP</th>
+                  <th className="p-2">PER</th>
                   <th className="p-2">MIN</th>
                 </tr>
               </thead>
               <tbody>
-                {/* Aquí se podrían agregar filas dinámicamente para estadisticasJugadores */}
-                <tr>
-                  <td
-                    colSpan="6"
-                    className="p-4 text-center text-gray-600 italic"
-                  >
-                    Las estadísticas detalladas se habilitan al marcar el
-                    partido como "Finalizado"
-                  </td>
-                </tr>
+                {estadisticasFields.length > 0 ? (
+                  estadisticasFields.map((field, index) => (
+                    <tr key={field.id} className="border-b border-white/5">
+                      <td className="p-2">
+                        <input type="hidden" {...register(`estadisticasJugadores.${index}.jugadorId`)} />
+                        <span className="text-white">Jugador {index + 1}</span>
+                      </td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.puntos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.rebotes`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.asistencias`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.faltas`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.robos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.tapones`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.perdidas`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.minutos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="9" className="p-4 text-center text-gray-600 italic">
+                      Las estadísticas detalladas se habilitan al marcar el
+                      partido como "Finalizado"
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

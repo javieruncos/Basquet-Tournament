@@ -39,7 +39,7 @@ const FormProgamado = () => {
         local: data?.local?._id,
         visitante: data?.visitante?._id,
         fase: data?.fase,
-       jornada: Number(data?.jornada),
+        jornada: Number(data?.jornada),
         arbitro1: data?.arbitro1,
         arbitro2: data?.arbitro2,
         arbitro3: data?.arbitro3,
