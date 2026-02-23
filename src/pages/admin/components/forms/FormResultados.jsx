@@ -22,7 +22,6 @@ const FormResultados = () => {
   const { fixture, setFixture } = useContext(TournamentContext);
   const { clubes } = useContext(ClubesContext);
   const { id } = useParams();
-  const [estadoPartido, setestadoPartido] = useState("")
   const navigate = useNavigate();
   const {
     register,
@@ -42,10 +41,6 @@ const FormResultados = () => {
       const formatDate = (date) => {
         return date?.split("T")[0];
       };
-
-      if(data?.estado){
-         setestadoPartido(data?.estado)
-      }
       reset({
         fecha: formatDate(data?.fecha),
         hora: data?.hora,
@@ -177,13 +172,13 @@ const FormResultados = () => {
               type="number"
               placeholder="0"
               {...register("resultado.total.local")}
-              className={`w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block ${estadoPartido === "Programado" ? "hidden" : "block"} `}
+              className="w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block "
             />
           </div>
 
           <div className="flex flex-col items-center justify-center">
             <span className="text-4xl font-black text-white/20 italic">VS</span>
-            <div className={`mt-4 px-4 py-1 bg-amber-300 text-black text-[10px] font-black uppercase rounded-full ${estadoPartido === "Programado" ? "hidden" : "block"}`}>
+            <div className="mt-4 px-4 py-1 bg-amber-300 text-black text-[10px] font-black uppercase rounded-full">
               Marcador Final
             </div>
           </div>
@@ -207,12 +202,12 @@ const FormResultados = () => {
               type="number"
               placeholder="0"
               {...register("resultado.total.visitante")}
-              className={`w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block ${estadoPartido === "Programado" ? "hidden" : "block"}`}
+              className="w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block"
             />
           </div>
         </div>  
 
-        <div className={`space-y-4 ${estadoPartido === "Programado" ? "hidden" : "block"}`}>
+        <div className="space-y-4">
           <h4 className="text-xs font-black uppercase tracking-widest text-amber-300 border-b border-white/10 pb-2">
             Desglose por Cuartos
           </h4>
@@ -244,7 +239,7 @@ const FormResultados = () => {
           </div>
         </div>
 
-        <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${estadoPartido === "Programado" ? "hidden" : "block"}}`}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaTrophy /> Ganador del Encuentro

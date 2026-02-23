@@ -20,6 +20,7 @@ import { TournamentContextProvider } from "./context/TournamentContext";
 import { ClubesContextProvider } from "./context/ClubesContext";
 import FormResultados from "./pages/admin/components/forms/FormResultados";
 import { Form } from "react-hook-form";
+import FormProgamado from "./pages/admin/components/forms/FormProgamado";
 
 function App() {
   return (
@@ -62,6 +63,11 @@ function App() {
                   <Route path="resultadosAdmin/fixture" element={<FormResultados />} />
                   <Route path="clubesAdmin" element={<ClubesAdmin />} />
                   <Route path="noticias/crear" element={<FormNoticias />} />
+                  <Route path="fixtureAdmin/crear" element={<FormProgamado />} />
+                  <Route
+                    path="fixtureAdmin/editar/:id"
+                    element={<FormProgamado />}
+                  />
                   <Route
                     path="resultadosAdmin/editar/:id"
                     element={<FormResultados />}
