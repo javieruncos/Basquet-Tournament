@@ -7,7 +7,7 @@ const api = axios.create({
 export const getFixtures = async () => {
     try {
         const respose = await api.get("/");
-        console.log(respose.data);
+       
         return respose.data;
     } catch (error) {
         console.error("Error al obtener noticias:", error.message);
@@ -46,3 +46,13 @@ export const editarFixture = async (id, data) => {
         throw new Error("No se pudo editar el fixture");
     }
 }
+
+export const editarResultadoFixture = async (id, data) => {
+    try {
+        const response = await api.put(`/${id}/resultado`, data);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo editar el fixture");
+    }
+}
+

@@ -7,7 +7,6 @@ const api = axios.create({
 export const getClubes = async () => {
     try {
         const reponse = await api.get("/");
-        console.log(reponse.data);
         return reponse.data;
     } catch (error) {
         throw new Error("No se pudieron cargar los clubes");
@@ -21,5 +20,14 @@ export const crearClub = async (formData) => {
         return response.data;
     } catch (error) {
         throw new Error("No se pudo crear el club");
+    }
+}
+
+export const jugadoresClub = async (id) => {
+    try {
+        const response = await api.get(`/${id}/jugadores`);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo obtener los jugadores del club");
     }
 }

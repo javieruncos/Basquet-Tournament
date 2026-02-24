@@ -1,10 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FaCalendarPlus, FaEdit, FaTrash, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import TournamentContext from '../../../context/TournamentContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { getFixtures } from '../../../services/FixtureService';
 
 const FixtureAdmin = () => {
     const { fixture, setFixture } = useContext(TournamentContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+
+     useEffect(() => {
+        if (location.state?.update) {
+          getFixtures().then((data) => {
+            setFixture(data);
+            navigate(location.pathname, { replace: true, state: null });
+          });
+        }
+      }, [location.state, navigate, setFixture]);
      
 
 

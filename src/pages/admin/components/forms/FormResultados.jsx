@@ -14,47 +14,80 @@ import ClubesContext from "../../../../context/ClubesContext";
 import {
   crearFixture,
   editarFixture,
+  editarResultadoFixture,
   obtenerFixtureID,
 } from "../../../../services/FixtureService";
-import TournamentContext from "../../../../context/TournamentContext";
-import { Block } from "@mui/icons-material";
 import Swal from "sweetalert2";
+import { jugadoresClub } from "../../../../services/ClubesService";
 
 const FormResultados = () => {
-  const { fixture, setFixture } = useContext(TournamentContext);
   const { clubes } = useContext(ClubesContext);
   const { id } = useParams();
+
   const navigate = useNavigate();
   const {
     register,
     control,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
-
-  const { fields: cuartosFields } = useFieldArray({
-    control,
-    name: "resultado.cuartos",
-    rules: {
-      minLength: 4,
-      maxLength: 4,
-    },
-    defaultValues: Array(4).fill({ local: 0, visitante: 0 }),
-  });
-  
-  const { fields: estadisticasFields } = useFieldArray({
-    control,
-    name: "estadisticasJugadores",
-  });
-
 
   const swalCustomConfig = {
     background: "#111",
     color: "#fff",
     confirmButtonColor: "#fbbf24",
     cancelButtonColor: "#333",
-  }
+  };
+
+  const { fields: cuartosFields } = useFieldArray({
+    control,
+    name: "resultado.cuartos",
+    rules: { minLength: 4, maxLength: 4 },
+    defaultValues: Array(4).fill({ local: 0, visitante: 0 }),
+  });
+
+  // --- LÓGICA DE ESTADÍSTICAS ---
+  const { fields: estadisticasFields, append, remove } = useFieldArray({
+    control,
+    name: "estadisticasJugadores",
+  });
+
+  const [jugadoresLocal, setJugadoresLocal] = useState([]);
+  const [jugadoresVisitante, setJugadoresVisitante] = useState([]);
+  const [selectedTeam, setSelectedTeam] = useState("");
+  const [selectedPlayerId, setSelectedPlayerId] = useState("");
+
+  const localId = watch("local");
+  const visitanteId = watch("visitante");
+
+  useEffect(() => {
+    if (localId) jugadoresClub(localId).then(setJugadoresLocal);
+  }, [localId]);
+
+  useEffect(() => {
+    if (visitanteId) jugadoresClub(visitanteId).then(setJugadoresVisitante);
+  }, [visitanteId]);
+
+  const agregarJugador = () => {
+    if (!selectedPlayerId || !selectedTeam) return;
+    const lista = selectedTeam === "local" ? jugadoresLocal : jugadoresVisitante;
+    const jugador = lista.find((j) => j._id === selectedPlayerId);
+
+    // Evitar duplicados
+    if (estadisticasFields.some((f) => f.jugadorId === jugador._id)) return;
+
+    if (jugador) {
+      append({
+        jugadorId: jugador._id,
+        clubId: selectedTeam === "local" ? localId : visitanteId,
+        nombre: jugador.nombre, // Asegúrate que coincida con tu backend
+        puntos: 0, rebotes: 0, asistencias: 0, faltas: 0, robos: 0, tapones: 0, perdidas: 0, minutos: 0,
+      });
+      setSelectedPlayerId("");
+    }
+  };
 
   useEffect(() => {
     obtenerFixtureID(id).then((data) => {
@@ -68,10 +101,14 @@ const FormResultados = () => {
         local: data?.local._id,
         visitante: data?.visitante._id,
         resultado: {
-          ...data?.resultado,
-          cuartos: data?.resultado?.cuartos?.length === 4 
-            ? data.resultado.cuartos 
-            : Array(4).fill({ local: 0, visitante: 0 })
+          total: {
+            local: Number(data?.resultado?.total?.local) || 0,
+            visitante: Number(data?.resultado?.total?.visitante) || 0,
+          },
+          cuartos:
+            data?.resultado?.cuartos?.length === 4
+              ? data.resultado.cuartos
+              : Array(4).fill({ local: 0, visitante: 0 }),
         },
         fase: data?.fase,
         jornada: data?.jornada,
@@ -79,7 +116,7 @@ const FormResultados = () => {
         arbitro2: data?.arbitro2,
         arbitro3: data?.arbitro3,
         estadio: data?.estadio,
-        ganador: data?.ganador,
+        ganador: data?.ganador._id,
         mvp: data?.mvp,
         estadisticasJugadores: data?.estadisticasJugadores || [],
         id: data._id,
@@ -87,62 +124,81 @@ const FormResultados = () => {
     });
   }, [id, reset]);
 
-   const onSubmit = async (data) => {
-      try {
-        // ✏️ MODO EDICIÓN
-        if (id) {
-          const result = await Swal.fire({
-            title: "¿Confirmar edición?",
-            text: "Se actualizará el resultado del partido",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sí, actualizar",
-            cancelButtonText: "Cancelar",
-            ...swalCustomConfig,
-          });
-  
-          if (!result.isConfirmed) return;
-  
-          await editarFixture(id, data);
-  
-          await Swal.fire({
-            icon: "success",
-            title: "Resultado actualizado",
-            text: "Los cambios se guardaron correctamente",
-            ...swalCustomConfig,
-          });
-  
-          navigate("/admin/resultadosAdmin", {
-            state: { update: true },
-          });
-  
-          return; // 🔥 CLAVE: salir para no crear otro
-        }
-  
-        // ➕ MODO CREACIÓN
-        await crearFixture(data);
-  
+  const onSubmit = async (data) => {
+    try {
+      const payload = {
+        fecha: data.fecha,
+        hora: data.hora,
+        estado: data.estado,
+        local: data.local,
+        visitante: data.visitante,
+        fase: data.fase,
+        jornada: data.jornada,
+        estadio: data.estadio,
+        arbitro1: data.arbitro1,
+        arbitro2: data.arbitro2,
+        arbitro3: data.arbitro3,
+        resultado: {
+          cuartos: data.resultado.cuartos, // solo cuartos, backend calcula total
+        },
+        ganador: data.ganador, // opcional, se puede dejar null
+        mvp: data.mvp, // opcional
+        estadisticasJugadores: data.estadisticasJugadores || [], // si aplica
+        reabrir: true, // si quieres desbloquear partido finalizado
+      };
+      // ✏️ MODO EDICIÓN
+      if (id) {
+        const result = await Swal.fire({
+          title: "¿Confirmar edición?",
+          text: "Se actualizará el resultado del partido",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Sí, actualizar",
+          cancelButtonText: "Cancelar",
+          ...swalCustomConfig,
+        });
+
+        if (!result.isConfirmed) return;
+
+        await editarResultadoFixture(id, payload);
+
         await Swal.fire({
           icon: "success",
-          title: "Partido Programado",
-          text: "El encuentro se ha registrado correctamente",
+          title: "Resultado actualizado",
+          text: "Los cambios se guardaron correctamente",
           ...swalCustomConfig,
         });
-  
-        navigate("/admin/fixtureAdmin");
-      } catch (error) {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: id
-            ? "No se pudo actualizar el partido"
-            : "No se pudo programar el partido",
-          ...swalCustomConfig,
+
+        navigate("/admin/resultadosAdmin", {
+          state: { update: true },
         });
+
+        return; // 🔥 CLAVE: salir para no crear otro
       }
-  
-      console.log(data);
-    };
+
+      // ➕ MODO CREACIÓN
+      await crearFixture(payload);
+
+      await Swal.fire({
+        icon: "success",
+        title: "Partido Programado",
+        text: "El encuentro se ha registrado correctamente",
+        ...swalCustomConfig,
+      });
+      console.log(payload);
+
+      navigate("/admin/fixtureAdmin");
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: id
+          ? "No se pudo actualizar el partido"
+          : "No se pudo programar el partido",
+        ...swalCustomConfig,
+      });
+    }
+  };
 
   return (
     <div className="bg-black/90 border border-white/10 rounded-2xl p-6 w-full max-w-5xl mx-auto shadow-2xl">
@@ -171,6 +227,7 @@ const FormResultados = () => {
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
             />
           </div>
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaClock /> Hora
@@ -181,6 +238,7 @@ const FormResultados = () => {
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
             />
           </div>
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
               Estado
@@ -206,6 +264,7 @@ const FormResultados = () => {
               </option>
             </select>
           </div>
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
               Fase
@@ -214,13 +273,24 @@ const FormResultados = () => {
               {...register("fase")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
             >
-              <option value="Regular" className="bg-[#111]">Regular</option>
-              <option value="Octavos" className="bg-[#111]">Octavos</option>
-              <option value="Cuartos" className="bg-[#111]">Cuartos</option>
-              <option value="SemiFinal" className="bg-[#111]">SemiFinal</option>
-              <option value="Final" className="bg-[#111]">Final</option>
+              <option value="Regular" className="bg-[#111]">
+                Regular
+              </option>
+              <option value="Octavos" className="bg-[#111]">
+                Octavos
+              </option>
+              <option value="Cuartos" className="bg-[#111]">
+                Cuartos
+              </option>
+              <option value="SemiFinal" className="bg-[#111]">
+                SemiFinal
+              </option>
+              <option value="Final" className="bg-[#111]">
+                Final
+              </option>
             </select>
           </div>
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300">
               Jornada
@@ -234,6 +304,7 @@ const FormResultados = () => {
         </div>
 
         {/* Sede y Árbitros */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
@@ -296,7 +367,10 @@ const FormResultados = () => {
             <input
               type="number"
               placeholder="0"
-              {...register("resultado.total.local")}
+              readOnly
+              {...register("resultado.total.local", {
+                valueAsNumber: true,
+              })}
               className="w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block "
             />
           </div>
@@ -326,11 +400,14 @@ const FormResultados = () => {
             <input
               type="number"
               placeholder="0"
-              {...register("resultado.total.visitante")}
+              readOnly
+              {...register("resultado.total.visitante", {
+                valueAsNumber: true,
+              })}
               className="w-24 bg-white/10 border border-amber-300/50 rounded-lg py-4 text-center text-3xl font-black text-amber-300 mx-auto block"
             />
           </div>
-        </div>  
+        </div>
 
         <div className="space-y-4">
           <h4 className="text-xs font-black uppercase tracking-widest text-amber-300 border-b border-white/10 pb-2">
@@ -349,13 +426,17 @@ const FormResultados = () => {
                   <input
                     type="number"
                     placeholder="L"
-                    {...register(`resultado.cuartos.${index}.local`)}
+                    {...register(`resultado.cuartos.${index}.local`, {
+                      valueAsNumber: true,
+                    })}
                     className="w-full bg-black/50 border border-white/10 rounded py-1 text-center text-sm"
                   />
                   <input
                     type="number"
                     placeholder="V"
-                    {...register(`resultado.cuartos.${index}.visitante`)}
+                    {...register(`resultado.cuartos.${index}.visitante`, {
+                      valueAsNumber: true,
+                    })}
                     className="w-full bg-black/50 border border-white/10 rounded py-1 text-center text-sm"
                   />
                 </div>
@@ -369,15 +450,17 @@ const FormResultados = () => {
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaTrophy /> Ganador del Encuentro
             </label>
-            <select
-              {...register("ganador")}
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white outline-none focus:border-amber-300"
-            >
-              <option value="" className="bg-[#111]">
-                Empate / Sin definir
-              </option>
-              {/* Opciones dinámicas basadas en local/visitante */}
-            </select>
+            <input
+              type="text"
+              value={
+                watch("resultado.total.local") >
+                watch("resultado.total.visitante")
+                  ? clubes.find((c) => c._id === watch("local"))?.name
+                  : clubes.find((c) => c._id === watch("visitante"))?.name
+              }
+              readOnly
+              className="w-full bg-white/10 border border-white/10 rounded-lg py-3 px-4 text-center text-white font-bold"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
@@ -390,7 +473,6 @@ const FormResultados = () => {
               <option value="" className="bg-[#111]">
                 Seleccionar Jugador
               </option>
-              {/* Mapear jugadores de ambos equipos */}
             </select>
           </div>
         </div>
@@ -410,6 +492,52 @@ const FormResultados = () => {
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 bg-black/40 p-4 rounded-lg border border-white/5">
+            <select
+              className="bg-[#111] border border-white/10 rounded-lg py-2 px-3 text-xs text-white outline-none"
+              onChange={(e) => {
+                setSelectedTeam(e.target.value);
+                setSelectedPlayerId("");
+              }}
+              value={selectedTeam}
+            >
+              <option value="" className="bg-[#111]">
+                Seleccionar Equipo
+              </option>
+              <option value="local" className="bg-[#111]">
+                Local
+              </option>
+              <option value="visitante" className="bg-[#111]">
+                Visitante
+              </option>
+            </select>
+
+            <select
+              className="bg-[#111] border border-white/10 rounded-lg py-2 px-3 text-xs text-white outline-none"
+              onChange={(e) => setSelectedPlayerId(e.target.value)}
+              value={selectedPlayerId}
+              disabled={!selectedTeam}
+            >
+              <option value="">Seleccionar Jugador</option>
+              {(selectedTeam === "local"
+                ? jugadoresLocal
+                : jugadoresVisitante
+              ).map((j) => (
+                <option key={j._id} value={j._id} className="bg-[#111]">
+                  {j.nombre}
+                </option>
+              ))}
+            </select>
+
+            <button
+              type="button"
+              onClick={agregarJugador}
+              className="bg-amber-300 text-black text-[10px] font-black uppercase rounded-lg hover:bg-amber-400 transition-colors"
+            >
+              Agregar Jugador
+            </button>
+          </div>
+
           <div className="overflow-x-auto">
             <table className="w-full text-[10px] uppercase font-bold">
               <thead>
@@ -423,6 +551,7 @@ const FormResultados = () => {
                   <th className="p-2">TAP</th>
                   <th className="p-2">PER</th>
                   <th className="p-2">MIN</th>
+                  <th className="p-2"></th>
                 </tr>
               </thead>
               <tbody>
@@ -430,22 +559,103 @@ const FormResultados = () => {
                   estadisticasFields.map((field, index) => (
                     <tr key={field.id} className="border-b border-white/5">
                       <td className="p-2">
-                        <input type="hidden" {...register(`estadisticasJugadores.${index}.jugadorId`)} />
-                        <span className="text-white">Jugador {index + 1}</span>
+                        <input
+                          type="hidden"
+                          {...register(
+                            `estadisticasJugadores.${index}.jugadorId`,
+                          )}
+                        />
+                        <input
+                          type="hidden"
+                          {...register(`estadisticasJugadores.${index}.clubId`)}
+                        />
+                        <span className="text-white">
+                          {field.nombre || "Jugador"}
+                        </span>
                       </td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.puntos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.rebotes`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.asistencias`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.faltas`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.robos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.tapones`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.perdidas`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
-                      <td className="p-2"><input type="number" {...register(`estadisticasJugadores.${index}.minutos`)} className="w-12 bg-black border border-white/10 rounded text-center" /></td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(`estadisticasJugadores.${index}.puntos`)}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(
+                            `estadisticasJugadores.${index}.rebotes`,
+                          )}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(
+                            `estadisticasJugadores.${index}.asistencias`,
+                          )}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(`estadisticasJugadores.${index}.faltas`)}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(`estadisticasJugadores.${index}.robos`)}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(
+                            `estadisticasJugadores.${index}.tapones`,
+                          )}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(
+                            `estadisticasJugadores.${index}.perdidas`,
+                          )}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <input
+                          type="number"
+                          {...register(
+                            `estadisticasJugadores.${index}.minutos`,
+                          )}
+                          className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2">
+                        <button
+                          type="button"
+                          onClick={() => remove(index)}
+                          className="text-red-500 hover:text-red-400"
+                        >
+                          <FaTimes />
+                        </button>
+                      </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="9" className="p-4 text-center text-gray-600 italic">
+                    <td
+                      colSpan="9"
+                      className="p-4 text-center text-gray-600 italic"
+                    >
                       Las estadísticas detalladas se habilitan al marcar el
                       partido como "Finalizado"
                     </td>
