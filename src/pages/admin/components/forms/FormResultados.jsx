@@ -49,7 +49,11 @@ const FormResultados = () => {
   });
 
   // --- LÓGICA DE ESTADÍSTICAS ---
-  const { fields: estadisticasFields, append, remove } = useFieldArray({
+  const {
+    fields: estadisticasFields,
+    append,
+    remove,
+  } = useFieldArray({
     control,
     name: "estadisticasJugadores",
   });
@@ -72,7 +76,8 @@ const FormResultados = () => {
 
   const agregarJugador = () => {
     if (!selectedPlayerId || !selectedTeam) return;
-    const lista = selectedTeam === "local" ? jugadoresLocal : jugadoresVisitante;
+    const lista =
+      selectedTeam === "local" ? jugadoresLocal : jugadoresVisitante;
     const jugador = lista.find((j) => j._id === selectedPlayerId);
 
     // Evitar duplicados
@@ -83,7 +88,14 @@ const FormResultados = () => {
         jugadorId: jugador._id,
         clubId: selectedTeam === "local" ? localId : visitanteId,
         nombre: jugador.nombre, // Asegúrate que coincida con tu backend
-        puntos: 0, rebotes: 0, asistencias: 0, faltas: 0, robos: 0, tapones: 0, perdidas: 0, minutos: 0,
+        puntos: 0,
+        rebotes: 0,
+        asistencias: 0,
+        faltas: 0,
+        robos: 0,
+        tapones: 0,
+        perdidas: 0,
+        minutos: 0,
       });
       setSelectedPlayerId("");
     }
@@ -459,21 +471,25 @@ const FormResultados = () => {
                   : clubes.find((c) => c._id === watch("visitante"))?.name
               }
               readOnly
-              className="w-full bg-white/10 border border-white/10 rounded-lg py-3 px-4 text-center text-white font-bold"
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-center text-white font-bold"
             />
           </div>
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUser /> Jugador Más Valioso (MVP)
             </label>
-            <select
-              {...register("mvp")}
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white outline-none focus:border-amber-300"
-            >
-              <option value="" className="bg-[#111]">
-                Seleccionar Jugador
-              </option>
-            </select>
+            <input
+              type="text"
+              value={
+                jugadoresLocal.find((j) => j._id === watch("mvp"))?.nombre ||
+                jugadoresVisitante.find((j) => j._id === watch("mvp"))
+                  ?.nombre ||
+                ""
+              }
+              readOnly
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white"
+            />
+            <input type="hidden" {...register("mvp")} />
           </div>
         </div>
 
@@ -570,7 +586,14 @@ const FormResultados = () => {
                           {...register(`estadisticasJugadores.${index}.clubId`)}
                         />
                         <span className="text-white">
-                          {field.nombre || "Jugador"}
+                          {field.jugadorId
+                            ? jugadoresLocal.find(
+                                (j) => j._id === field.jugadorId,
+                              )?.nombre ||
+                              jugadoresVisitante.find(
+                                (j) => j._id === field.jugadorId,
+                              )?.nombre
+                            : "Jugador"}
                         </span>
                       </td>
                       <td className="p-2">
