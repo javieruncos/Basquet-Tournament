@@ -13,7 +13,6 @@ export  const NewsContextProvider = ({children}) => {
         getNoticias().then((res)=>{
             setNoticias(res);
             setLoading(false);
-            console.log(res);
         }).catch((error)=>{
             setError(error);
             setLoading(false);

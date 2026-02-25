@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { FaEdit, FaTrash, FaPlus, FaEye } from "react-icons/fa";
-import NewsContext from "../../../context/useNewsContext";
+import NewsContext from "../../../context/NewsContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { eliminarNoticia, getNoticias } from "../../../services/NewsService";
 import Swal from "sweetalert2";
