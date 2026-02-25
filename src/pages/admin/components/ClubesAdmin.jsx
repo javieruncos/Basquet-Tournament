@@ -6,6 +6,7 @@ import {
   FaSearch,
 } from "react-icons/fa";
 import ClubesContext from "../../../context/ClubesContext";
+import { Link } from "react-router-dom";
 
 const ClubesAdmin = () => {
   const {clubes} = useContext(ClubesContext);
@@ -21,9 +22,9 @@ const ClubesAdmin = () => {
             Administra las instituciones, estadios y datos generales
           </p>
         </div>
-        <button className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
+        <Link to="/admin/clubesAdmin/crear" className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
           <FaPlus /> Nuevo Club
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
@@ -56,7 +57,7 @@ const ClubesAdmin = () => {
           </thead>
           <tbody className="divide-y divide-white/5">
             {clubes.map((club) => (
-              <tr key={club.id} className="hover:bg-white/5 transition-colors">
+              <tr key={club._id} className="hover:bg-white/5 transition-colors">
                 <td className="p-4">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                     <img src={club.logo.url} alt="escudo" className="h-7 w-7" />
@@ -77,7 +78,7 @@ const ClubesAdmin = () => {
                 </td>
                 <td className="p-4">
                   <div className="flex justify-center gap-2">
-                    <Link to={`/resultadoAdmin/${club._id}`}
+                    <Link to={`/admin/clubesAdmin/editar/${club._id}`}
                       className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors"
                       title="Editar"
                     >
