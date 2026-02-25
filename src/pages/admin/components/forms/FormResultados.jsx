@@ -13,7 +13,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import ClubesContext from "../../../../context/ClubesContext";
 import {
   crearFixture,
-  editarFixture,
   editarResultadoFixture,
   obtenerFixtureID,
 } from "../../../../services/FixtureService";
@@ -80,14 +79,13 @@ const FormResultados = () => {
       selectedTeam === "local" ? jugadoresLocal : jugadoresVisitante;
     const jugador = lista.find((j) => j._id === selectedPlayerId);
 
-    // Evitar duplicados
     if (estadisticasFields.some((f) => f.jugadorId === jugador._id)) return;
 
     if (jugador) {
       append({
         jugadorId: jugador._id,
         clubId: selectedTeam === "local" ? localId : visitanteId,
-        nombre: jugador.nombre, // Asegúrate que coincida con tu backend
+        nombre: jugador.nombre, 
         puntos: 0,
         rebotes: 0,
         asistencias: 0,
@@ -151,14 +149,14 @@ const FormResultados = () => {
         arbitro2: data.arbitro2,
         arbitro3: data.arbitro3,
         resultado: {
-          cuartos: data.resultado.cuartos, // solo cuartos, backend calcula total
+          cuartos: data.resultado.cuartos, 
         },
-        ganador: data.ganador, // opcional, se puede dejar null
-        mvp: data.mvp, // opcional
-        estadisticasJugadores: data.estadisticasJugadores || [], // si aplica
-        reabrir: true, // si quieres desbloquear partido finalizado
+        ganador: data.ganador, 
+        mvp: data.mvp,
+        estadisticasJugadores: data.estadisticasJugadores || [], 
+        reabrir: true,
       };
-      // ✏️ MODO EDICIÓN
+    
       if (id) {
         const result = await Swal.fire({
           title: "¿Confirmar edición?",
@@ -185,10 +183,9 @@ const FormResultados = () => {
           state: { update: true },
         });
 
-        return; // 🔥 CLAVE: salir para no crear otro
+        return; 
       }
 
-      // ➕ MODO CREACIÓN
       await crearFixture(payload);
 
       await Swal.fire({
@@ -228,7 +225,7 @@ const FormResultados = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        {/* Información General */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
@@ -315,8 +312,6 @@ const FormResultados = () => {
             />
           </div>
         </div>
-
-        {/* Sede y Árbitros */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">
