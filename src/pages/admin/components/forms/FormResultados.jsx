@@ -210,6 +210,7 @@ const FormResultados = () => {
         ...swalCustomConfig,
       });
     }
+    console.log(data);
   };
 
   return (
@@ -521,10 +522,10 @@ const FormResultados = () => {
                 Seleccionar Equipo
               </option>
               <option value="local" className="bg-[#111]">
-                Local
+                {clubes.find((c) => c._id === watch("local"))?.name}
               </option>
               <option value="visitante" className="bg-[#111]">
-                Visitante
+               {clubes.find((c) => c._id === watch("visitante"))?.name}
               </option>
             </select>
 
@@ -567,6 +568,7 @@ const FormResultados = () => {
                   <th className="p-2">TAP</th>
                   <th className="p-2">PER</th>
                   <th className="p-2">MIN</th>
+                  <th className="p-2 text-center">TIT</th>
                   <th className="p-2"></th>
                 </tr>
               </thead>
@@ -577,12 +579,14 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="hidden"
+                          defaultValue={field.jugadorId}
                           {...register(
                             `estadisticasJugadores.${index}.jugadorId`,
                           )}
                         />
                         <input
                           type="hidden"
+                          defaultValue={field.clubId}
                           {...register(`estadisticasJugadores.${index}.clubId`)}
                         />
                         <span className="text-white">
@@ -599,7 +603,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
-                          {...register(`estadisticasJugadores.${index}.puntos`)}
+                          {...register(
+                            `estadisticasJugadores.${index}.puntos`,
+                            {
+                              valueAsNumber: true,
+                            },
+                          )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
                       </td>
@@ -608,6 +617,9 @@ const FormResultados = () => {
                           type="number"
                           {...register(
                             `estadisticasJugadores.${index}.rebotes`,
+                            {
+                              valueAsNumber: true,
+                            },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -617,6 +629,9 @@ const FormResultados = () => {
                           type="number"
                           {...register(
                             `estadisticasJugadores.${index}.asistencias`,
+                            {
+                              valueAsNumber: true,
+                            },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -624,14 +639,18 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
-                          {...register(`estadisticasJugadores.${index}.faltas`)}
+                          {...register(`estadisticasJugadores.${index}.faltas`,{
+                            valueAsNumber: true,
+                          })}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
                       </td>
                       <td className="p-2">
                         <input
                           type="number"
-                          {...register(`estadisticasJugadores.${index}.robos`)}
+                          {...register(`estadisticasJugadores.${index}.robos`,{
+                            valueAsNumber: true,
+                          })}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
                       </td>
@@ -640,6 +659,9 @@ const FormResultados = () => {
                           type="number"
                           {...register(
                             `estadisticasJugadores.${index}.tapones`,
+                            {
+                              valueAsNumber: true,
+                            }
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -649,6 +671,9 @@ const FormResultados = () => {
                           type="number"
                           {...register(
                             `estadisticasJugadores.${index}.perdidas`,
+                            {
+                              valueAsNumber: true,
+                            }
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -658,8 +683,20 @@ const FormResultados = () => {
                           type="number"
                           {...register(
                             `estadisticasJugadores.${index}.minutos`,
+                            {
+                              valueAsNumber: true,
+                            }
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
+                        />
+                      </td>
+                      <td className="p-2 text-center align-middle">
+                        <input
+                          type="checkbox"
+                          {...register(
+                            `estadisticasJugadores.${index}.titular`,
+                          )}
+                          className="w-4 h-4 accent-amber-400"
                         />
                       </td>
                       <td className="p-2">
