@@ -15,7 +15,6 @@ import {
   editarFixture,
   obtenerFixtureID,
 } from "../../../../services/FixtureService";
-import TournamentContext from "../../../../context/TournamentContext";
 import Swal from "sweetalert2";
 
 const FormProgamado = () => {
@@ -26,6 +25,7 @@ const FormProgamado = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm();
@@ -48,6 +48,10 @@ const FormProgamado = () => {
     });
   }, [id, reset]);
 
+  const localId = watch("local");
+  const visitanteId = watch("visitante");
+ 
+
   const swalCustomConfig = {
     background: "#111",
     color: "#fff",
@@ -61,7 +65,7 @@ const FormProgamado = () => {
 
   const onSubmit = async (data) => {
     try {
-      // ✏️ MODO EDICIÓN
+
       if (id) {
         const result = await Swal.fire({
           title: "¿Confirmar edición?",
@@ -88,11 +92,21 @@ const FormProgamado = () => {
           state: { update: true },
         });
 
-        return; // 🔥 CLAVE: salir para no crear otro
+        return; 
       }
 
-      // ➕ MODO CREACIÓN
+      Swal.fire({
+        title: "Cargando...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        ...swalCustomConfig,
+      });
+
       await crearFixture(data);
+
+      Swal.close();
 
       await Swal.fire({
         icon: "success",
@@ -101,7 +115,9 @@ const FormProgamado = () => {
         ...swalCustomConfig,
       });
 
-      navigate("/admin/fixtureAdmin");
+      navigate("/admin/fixtureAdmin", {
+        state: { update: true },
+      });
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -132,7 +148,7 @@ const FormProgamado = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Equipo Local */}
+         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUsers /> Equipo Local
@@ -157,7 +173,6 @@ const FormProgamado = () => {
             )}
           </div>
 
-          {/* Equipo Visitante */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUsers /> Equipo Visitante
@@ -182,7 +197,6 @@ const FormProgamado = () => {
             )}
           </div>
 
-          {/* Fecha */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaCalendarPlus /> Fecha del Encuentro
@@ -194,7 +208,6 @@ const FormProgamado = () => {
             />
           </div>
 
-          {/* Hora */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaClock /> Hora
@@ -208,7 +221,7 @@ const FormProgamado = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Fase */}
+  
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Fase / Jornada
@@ -238,7 +251,6 @@ const FormProgamado = () => {
             </select>
           </div>
 
-          {/* Jornada */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Número de Jornada
@@ -262,7 +274,7 @@ const FormProgamado = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Árbitro 1 */}
+         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Principal
@@ -270,11 +282,12 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+              autoComplete="off"
               {...register("arbitro1")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
           </div>
-          {/* Árbitro 2 */}
+        
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Secundario
@@ -282,12 +295,12 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+              autoComplete="off"
               {...register("arbitro2")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
           </div>
 
-          {/* Árbitro 3 */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Auxiliar
@@ -295,6 +308,7 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+               autoComplete="off"
               {...register("arbitro3")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
@@ -303,12 +317,24 @@ const FormProgamado = () => {
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaMapMarkerAlt /> Estadio / Sede
             </label>
-            <input
-              type="text"
-              placeholder="Ej: Estadio Ciudad de Tucumán"
+            <select
               {...register("estadio")}
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
-            />
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none appearance-none [&>option]:bg-[#111]"
+            >
+              <option value="" className="bg-[#111]">
+                Seleccionar Estadio
+              </option>
+              {clubes
+                .filter(
+                  (c) =>
+                    c._id === watch("local") || c._id === watch("visitante"),
+                )
+                .map((c) => (
+                  <option key={c._id} value={c.city}>
+                    Estadio {c.name} ({c.city})
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
 

@@ -2,10 +2,66 @@ import React, { useContext } from 'react';
 import { FaTrophy, FaEdit, FaTrash, FaPlus, FaChartBar } from 'react-icons/fa';
 import TournamentContext from '../../../context/TournamentContext';
 import { Link } from 'react-router-dom';
-import ClubesContext from '../../../context/ClubesContext';
+import ItemsResultados from './forms/ItemsResultados';
+import Swal from 'sweetalert2';
+import { eliminarFixture, getFixtures } from '../../../services/FixtureService';
 
 const ResultadosAdmin = () => {
-    const { fixture } = useContext(TournamentContext);
+    const { fixture ,setFixture} = useContext(TournamentContext);
+
+    const swalCustomConfig = {
+    background: "#111",
+    color: "#fff",
+    confirmButtonColor: "#fbbf24", // amber-400
+    cancelButtonColor: "#333",
+    customClass: {
+      popup: "border border-white/10 rounded-2xl",
+      title: "font-black uppercase tracking-tighter",
+    },
+  };
+
+
+    const onDelete = async (id) => {
+        try{
+            if(!id) return;
+            const result = await Swal.fire({
+                title: "¿Eliminar partido?",
+                text: "No se puede revertir esta acción",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, eliminar",
+                cancelButtonText: "Cancelar",
+                ...swalCustomConfig
+            })
+
+            if(!result.isConfirmed) return;
+
+            Swal.fire({
+                title: "Eliminando...",
+                allowOutsideClick: false,
+                didOpen: () => {
+                  Swal.showLoading()
+                },
+                ...swalCustomConfig
+            })
+
+            await eliminarFixture(id);
+
+            Swal.close();
+
+            Swal.fire({
+                icon: "success",
+                title: "Eliminado",
+                text: "El partido fue eliminado correctamente",
+                ...swalCustomConfig
+            })
+
+            const data = await getFixtures();
+            setFixture(data);   
+        }catch(error){
+            console.error(error);
+        }
+    }
 
     return (
         <div className="space-y-6">
@@ -35,46 +91,7 @@ const ResultadosAdmin = () => {
                     </thead>
                     <tbody className="divide-y divide-white/5">
                         {fixture.map((res) => (
-                            <tr key={res.id} className="hover:bg-white/5 transition-colors">
-                                <td className="p-4 text-sm text-gray-400">{res.fecha}</td>
-                                <td className="p-4 text-sm text-gray-400">{res.hora}</td>
-                                <td className="p-4">
-                                    <div className="flex items-center gap-2 font-bold text-sm">
-                                        <span>{res.local?.name}</span>
-                                        <span className="text-amber-300 text-[10px]">VS</span>
-                                        <span>{res.visitante?.name}</span>
-                                    </div>
-                                </td>
-                                <td className="p-4">
-                                    <div className="flex justify-center items-center gap-3 font-mono font-black text-lg">
-                                        <span className={res.resultado.total?.local > res.resultado.total?.visitante ? "text-green-400" : ""}>{res.resultado.total?.local}</span>
-                                        <span className="text-gray-600">-</span>
-                                        <span className={res.resultado.total?.visitante > res.total?.local ? "text-green-400" : ""}>{res.resultado.total?.visitante}</span>
-                                    </div>
-                                </td>
-                                <td className="p-4">
-                                    <span className={`text-[10px] uppercase font-black px-2 py-1 rounded-full ${
-                                        res.estado === 'Finalizado' 
-                                        ? 'bg-blue-500/20 text-blue-400' 
-                                        : 'bg-gray-500/20 text-gray-400'
-                                    }`}>
-                                        {res.estado}
-                                    </span>
-                                </td>
-                                <td className="p-4">
-                                    <div className="flex justify-center gap-2">
-                                        <Link to={`editar/${res._id}`}className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors" title="Editar Marcador">
-                                            <FaEdit size={14} />
-                                        </Link>
-                                        <button className="p-2 hover:bg-green-500/20 hover:text-green-400 rounded-lg transition-colors" title="Cargar Boxscore">
-                                            <FaChartBar size={14} />
-                                        </button>
-                                        <button className="p-2 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-colors" title="Eliminar">
-                                            <FaTrash size={14} />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            <ItemsResultados res={res} key={res._id} onDelete={onDelete}></ItemsResultados>
                         ))}
                     </tbody>
                 </table>

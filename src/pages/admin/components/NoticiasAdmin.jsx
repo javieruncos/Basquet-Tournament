@@ -57,6 +57,9 @@ const NoticiasAdmin = () => {
         });
   
         await eliminarNoticia(id);
+        
+        Swal.close(); 
+  
         const data = await getNoticias();
         setNoticias(data);
   

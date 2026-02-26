@@ -85,7 +85,7 @@ const FormResultados = () => {
       append({
         jugadorId: jugador._id,
         clubId: selectedTeam === "local" ? localId : visitanteId,
-        nombre: jugador.nombre, 
+        nombre: jugador.nombre,
         puntos: 0,
         rebotes: 0,
         asistencias: 0,
@@ -149,14 +149,14 @@ const FormResultados = () => {
         arbitro2: data.arbitro2,
         arbitro3: data.arbitro3,
         resultado: {
-          cuartos: data.resultado.cuartos, 
+          cuartos: data.resultado.cuartos,
         },
-        ganador: data.ganador, 
+        ganador: data.ganador,
         mvp: data.mvp,
-        estadisticasJugadores: data.estadisticasJugadores || [], 
+        estadisticasJugadores: data.estadisticasJugadores || [],
         reabrir: true,
       };
-    
+
       if (id) {
         const result = await Swal.fire({
           title: "¿Confirmar edición?",
@@ -183,10 +183,21 @@ const FormResultados = () => {
           state: { update: true },
         });
 
-        return; 
+        return;
       }
 
+      Swal.fire({
+        title: "Cargando...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        ...swalCustomConfig,
+      });
+
       await crearFixture(payload);
+
+      Swal.close();
 
       await Swal.fire({
         icon: "success",
@@ -225,7 +236,6 @@ const FormResultados = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
@@ -434,6 +444,7 @@ const FormResultados = () => {
                   <input
                     type="number"
                     placeholder="L"
+                     autoComplete="off"
                     {...register(`resultado.cuartos.${index}.local`, {
                       valueAsNumber: true,
                     })}
@@ -442,6 +453,7 @@ const FormResultados = () => {
                   <input
                     type="number"
                     placeholder="V"
+                     autoComplete="off"
                     {...register(`resultado.cuartos.${index}.visitante`, {
                       valueAsNumber: true,
                     })}
@@ -460,6 +472,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
+               autoComplete="off"
               value={
                 watch("resultado.total.local") >
                 watch("resultado.total.visitante")
@@ -476,6 +489,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
+               autoComplete="off"
               value={
                 jugadoresLocal.find((j) => j._id === watch("mvp"))?.nombre ||
                 jugadoresVisitante.find((j) => j._id === watch("mvp"))
@@ -520,7 +534,7 @@ const FormResultados = () => {
                 {clubes.find((c) => c._id === watch("local"))?.name}
               </option>
               <option value="visitante" className="bg-[#111]">
-               {clubes.find((c) => c._id === watch("visitante"))?.name}
+                {clubes.find((c) => c._id === watch("visitante"))?.name}
               </option>
             </select>
 
@@ -634,16 +648,19 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
-                          {...register(`estadisticasJugadores.${index}.faltas`,{
-                            valueAsNumber: true,
-                          })}
+                          {...register(
+                            `estadisticasJugadores.${index}.faltas`,
+                            {
+                              valueAsNumber: true,
+                            },
+                          )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
                       </td>
                       <td className="p-2">
                         <input
                           type="number"
-                          {...register(`estadisticasJugadores.${index}.robos`,{
+                          {...register(`estadisticasJugadores.${index}.robos`, {
                             valueAsNumber: true,
                           })}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -656,7 +673,7 @@ const FormResultados = () => {
                             `estadisticasJugadores.${index}.tapones`,
                             {
                               valueAsNumber: true,
-                            }
+                            },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -668,7 +685,7 @@ const FormResultados = () => {
                             `estadisticasJugadores.${index}.perdidas`,
                             {
                               valueAsNumber: true,
-                            }
+                            },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -680,7 +697,7 @@ const FormResultados = () => {
                             `estadisticasJugadores.${index}.minutos`,
                             {
                               valueAsNumber: true,
-                            }
+                            },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />

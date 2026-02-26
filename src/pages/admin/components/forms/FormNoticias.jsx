@@ -67,12 +67,10 @@ const FormNoticias = () => {
     formData.append("published", data.published ? "true" : "false");
     console.log(data);
 
-    //verficar que la image sea cargada
     if (data.image?.[0]) {
       formData.append("image", data.image[0]);
     }
 
-    // Tags como array
     if (data.tags) {
       if (Array.isArray(data.tags)) {
         data.tags.forEach((tag) => formData.append("tags", tag));
@@ -86,7 +84,6 @@ const FormNoticias = () => {
 
     try {
       if (id) {
-        // 🔥 CONFIRMAR EDICIÓN
         const result = await Swal.fire({
           title: "¿Confirmar edición?",
           text: "Se actualizarán los datos de la noticia",
@@ -148,6 +145,7 @@ const FormNoticias = () => {
           <input
             type="text"
             name="title"
+             autoComplete="off"
             placeholder="Ej: Gran victoria de Talleres en el clásico"
             className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
             {...register("title", {
@@ -177,6 +175,7 @@ const FormNoticias = () => {
             <input
               type="text"
               name="author"
+               autoComplete="off"
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
               {...register("author", {
                 required: "El autor es obligatorio",
@@ -226,6 +225,7 @@ const FormNoticias = () => {
               </span>
             )}
           </div>
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaImage /> imagen

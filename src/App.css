@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+
+
 .App{
   font-family: "Roboto", sans-serif;
   background-color:black;
@@ -30,4 +32,25 @@ h1,h2,h3,h4,h5,h6 {
 
 .bg-dark-gradient {
   background: linear-gradient(to bottom right, #1e1e1e, transparent);
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.05) inset; /* igual que bg-white/5 */
+  -webkit-text-fill-color: white !important; /* texto blanco */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill:invalid {
+  -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.05) inset !important;
+  -webkit-text-fill-color: white !important;
+}
+
+input:invalid {
+  color: white !important; 
+}
+
+input:focus {
+  outline: none;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 3px rgba(251,191,36,0.3);
 }

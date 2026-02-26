@@ -1,14 +1,77 @@
-import React, { useContext } from "react";
-import {
-  FaPlus,
-  FaEdit,
-  FaTrash,
-  FaSearch,
-} from "react-icons/fa";
+import React, { useContext, useEffect } from "react";
+import { FaPlus, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
 import ClubesContext from "../../../context/ClubesContext";
+import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { eliminarClub, getClubes } from "../../../services/ClubesService";
+import Swal from "sweetalert2";
 
 const ClubesAdmin = () => {
-  const {clubes} = useContext(ClubesContext);
+  const { clubes, setClubes } = useContext(ClubesContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state?.update) {
+      getClubes().then((data) => {
+        setClubes(data);
+      });
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, [location.state, navigate, setClubes]);
+
+  const swalCustomConfig = {
+    background: "#111",
+    color: "#fff",
+    confirmButtonColor: "#fbbf24", // amber-400
+    cancelButtonColor: "#333",
+    customClass: {
+      popup: "border border-white/10 rounded-2xl",
+      title: "font-black uppercase tracking-tighter",
+    },
+  };
+
+  const onDelete = async (id) => {
+    try {
+      if (!id) return;
+      const result = await Swal.fire({
+        title: "¿Eliminar noticia?",
+        text: "No se puede revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+        ...swalCustomConfig,
+      });
+
+      if (!result.isConfirmed) return;
+
+      Swal.fire({
+        title: "Eliminando...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        ...swalCustomConfig,
+      });
+
+      await  eliminarClub(id);
+
+      Swal.close(); 
+      
+      const data = await getClubes();
+      setClubes(data);
+    } catch (error) {
+      console.error(error);
+
+      await Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo eliminar la noticia",
+        ...swalCustomConfig,
+      });
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -21,9 +84,12 @@ const ClubesAdmin = () => {
             Administra las instituciones, estadios y datos generales
           </p>
         </div>
-        <button className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors">
+        <Link
+          to="/admin/clubesAdmin/crear"
+          className="flex items-center gap-2 bg-amber-300 text-black px-4 py-2 rounded-lg font-bold uppercase text-xs tracking-widest hover:bg-amber-400 transition-colors"
+        >
           <FaPlus /> Nuevo Club
-        </button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
@@ -56,7 +122,7 @@ const ClubesAdmin = () => {
           </thead>
           <tbody className="divide-y divide-white/5">
             {clubes.map((club) => (
-              <tr key={club.id} className="hover:bg-white/5 transition-colors">
+              <tr key={club._id} className="hover:bg-white/5 transition-colors">
                 <td className="p-4">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                     <img src={club.logo.url} alt="escudo" className="h-7 w-7" />
@@ -67,9 +133,7 @@ const ClubesAdmin = () => {
                     <span className="font-bold text-sm">{club.name}</span>
                   </div>
                 </td>
-                <td className="p-4 text-sm text-gray-300 ">
-                  {club._id}
-                </td>
+                <td className="p-4 text-sm text-gray-300 ">{club._id}</td>
                 <td className="p-4">
                   <div className="flex items-center gap-2 text-sm">
                     {club.shortname}
@@ -77,7 +141,8 @@ const ClubesAdmin = () => {
                 </td>
                 <td className="p-4">
                   <div className="flex justify-center gap-2">
-                    <Link to={`/resultadoAdmin/${club._id}`}
+                    <Link
+                      to={`/admin/clubesAdmin/editar/${club._id}`}
                       className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors"
                       title="Editar"
                     >
@@ -86,6 +151,7 @@ const ClubesAdmin = () => {
                     <button
                       className="p-2 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-colors"
                       title="Eliminar"
+                      onClick={() => onDelete(club._id)}
                     >
                       <FaTrash size={14} />
                     </button>

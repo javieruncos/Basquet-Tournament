@@ -31,3 +31,35 @@ export const jugadoresClub = async (id) => {
         throw new Error("No se pudo obtener los jugadores del club");
     }
 }
+
+ export const obtenerClubID = async (id) => {
+    try {
+        const response = await api.get(`/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo obtener el club");
+    }
+}
+
+
+
+export const editarClub = async (id, formData) => {
+    try {
+        const response = await api.put(`/${id}`, formData);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo editar el club");
+    }
+
+}
+
+
+export const eliminarClub = async (id) => {
+    try {
+        const response = await api.delete(`/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo eliminar el club");
+    }
+
+}

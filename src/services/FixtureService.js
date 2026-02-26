@@ -56,3 +56,11 @@ export const editarResultadoFixture = async (id, data) => {
     }
 }
 
+export const eliminarFixture = async (id) =>{
+    try {
+        const response = await api.delete(`/${id}`);
+        return response.data;
+    } catch (error) {
+        throw new Error("No se pudo eliminar el fixture");
+    }
+}
