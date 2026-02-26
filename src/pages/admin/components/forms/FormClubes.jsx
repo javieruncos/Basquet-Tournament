@@ -10,7 +10,11 @@ import {
   FaImage,
   FaInfoCircle,
 } from "react-icons/fa";
-import { crearClub, editarClub, obtenerClubID } from "../../../../services/ClubesService";
+import {
+  crearClub,
+  editarClub,
+  obtenerClubID,
+} from "../../../../services/ClubesService";
 import Swal from "sweetalert2";
 
 const FormClubes = () => {
@@ -117,6 +121,10 @@ const FormClubes = () => {
       title: " Club Creado",
       text: "El Club se ha registrado correctamente",
       ...swalCustomConfig,
+    });
+
+    navigate("/admin/clubesAdmin", {
+      state: { update: true },
     });
   };
 

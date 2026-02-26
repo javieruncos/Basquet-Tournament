@@ -19,7 +19,6 @@ import FormNoticias from "./pages/admin/components/forms/FormNoticias";
 import { TournamentContextProvider } from "./context/TournamentContext";
 import { ClubesContextProvider } from "./context/ClubesContext";
 import FormResultados from "./pages/admin/components/forms/FormResultados";
-import { Form } from "react-hook-form";
 import FormProgamado from "./pages/admin/components/forms/FormProgamado";
 import FormClubes from "./pages/admin/components/forms/FormClubes";
 
@@ -29,8 +28,6 @@ function App() {
       <NewsContextProvider>
         <TournamentContextProvider>
           <ClubesContextProvider>
-
-         
           <BrowserRouter>
             <div className="App">
               <MenuNav></MenuNav>

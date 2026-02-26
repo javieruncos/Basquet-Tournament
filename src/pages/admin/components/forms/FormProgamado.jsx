@@ -15,7 +15,6 @@ import {
   editarFixture,
   obtenerFixtureID,
 } from "../../../../services/FixtureService";
-import TournamentContext from "../../../../context/TournamentContext";
 import Swal from "sweetalert2";
 
 const FormProgamado = () => {
@@ -26,6 +25,7 @@ const FormProgamado = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
     reset,
   } = useForm();
@@ -47,6 +47,11 @@ const FormProgamado = () => {
       });
     });
   }, [id, reset]);
+
+  const localId = watch("local");
+  const visitanteId = watch("visitante");
+  const localClub = clubes.find((c) => c._id === localId);
+  const visitanteClub = clubes.find((c) => c._id === visitanteId);
 
   const swalCustomConfig = {
     background: "#111",
@@ -91,8 +96,19 @@ const FormProgamado = () => {
         return; // 🔥 CLAVE: salir para no crear otro
       }
 
+      Swal.fire({
+        title: "Cargando...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        ...swalCustomConfig,
+      });
+
       // ➕ MODO CREACIÓN
       await crearFixture(data);
+
+      Swal.close();
 
       await Swal.fire({
         icon: "success",
@@ -101,7 +117,9 @@ const FormProgamado = () => {
         ...swalCustomConfig,
       });
 
-      navigate("/admin/fixtureAdmin");
+      navigate("/admin/fixtureAdmin", {
+        state: { update: true },
+      });
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -262,7 +280,7 @@ const FormProgamado = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Árbitro 1 */}
+         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Principal
@@ -270,11 +288,12 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+              autoComplete="off"
               {...register("arbitro1")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
           </div>
-          {/* Árbitro 2 */}
+        
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Secundario
@@ -282,12 +301,12 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+              autoComplete="off"
               {...register("arbitro2")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
           </div>
 
-          {/* Árbitro 3 */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Auxiliar
@@ -303,12 +322,24 @@ const FormProgamado = () => {
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaMapMarkerAlt /> Estadio / Sede
             </label>
-            <input
-              type="text"
-              placeholder="Ej: Estadio Ciudad de Tucumán"
+            <select
               {...register("estadio")}
-              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
-            />
+              className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none appearance-none [&>option]:bg-[#111]"
+            >
+              <option value="" className="bg-[#111]">
+                Seleccionar Estadio
+              </option>
+              {clubes
+                .filter(
+                  (c) =>
+                    c._id === watch("local") || c._id === watch("visitante"),
+                )
+                .map((c) => (
+                  <option key={c._id} value={c.city}>
+                    Estadio {c.name} ({c.city})
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
 
