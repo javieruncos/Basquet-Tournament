@@ -57,7 +57,7 @@ const ClubesAdmin = () => {
 
       await  eliminarClub(id);
 
-      Swal.close(); // 🔥 cerrar loader
+      Swal.close(); 
       
       const data = await getClubes();
       setClubes(data);

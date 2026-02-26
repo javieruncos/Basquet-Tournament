@@ -80,7 +80,6 @@ const FormClubes = () => {
     formData.append("active", data.active ? "true" : "false");
     formData.append("colors", JSON.stringify(data.colors));
 
-    // ✅ Imagen
     if (data.logo && data.logo[0]) {
       formData.append("logo", data.logo[0]);
     }
@@ -144,7 +143,7 @@ const FormClubes = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Nombre del Club */}
+        
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaShieldAlt /> Nombre de la Institución
@@ -152,6 +151,7 @@ const FormClubes = () => {
             <input
               type="text"
               {...register("name", { required: "El nombre es obligatorio" })}
+              
               placeholder="Ej: Club Atlético Estación Experimental"
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
             />
@@ -162,7 +162,6 @@ const FormClubes = () => {
             )}
           </div>
 
-          {/* Siglas / Shortname */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Siglas (Shortname)
@@ -175,7 +174,6 @@ const FormClubes = () => {
             />
           </div>
 
-          {/* Ciudad */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaMapMarkerAlt /> Ciudad
@@ -188,7 +186,6 @@ const FormClubes = () => {
             />
           </div>
 
-          {/* Categoría */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Categoría Principal
@@ -210,7 +207,6 @@ const FormClubes = () => {
           </div>
         </div>
 
-        {/* Colores del Club */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-white/5 rounded-xl border border-white/5">
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
@@ -234,7 +230,6 @@ const FormClubes = () => {
           </div>
         </div>
 
-        {/* Logo / Escudo */}
         <div className="space-y-2">
           <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
             <FaImage /> Escudo del Club (Imagen)
@@ -259,7 +254,6 @@ const FormClubes = () => {
           </div>
         </div>
 
-        {/* Descripción */}
         <div className="space-y-2">
           <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
             <FaInfoCircle /> Historia / Descripción
@@ -272,7 +266,6 @@ const FormClubes = () => {
           ></textarea>
         </div>
 
-        {/* Estado Activo */}
         <div className="flex items-center gap-3 py-2">
           <input
             type="checkbox"

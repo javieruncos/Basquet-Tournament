@@ -444,6 +444,7 @@ const FormResultados = () => {
                   <input
                     type="number"
                     placeholder="L"
+                     autoComplete="off"
                     {...register(`resultado.cuartos.${index}.local`, {
                       valueAsNumber: true,
                     })}
@@ -452,6 +453,7 @@ const FormResultados = () => {
                   <input
                     type="number"
                     placeholder="V"
+                     autoComplete="off"
                     {...register(`resultado.cuartos.${index}.visitante`, {
                       valueAsNumber: true,
                     })}
@@ -470,6 +472,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
+               autoComplete="off"
               value={
                 watch("resultado.total.local") >
                 watch("resultado.total.visitante")
@@ -486,6 +489,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
+               autoComplete="off"
               value={
                 jugadoresLocal.find((j) => j._id === watch("mvp"))?.nombre ||
                 jugadoresVisitante.find((j) => j._id === watch("mvp"))

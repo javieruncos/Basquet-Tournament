@@ -50,8 +50,7 @@ const FormProgamado = () => {
 
   const localId = watch("local");
   const visitanteId = watch("visitante");
-  const localClub = clubes.find((c) => c._id === localId);
-  const visitanteClub = clubes.find((c) => c._id === visitanteId);
+ 
 
   const swalCustomConfig = {
     background: "#111",
@@ -66,7 +65,7 @@ const FormProgamado = () => {
 
   const onSubmit = async (data) => {
     try {
-      // ✏️ MODO EDICIÓN
+
       if (id) {
         const result = await Swal.fire({
           title: "¿Confirmar edición?",
@@ -93,7 +92,7 @@ const FormProgamado = () => {
           state: { update: true },
         });
 
-        return; // 🔥 CLAVE: salir para no crear otro
+        return; 
       }
 
       Swal.fire({
@@ -105,7 +104,6 @@ const FormProgamado = () => {
         ...swalCustomConfig,
       });
 
-      // ➕ MODO CREACIÓN
       await crearFixture(data);
 
       Swal.close();
@@ -150,7 +148,7 @@ const FormProgamado = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Equipo Local */}
+         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUsers /> Equipo Local
@@ -175,7 +173,6 @@ const FormProgamado = () => {
             )}
           </div>
 
-          {/* Equipo Visitante */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUsers /> Equipo Visitante
@@ -200,7 +197,6 @@ const FormProgamado = () => {
             )}
           </div>
 
-          {/* Fecha */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaCalendarPlus /> Fecha del Encuentro
@@ -212,7 +208,6 @@ const FormProgamado = () => {
             />
           </div>
 
-          {/* Hora */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaClock /> Hora
@@ -226,7 +221,7 @@ const FormProgamado = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Fase */}
+  
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Fase / Jornada
@@ -256,7 +251,6 @@ const FormProgamado = () => {
             </select>
           </div>
 
-          {/* Jornada */}
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Número de Jornada
@@ -314,6 +308,7 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
+               autoComplete="off"
               {...register("arbitro3")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
