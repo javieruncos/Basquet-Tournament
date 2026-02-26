@@ -1,8 +1,15 @@
 import { FaPlus } from "react-icons/fa";
 import CardNoticias from "../../noticias/components/CardNoticias";
+import NewsContext from "../../../context/NewsContext";
+import { useContext } from "react";
 
 
 const NoticiasSection = () => {
+
+   const {noticias} = useContext(NewsContext)
+
+
+
     return (
         <section className="relative px-5 sm:px-6 lg:px-8 overflow-hidden">
                <div className="relative z-10 max-w-7xl mx-auto">
@@ -19,8 +26,8 @@ const NoticiasSection = () => {
                  </div>
        
                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                   {[1, 2, 3].map((n) => (
-                     <CardNoticias key={n} />
+                   {noticias.map((noticia) => (
+                     <CardNoticias key={noticia._id} noticia={noticia}/>
                    ))}
                  </div>
                </div>

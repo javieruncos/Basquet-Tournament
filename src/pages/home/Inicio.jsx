@@ -7,8 +7,12 @@ import ProximosResultSection from "./components/ProximosResultSection";
 import ClubesSection from "./components/ClubesSection";
 import LideresSection from "./components/LideresSection";
 import TablaPosicionesSection from "./components/TablaPosicionesSection";
+import TournamentContext from "../../context/TournamentContext";
+import { useContext } from "react";
+import ClubesContext from "../../context/ClubesContext";
 
 export const Inicio = () => {
+ 
   return (
     <div className=" text-white mt-0">
       <PortadaInicio />
@@ -61,7 +65,6 @@ export const Inicio = () => {
           </div>
         </div>
       </section>
-
       <Footer />
     </div>
   );

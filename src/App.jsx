@@ -51,7 +51,7 @@ function App() {
                 ></Route>
                 <Route path="/fixture" element={<Fixture></Fixture>}></Route>
                 <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
-                <Route path="/inicio" element={<Inicio></Inicio>}></Route>
+                <Route path="/" element={<Inicio></Inicio>}></Route>
                 <Route path="/admin" element={<AdminLayout></AdminLayout>}>
                   <Route index element={<NoticiasAdmin />} />
                   <Route path="noticias" element={<NoticiasAdmin />} />
