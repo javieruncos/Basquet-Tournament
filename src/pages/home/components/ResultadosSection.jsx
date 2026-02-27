@@ -27,7 +27,7 @@ const ResultadosSection = () => {
                  </div>
        
                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-                   {fixture.map((item) => (
+                   {fixture.filter((item) => item.estado !== "Programado").map((item) => (
                        <CardResultados resultados = {item} key={item._id} clubes = {clubes}/>
                    ))}
                  </div>

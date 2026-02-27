@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import fixtureResultado from '../../detalleResultado/components/fixtureResultado';
+import { Tour } from '@mui/icons-material';
+import TournamentContext from '../../../context/TournamentContext';
+import ClubesContext from '../../../context/ClubesContext';
+
 
 const ProximosResultSection = () => {
+    const {fixture} = useContext(TournamentContext)
+    const {clubes} = useContext(ClubesContext)
+    
     return (
          <section className="pt-10 px-5 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
@@ -17,7 +25,7 @@ const ProximosResultSection = () => {
                   </div>
         
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {[1, 2, 3, 4,5,6].map((item) => (
+                    {fixture.filter((item) => item.estado === "Programado").map((item) => (
                       <div key={item} className="w-full rounded-2xl p-1">
                         <div className="bg-white/5 backdrop-blur-3xl border border-white/10  hover:bg-white/10 transition-all duration-300 shadow-xl rounded-md p-6 text-white relative overflow-hidden group hover:border-amber-300/30 ">
                           <p className="text-center text-xs text-amber-300 mb-4 tracking-[0.2em] uppercase font-bold numberFonts">
@@ -27,12 +35,12 @@ const ProximosResultSection = () => {
                           <div className="flex items-center justify-between gap-2">
                             <div className="flex flex-col items-center gap-2">
                               <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Escudo_del_Club_Estaci%C3%B3n_Experimental_Tucum%C3%A1n.svg"
+                                src={item.local.logo.url}
                                 className="w-14 h-14 object-contain"
                                 alt="Local"
                               />
                               <span className="text-2xl font-bold uppercase tracking-tighter">
-                                CAEE
+                               { clubes?.find((club) => club._id === item.local._id)?.shortname}
                               </span>
                             </div>
         
@@ -47,22 +55,22 @@ const ProximosResultSection = () => {
         
                             <div className="flex flex-col items-center gap-2">
                               <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Escudo_del_Club_Estaci%C3%B3n_Experimental_Tucum%C3%A1n.svg"
+                                src={item.visitante.logo.url}
                                 className="w-14 h-14 object-contain"
                                 alt="Visitante"
                               />
                               <span className="text-2xl font-bold uppercase tracking-tighter">
-                                TTF
+                               { clubes?.find((club) => club._id === item.visitante._id)?.shortname}
                               </span>
                             </div>
                           </div>
         
                           <div className="mt-6 pt-4 border-t border-white/5 flex flex-col items-center gap-1">
                             <span className="text-sm font-bold numberFonts text-amber-300">
-                              24/06/2026
+                              {item.fecha}
                             </span>
                             <span className="text-xs text-gray-500">
-                              21:00 HS - Estadio Central
+                              {item.hora} HS - Estadio Central
                             </span>
                             <button className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest">
                               Ver Previa

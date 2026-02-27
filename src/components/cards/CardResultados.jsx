@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CardReultados = ({resultados,clubes}) => {
   return (
-    <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl p-5">
+    <Link to={`/boxscore/${resultados._id}`}href="">
+       <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl p-5">
       <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
         <span className="w-2 h-2 bg-yellow-400 rounded-full"></span>
        Fase {resultados?.fase}
@@ -53,6 +55,7 @@ const CardReultados = ({resultados,clubes}) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
