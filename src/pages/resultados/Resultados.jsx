@@ -1,8 +1,9 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CardResultados from "../../components/cards/CardResultados";
 
 const Resultados = () => {
+  const [value, setValue] = useState("")
   const filter = [
     "Todos",
     "Clasificatoria",
@@ -10,6 +11,17 @@ const Resultados = () => {
     "cuartos de final",
     "Final",
   ];
+
+
+  const onChange = (e) => {
+    setValue(e.target.value);
+    console.log(e.target.value);
+  };
+
+
+
+
+
   return (
     <div className="md:px-10 px-5 main-container mt-30">
         <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
@@ -133,7 +145,8 @@ const Resultados = () => {
             <Select
               id="demo-simple-select"
               displayEmpty
-              defaultValue=""
+              value={value}
+              onChange={onChange}
               className="bg-amber-300"
               sx={{
                 color: "black",
@@ -168,9 +181,9 @@ const Resultados = () => {
               <MenuItem value="" disabled>
                 Fecha del torneo
               </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"10"}>10</MenuItem>
+              <MenuItem value={"20"}>20</MenuItem>
+              <MenuItem value={"30"}>30</MenuItem>
             </Select>
           </FormControl>
         </div>

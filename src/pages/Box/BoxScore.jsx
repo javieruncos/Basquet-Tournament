@@ -20,7 +20,7 @@ const BoxScore = () => {
     ];
 
     const StatTable = ({ title, players }) => (
-        <div className="bg-[#171717] border border-white/10 rounded-md overflow-hidden">
+        <div className="bg-[#171717] border border-white/10 rounded-md overflow-hidden ">
             <div className="bg-[#222222] p-4 border-b border-white/10">
                 <h3 className="text-amber-300 font-bold uppercase text-sm tracking-widest">{title}</h3>
             </div>
@@ -50,7 +50,7 @@ const BoxScore = () => {
     );
 
     return (
-        <div className="p-10 px-3 lg:px-10 numberFonts">
+        <div className="p-10 px-3 lg:px-10 numberFonts mt-10">
             <div className="py-5 w-full flex gap-1 text-amber-300 text-sm lg:gap-4">
                 <span>22/06/2026</span>
                 <span>/</span>
