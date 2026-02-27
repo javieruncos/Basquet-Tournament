@@ -1,5 +1,5 @@
 import React from "react";
-import CardClubes from "./components/CardClubes";
+import CardClubes from "../../components/cards/CardClubes";
 import Sponsor from "../../components/common/Sponsor";
 
 const ClubesPage = () => {

@@ -3,18 +3,23 @@ import jugadores from "../../../assets/images/jugadores.png";
 
 const PortadaInicio = () => {
   return (
-    <section className="relative h-162.5 overflow-hidden flex items-center px-6 md:px-16 bg-[#171717] text-white">
+    <section className="relative h-162.5 overflow-hidden flex items-center px-6 md:px-16  text-white">
       <div className="absolute inset-0 z-0">
         <img
           src={jugadores}
           alt="Fondo"
-          className="w-full h-full object-cover opacity-30 "
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-r from-black via-black/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-[black] via-[#171717]/85 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-r from-black/70 via-transparent to-transparent"></div>
       </div>
 
-      <div className="absolute top-0 -left-25 h-full w-50 bg-amber-400/20 skew-x-45 z-10 border-r border-amber-400/30"></div>
-      <div className="absolute top-0 left-37.5 h-full w-25 bg-white/5 skew-x-45 z-10"></div>
+      <div className="absolute top-0 -left-25 h-full w-50 bg-amber-400/20 skew-x-45 z-10 border-r border-amber-400/30">
+        <div className="absolute inset-0 bg-linear-to-t from-[#000000fa] via-[#0a0a0a]/40 to-transparent"></div>
+      </div>
+      <div className="absolute top-0 left-37.5 h-full w-25 bg-white/5 skew-x-45 z-10">
+        <div className="absolute inset-0 bg-linear-to-t from-[#000000c4] via-[#0a0a0a]/40 to-transparent"></div>
+      </div>
       <div className="relative z-20 max-w-5xl h-full flex flex-col justify-center items-center md:items-start text-center md:text-left gap-6 mx-auto md:mx-0">
         <span className="text-amber-400 font-bold tracking-[0.3em] uppercase text-sm animate-pulse w-full">
           Temporada 2026

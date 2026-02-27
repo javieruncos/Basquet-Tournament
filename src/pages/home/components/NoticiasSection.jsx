@@ -1,5 +1,5 @@
 import { FaPlus } from "react-icons/fa";
-import CardNoticias from "../../noticias/components/CardNoticias";
+import CardNoticias from "../../../components/cards/CardNoticias";
 import NewsContext from "../../../context/NewsContext";
 import { useContext } from "react";
 

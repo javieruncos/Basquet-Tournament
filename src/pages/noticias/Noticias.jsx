@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import PortadaNoticias from "./components/PortadaNoticias";
-import CardNoticias from "./components/CardNoticias";
+import CardNoticias from "../../components/cards/CardNoticias";
 import SponsorCTA from "./components/SponsorCTA";
 import Sponsor from "../../components/common/Sponsor";
 import {
@@ -12,8 +12,10 @@ import {
 } from "@mui/material";
 import ResultadosSection from "../home/components/ResultadosSection";
 import ProximosResultSection from "../home/components/ProximosResultSection";
+import NewsContext from "../../context/NewsContext";
 
 const Noticias = () => {
+  const {noticias} = useContext(NewsContext);
   const filtros = ["Todos", "Masculino", "Femenino", "Juveniles"];
 
   return (
@@ -143,12 +145,11 @@ const Noticias = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-15">
-        <CardNoticias></CardNoticias>
-        <CardNoticias></CardNoticias>
-        <CardNoticias></CardNoticias>
-        <CardNoticias></CardNoticias>
-        <CardNoticias></CardNoticias>
-        <CardNoticias></CardNoticias>
+        {
+          noticias.map((noticia) => (
+            <CardNoticias noticia={noticia}></CardNoticias>
+          ))
+        }
       </div>
       <div className="">
         <ProximosResultSection />

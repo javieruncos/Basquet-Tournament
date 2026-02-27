@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import React from "react";
-import CardResultados from "./components/CardResultados";
+import CardResultados from "../../components/cards/CardResultados";
 
 const Resultados = () => {
   const filter = [

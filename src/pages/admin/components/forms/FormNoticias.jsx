@@ -301,7 +301,7 @@ const FormNoticias = () => {
                 message: "El contenido debe tener al menos 5 caracteres",
               },
               maxLength: {
-                value: 1000,
+                value: 2000,
                 message: "El contenido no puede exceder los 1000 caracteres",
               },
             })}

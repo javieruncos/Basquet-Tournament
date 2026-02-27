@@ -4,17 +4,20 @@ const PortadaNoticias = () => {
   return (
     <div className="mt-10 h-125 rounded-xl relative overflow-hidden bg-[#171717]">
       {/* Background Image with Gradient Overlay */}
+     
       <div className="absolute inset-0 z-0">
         <img
           src="https://images.pexels.com/photos/31169292/pexels-photo-31169292.jpeg"
           alt="Portada Noticias"
           className="object-cover w-full h-full opacity-40"
         />
+         <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent"></div>
         <div className="absolute inset-0 bg-linear-to-r from-black via-black/70 to-transparent"></div>
       </div>
 
       {/* Decorative Diagonal Elements (Home Style) */}
-      <div className="absolute top-0 -left-20 h-full w-40 bg-amber-400/10 skew-x-45 z-10 border-r border-amber-400/20"></div>
+      <div className="absolute top-0 -left-20 h-full w-40 bg-amber-400/10 skew-x-45 z-10 border-r border-amber-400/20">
+      </div>
 
       {/* Content */}
       <div className="relative z-20 h-full flex flex-col justify-center px-6 md:px-16 max-w-4xl gap-6">

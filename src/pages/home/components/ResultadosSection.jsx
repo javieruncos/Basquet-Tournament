@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import CardResultados from "../../resultados/components/CardResultados";
+import CardResultados from "../../../components/cards/CardResultados";
 import { FaPlus } from "react-icons/fa";
 import ClubesContext from "../../../context/ClubesContext";
 import TournamentContext from "../../../context/TournamentContext";

@@ -21,6 +21,9 @@ import { ClubesContextProvider } from "./context/ClubesContext";
 import FormResultados from "./pages/admin/components/forms/FormResultados";
 import FormProgamado from "./pages/admin/components/forms/FormProgamado";
 import FormClubes from "./pages/admin/components/forms/FormClubes";
+import NoticiaDetalle from "./pages/DetalleNoticias/NoticiaDetalle";
+import ScrollToTop from "./utils/ScrollToTop";
+
 
 function App() {
   return (
@@ -29,10 +32,12 @@ function App() {
         <TournamentContextProvider>
           <ClubesContextProvider>
           <BrowserRouter>
+          <ScrollToTop />
             <div className="App">
               <MenuNav></MenuNav>
               <Routes>
                 <Route path="/noticias" element={<Noticias></Noticias>}></Route>
+                <Route path="/noticiasDetalle/:id" element={<NoticiaDetalle></NoticiaDetalle>}></Route>
                 <Route
                   path="/resultados"
                   element={<Resultados></Resultados>}
