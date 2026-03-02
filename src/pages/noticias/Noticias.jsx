@@ -8,9 +8,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
-import ResultadosSection from "../home/components/ResultadosSection";
 import ProximosResultSection from "../home/components/ProximosResultSection";
 import NewsContext from "../../context/NewsContext";
 import ClubesContext from "../../context/ClubesContext";
