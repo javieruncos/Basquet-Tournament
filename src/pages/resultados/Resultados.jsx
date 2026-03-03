@@ -9,6 +9,9 @@ import React, { useContext, useState } from "react";
 import CardResultados from "../../components/cards/CardResultados";
 import TournamentContext from "../../context/TournamentContext";
 import ClubesContext from "../../context/ClubesContext";
+import ProximosResultSection from "../../pages/home/components/ProximosResultSection";
+import Sponsor from "../../components/common/Sponsor";
+
 
 const Resultados = () => {
   const { fixture, setFixture } = useContext(TournamentContext);
@@ -46,6 +49,8 @@ const Resultados = () => {
   console.log(filtro);
 
   return (
+    <>
+    
     <div className="md:px-10 px-5 main-container mt-30">
       <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
         <span>Torneo</span>
@@ -242,6 +247,11 @@ const Resultados = () => {
        
       </div>
     </div>
+        <ProximosResultSection></ProximosResultSection>
+      <div className="mt-20">
+        <Sponsor></Sponsor>
+      </div>
+    </>
   );
 };
 
