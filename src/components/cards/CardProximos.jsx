@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CardProximos = ({ partido, clubes }) => {
   return (
@@ -49,9 +50,9 @@ const CardProximos = ({ partido, clubes }) => {
           <span className="text-xs text-gray-500">
             {partido.hora} HS - Estadio Central
           </span>
-          <button className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest">
+          <Link to={`/detalleFixture/${partido._id}`}className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest text-center">
             Ver Previa
-          </button>
+          </Link>
         </div>
       </div>
     </div>

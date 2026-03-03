@@ -50,8 +50,8 @@ const BoxScore = () => {
         <span>{partido?.fase}</span>
       </div>
       <div className="bg-[#171717] border border-white/10 rounded-md p-6 mb-10">
-        <div className="flex justify-between items-center max-w-4xl mx-auto">
-          <div className="flex flex-col items-center gap-2">
+        <div className="grid grid-cols-3 items-center max-w-4xl mx-auto">
+          <div className="flex flex-col items-center gap-2 justify-self-start">
             <img
               src={
                 clubes?.find((c) => c._id === partido?.local?._id)?.logo.url }
@@ -63,7 +63,7 @@ const BoxScore = () => {
             </span>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center justify-self-center">
             <div className="flex items-center gap-6">
               <span className="text-5xl lg:text-7xl font-bold text-white">
                 {partido?.resultado?.total.local}
@@ -78,7 +78,7 @@ const BoxScore = () => {
             </span>
           </div>
 
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-2 justify-self-end">
            <img
               src={
                 clubes?.find((c) => c._id === partido?.visitante?._id)?.logo.url }
@@ -149,6 +149,23 @@ const BoxScore = () => {
             </h3>
             <p className="text-white">Estadio "El Coloso de las Flores"</p>
             <p className="text-gray-500 text-sm mt-1">Las Talitas, Tucumán</p>
+          </div>
+
+          <div className="bg-[#171717] p-6 rounded-md border border-white/10 text-center">
+            <h3 className="text-amber-300 font-bold mb-4 uppercase text-sm tracking-widest">
+              Árbitros
+            </h3>
+            <div className="flex flex-col gap-2">
+              {partido?.arbitros?.length > 0 ? (
+                partido.arbitros.map((arbitro, index) => (
+                  <p key={index} className="text-white text-sm">
+                    {arbitro}
+                  </p>
+                ))
+              ) : (
+                <p className="text-gray-500 text-xs italic">No asignados</p>
+              )}
+            </div>
           </div>
         </div>
 

@@ -23,6 +23,8 @@ import FormProgamado from "./pages/admin/components/forms/FormProgamado";
 import FormClubes from "./pages/admin/components/forms/FormClubes";
 import NoticiaDetalle from "./pages/DetalleNoticias/NoticiaDetalle";
 import ScrollToTop from "./utils/ScrollToTop";
+import DetalleFixture from "./pages/detalleFixture/DetalleFixture";
+import DetalleClub from "./pages/clubes/DetalleClub";
 
 
 function App() {
@@ -41,6 +43,14 @@ function App() {
                 <Route
                   path="/resultados"
                   element={<Resultados></Resultados>}
+                ></Route>
+                <Route
+                  path="/detalleFixture/:id"
+                  element={<DetalleFixture></DetalleFixture>}
+                ></Route>
+                <Route
+                  path="/detelleClub/:id"
+                  element={<DetalleClub></DetalleClub>}
                 ></Route>
                 <Route
                   path="/detalle"

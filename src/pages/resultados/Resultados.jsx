@@ -177,7 +177,7 @@ const Resultados = () => {
             <Select
               id="demo-simple-select"
               displayEmpty
-              value={filters.fecha}
+              value={filters.jornada}
               onChange={onChange}
               name="jornada"
               className="bg-amber-300"
