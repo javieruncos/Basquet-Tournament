@@ -25,6 +25,7 @@ import NoticiaDetalle from "./pages/DetalleNoticias/NoticiaDetalle";
 import ScrollToTop from "./utils/ScrollToTop";
 import DetalleFixture from "./pages/detalleFixture/DetalleFixture";
 import DetalleClub from "./pages/clubes/DetalleClub";
+import Tabla from "./pages/tabla/Tabla";
 
 
 function App() {
@@ -40,32 +41,15 @@ function App() {
               <Routes>
                 <Route path="/noticias" element={<Noticias></Noticias>}></Route>
                 <Route path="/noticiasDetalle/:id" element={<NoticiaDetalle></NoticiaDetalle>}></Route>
-                <Route
-                  path="/resultados"
-                  element={<Resultados></Resultados>}
-                ></Route>
-                <Route
-                  path="/detalleFixture/:id"
-                  element={<DetalleFixture></DetalleFixture>}
-                ></Route>
-                <Route
-                  path="/detelleClub/:id"
-                  element={<DetalleClub></DetalleClub>}
-                ></Route>
-                <Route
-                  path="/detalle"
-                  element={<DetalleResultado></DetalleResultado>}
-                ></Route>
-                <Route
-                  path="/clubes"
-                  element={<ClubesPage></ClubesPage>}
-                ></Route>
-                <Route
-                  path="/club"
-                  element={<ClubDetalle></ClubDetalle>}
-                ></Route>
+                <Route path="/resultados" element={<Resultados></Resultados>}></Route>
+                <Route path="/detalleFixture/:id"  element={<DetalleFixture></DetalleFixture>}></Route>
+                <Route path="/detelleClub/:id" element={<DetalleClub></DetalleClub>}></Route>
+                <Route path="/detalle"  element={<DetalleResultado></DetalleResultado>} ></Route>
+                <Route path="/clubes"  element={<ClubesPage></ClubesPage>}></Route>
+                <Route path="/club"  element={<ClubDetalle></ClubDetalle>}></Route>
                 <Route path="/fixture" element={<Fixture></Fixture>}></Route>
                 <Route path="/boxscore/:id" element={<BoxScore></BoxScore>}></Route>
+                <Route path="/tabla" element={<Tabla></Tabla>}></Route>
                 <Route path="/" element={<Inicio></Inicio>}></Route>
                 <Route path="/admin" element={<AdminLayout></AdminLayout>}>
                   <Route index element={<NoticiasAdmin />} />
