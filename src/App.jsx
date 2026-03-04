@@ -26,6 +26,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import DetalleFixture from "./pages/detalleFixture/DetalleFixture";
 import DetalleClub from "./pages/clubes/DetalleClub";
 import Tabla from "./pages/tabla/Tabla";
+import Footer from "./components/layout/Footer";
 
 
 function App() {
@@ -78,6 +79,7 @@ function App() {
 
                 </Route>
               </Routes>
+              <Footer></Footer>
             </div>
           </BrowserRouter>
           </ClubesContextProvider>

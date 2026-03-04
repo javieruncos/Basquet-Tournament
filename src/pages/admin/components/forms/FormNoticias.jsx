@@ -104,13 +104,38 @@ const FormNoticias = () => {
           text: "Los cambios se guardaron correctamente",
           ...swalCustomConfig,
         });
+
+        navigate("/admin/noticias", {
+          state: { update: true },
+        });
+
+        return;
       }
 
-      reset();
+      Swal.fire({
+        title: "Cargando...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        ...swalCustomConfig,
+      });
 
+      await crearNoticia(formData);
+
+      Swal.close();
+
+      await Swal.fire({
+        icon: "success",
+        title: "Noticia creada",
+        text: "La noticia se creó correctamente",
+        ...swalCustomConfig,
+      })
+      
       navigate("/admin/noticias", {
         state: { update: true },
       });
+
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -120,8 +145,6 @@ const FormNoticias = () => {
       });
     }
   };
-
- 
 
   return (
     <div className="bg-black/90 border border-white/10 rounded-2xl p-6 w-full  mx-auto shadow-2xl">
@@ -145,7 +168,7 @@ const FormNoticias = () => {
           <input
             type="text"
             name="title"
-             autoComplete="off"
+            autoComplete="off"
             placeholder="Ej: Gran victoria de Talleres en el clásico"
             className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
             {...register("title", {
@@ -175,7 +198,7 @@ const FormNoticias = () => {
             <input
               type="text"
               name="author"
-               autoComplete="off"
+              autoComplete="off"
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-amber-300 transition-colors"
               {...register("author", {
                 required: "El autor es obligatorio",
@@ -330,10 +353,7 @@ const FormNoticias = () => {
         </div>
 
         <div className="flex gap-4 pt-4">
-          <button
-            type="submit"
-            className="flex-1 bg-amber-300 text-black font-black uppercase py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-all tracking-widest text-sm"
-          >
+          <button className="flex-1 bg-amber-300 text-black font-black uppercase py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-amber-400 transition-all tracking-widest text-sm">
             <FaSave /> Guardar Noticia
           </button>
           <button

@@ -90,7 +90,7 @@ const Noticias = () => {
                 },
               }}
             >
-              {noticias.map((not) => (
+              {noticias.slice(0, 6).map((not) => (
                 <MenuItem
                   key={not._id}
                   value={new Date(not.createdAt).toISOString().split("T")[0]}
@@ -169,7 +169,6 @@ const Noticias = () => {
       </div>
       <div className="mt-20">
         <SponsorCTA />
-        <Sponsor></Sponsor>
       </div>
     </div>
   );

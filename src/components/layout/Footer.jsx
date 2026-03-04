@@ -1,4 +1,5 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import Sponsor from '../common/Sponsor';
 
 const Footer = () => {
   const socialLinks = [
@@ -16,6 +17,8 @@ const Footer = () => {
   ];
 
   return (
+    <>
+    <Sponsor></Sponsor>
     <footer className="bg-[#0f0f0f] text-gray-400 border-t border-white/10">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
@@ -63,6 +66,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };
 
