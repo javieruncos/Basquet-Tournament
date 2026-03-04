@@ -2,7 +2,7 @@ import React from "react";
 
 const PortadaNoticias = () => {
   return (
-    <div className="mt-10 h-125 rounded-xl relative overflow-hidden bg-[#171717]">
+    <div className="mt-10 h-145 rounded-xl relative overflow-hidden bg-[#171717]">
       {/* Background Image with Gradient Overlay */}
      
       <div className="absolute inset-0 z-0">
@@ -24,7 +24,7 @@ const PortadaNoticias = () => {
         <span className="text-amber-400 font-bold tracking-[0.3em] uppercase text-sm animate-pulse">
           Actualidad & Novedades
         </span>
-        <h1 className="text-5xl md:text-8xl font-black uppercase italic leading-none tracking-tighter text-white">
+        <h1 className="text-5xl md:text-9xl font-black uppercase italic leading-none tracking-tighter text-white">
           Noticias del <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-300 to-amber-500">Torneo</span>
         </h1>
         <p className="text-gray-300 text-sm md:text-lg max-w-xl leading-relaxed border-l-4 border-amber-400 pl-4">

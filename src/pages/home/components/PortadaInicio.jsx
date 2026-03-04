@@ -1,14 +1,14 @@
 import Portada from "../../../assets/images/portadaInicio.png";
-import jugadores from "../../../assets/images/jugadores.png";
+import jugadores from "../../../assets/images/portada2.png";
 
 const PortadaInicio = () => {
   return (
-    <section className="relative h-162.5 overflow-hidden flex items-center px-6 md:px-16  text-white">
-      <div className="absolute inset-0 z-0">
+    <section className="relative h-152.5 overflow-hidden flex items-center px-6 md:px-16 text-white mt-15">
+      <div className="absolute inset-0 z-0 top-0">
         <img
           src={jugadores}
           alt="Fondo"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover lg:block hidden"
         />
         <div className="absolute inset-0 bg-linear-to-t from-[black] via-[#171717]/85 to-transparent"></div>
         <div className="absolute inset-0 bg-linear-to-r from-black/70 via-transparent to-transparent"></div>

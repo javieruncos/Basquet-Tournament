@@ -43,7 +43,7 @@ const Noticias = () => {
     <div className="md:px-0 main-container">
       <PortadaNoticias></PortadaNoticias>
 
-      <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
+      <div className="w-full py-10   bg-white/5 backdrop-blur-3xl  flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
         <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
           <FormControl className="w-full md:w-60 text-white">
             <InputLabel
@@ -90,14 +90,17 @@ const Noticias = () => {
                 },
               }}
             >
-              {noticias.slice(0, 6).map((not) => (
-                <MenuItem
-                  key={not._id}
-                  value={new Date(not.createdAt).toISOString().split("T")[0]}
-                >
-                  {new Date(not.createdAt).toLocaleDateString()}
-                </MenuItem>
-              ))}
+              {[...new Set(noticias.map(not => new Date(not.createdAt).toISOString().split("T")[0]))]
+                .slice(0, 6)
+                .map((fechaIso) => (
+                  <MenuItem
+                    key={fechaIso}
+                    value={fechaIso}
+                  >
+                    {new Date(fechaIso + "T12:00:00").toLocaleDateString()}
+                  </MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
         </div>
@@ -145,7 +148,6 @@ const Noticias = () => {
               </MenuItem>
               <MenuItem value={"masculino"}>Masculino</MenuItem>
               <MenuItem value={"femenino"}>Femenino</MenuItem>
-              <MenuItem value={"juvenil"}>Juveniles</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -164,7 +166,7 @@ const Noticias = () => {
         )}
        
       </div>
-      <div className="">
+      <div className="mt-10">
         <ProximosResultSection />
       </div>
       <div className="mt-20">
