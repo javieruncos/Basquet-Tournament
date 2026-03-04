@@ -1,8 +1,13 @@
-import React from "react";
-import CardResultados from "../../resultados/components/CardResultados";
+import React, { useContext } from "react";
+import CardResultados from "../../../components/cards/CardResultados";
 import { FaPlus } from "react-icons/fa";
+import ClubesContext from "../../../context/ClubesContext";
+import TournamentContext from "../../../context/TournamentContext";
 
 const ResultadosSection = () => {
+    const {fixture} = useContext(TournamentContext)
+    const {clubes} = useContext(ClubesContext)
+
     return (
        <section className="py-20 px-5 sm:px-6 lg:px-8">
                <div className="max-w-7xl mx-auto">
@@ -22,8 +27,8 @@ const ResultadosSection = () => {
                  </div>
        
                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-                   {[1, 2, 3, 4].map((item) => (
-                       <CardResultados />
+                   {fixture.filter((item) => item.estado !== "Programado").map((item) => (
+                       <CardResultados resultados = {item} key={item._id} clubes = {clubes}/>
                    ))}
                  </div>
                </div>

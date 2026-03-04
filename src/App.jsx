@@ -21,6 +21,13 @@ import { ClubesContextProvider } from "./context/ClubesContext";
 import FormResultados from "./pages/admin/components/forms/FormResultados";
 import FormProgamado from "./pages/admin/components/forms/FormProgamado";
 import FormClubes from "./pages/admin/components/forms/FormClubes";
+import NoticiaDetalle from "./pages/DetalleNoticias/NoticiaDetalle";
+import ScrollToTop from "./utils/ScrollToTop";
+import DetalleFixture from "./pages/detalleFixture/DetalleFixture";
+import DetalleClub from "./pages/clubes/DetalleClub";
+import Tabla from "./pages/tabla/Tabla";
+import Footer from "./components/layout/Footer";
+
 
 function App() {
   return (
@@ -29,29 +36,22 @@ function App() {
         <TournamentContextProvider>
           <ClubesContextProvider>
           <BrowserRouter>
+          <ScrollToTop />
             <div className="App">
               <MenuNav></MenuNav>
               <Routes>
                 <Route path="/noticias" element={<Noticias></Noticias>}></Route>
-                <Route
-                  path="/resultados"
-                  element={<Resultados></Resultados>}
-                ></Route>
-                <Route
-                  path="/detalle"
-                  element={<DetalleResultado></DetalleResultado>}
-                ></Route>
-                <Route
-                  path="/clubes"
-                  element={<ClubesPage></ClubesPage>}
-                ></Route>
-                <Route
-                  path="/club"
-                  element={<ClubDetalle></ClubDetalle>}
-                ></Route>
+                <Route path="/noticiasDetalle/:id" element={<NoticiaDetalle></NoticiaDetalle>}></Route>
+                <Route path="/resultados" element={<Resultados></Resultados>}></Route>
+                <Route path="/detalleFixture/:id"  element={<DetalleFixture></DetalleFixture>}></Route>
+                <Route path="/detelleClub/:id" element={<DetalleClub></DetalleClub>}></Route>
+                <Route path="/detalle"  element={<DetalleResultado></DetalleResultado>} ></Route>
+                <Route path="/clubes"  element={<ClubesPage></ClubesPage>}></Route>
+                <Route path="/club"  element={<ClubDetalle></ClubDetalle>}></Route>
                 <Route path="/fixture" element={<Fixture></Fixture>}></Route>
-                <Route path="/boxscore" element={<BoxScore></BoxScore>}></Route>
-                <Route path="/inicio" element={<Inicio></Inicio>}></Route>
+                <Route path="/boxscore/:id" element={<BoxScore></BoxScore>}></Route>
+                <Route path="/tabla" element={<Tabla></Tabla>}></Route>
+                <Route path="/" element={<Inicio></Inicio>}></Route>
                 <Route path="/admin" element={<AdminLayout></AdminLayout>}>
                   <Route index element={<NoticiasAdmin />} />
                   <Route path="noticias" element={<NoticiasAdmin />} />
@@ -79,6 +79,7 @@ function App() {
 
                 </Route>
               </Routes>
+              <Footer></Footer>
             </div>
           </BrowserRouter>
           </ClubesContextProvider>

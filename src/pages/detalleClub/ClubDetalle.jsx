@@ -1,6 +1,6 @@
 import PortadaClub from "./components/PortadaClub";
 import EstadisticasClub from "./components/EstadisticasClub";
-import CardNoticias from "../../pages/noticias/components/CardNoticias";
+import CardNoticias from "../../components/cards/CardNoticias";
 import { FaBasketballBall } from "react-icons/fa";
 
 const ClubDetalle = () => {

@@ -14,7 +14,7 @@ export const ClubesContextProvider = ({children}) => {
             setClubes(res)
         })
     }, [])
-
+ 
     return (
         <ClubesContext.Provider value={{clubes, setClubes}}>
             {children}
