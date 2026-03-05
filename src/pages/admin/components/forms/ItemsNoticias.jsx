@@ -7,7 +7,12 @@ const ItemsNoticias = ({noticia,onDelete}) => {
     <>
       <tr>
         <td className="p-4 text-gray-400 font-mono text-sm">#{noticia._id}</td>
-        <td className="p-4 font-bold text-sm">{noticia.title}</td>
+        <td className="p-4 font-bold text-sm">
+          <span className="lg:hidden">
+            {noticia.title?.substring(0, 5)}...
+          </span>
+          <span className="hidden lg:inline">{noticia.title}</span>
+        </td>
         <td className="p-4">
           <span className="px-2 py-1 bg-white/10 rounded text-[10px] uppercase font-bold tracking-wider">
             {noticia.category}

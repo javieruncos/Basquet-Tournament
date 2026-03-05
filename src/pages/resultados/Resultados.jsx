@@ -3,14 +3,12 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
 import React, { useContext, useState } from "react";
 import CardResultados from "../../components/cards/CardResultados";
 import TournamentContext from "../../context/TournamentContext";
 import ClubesContext from "../../context/ClubesContext";
 import ProximosResultSection from "../../pages/home/components/ProximosResultSection";
-import Sponsor from "../../components/common/Sponsor";
 
 const Resultados = () => {
   const { fixture, setFixture } = useContext(TournamentContext);
@@ -49,23 +47,23 @@ const Resultados = () => {
 
   return (
     <>
-      <div className="md:px-10 px-5 main-container mt-30">
-        <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
+      <div className="md:px-10 px-5 main-container mt-20">
+        <div className="py-5 w-full flex justify-center md:justify-start gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
           <span>/</span>
           <span>Regional Amateur</span>
           <span>/</span>
-          <span className="">Fixture</span>
+          <span className="">Resultados</span>
         </div>
-        <div className="flex flex-col gap-2 ">
-          <h1 className="text-7xl">Resultados Destacados</h1>
-          <p className="numberFonts text-amber-300">
+        <div className="flex flex-col gap-2 text-center md:text-left">
+          <h1 className="text-5xl lg:text-7xl">Resultados Destacados</h1>
+          <p className="numberFonts text-amber-300 uppercase font-bold tracking-wider">
             Torneo Regional Amateur de Basquet - Temporada 2026
           </p>
         </div>
-        <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
-          <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
-            <FormControl className="w-full md:w-60 text-white">
+        <div className="w-full py-10 bg-[#191919] bg-dark-gradient mt-10 flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-4 lg:justify-between rounded-md px-4 lg:px-10">
+          <div className="flex flex-col sm:flex-row md:flex-1 lg:flex-none gap-4 items-center w-full lg:w-auto">
+            <FormControl className="w-full sm:w-60 md:flex-1 lg:w-60 text-white">
               <InputLabel
                 id="demo-simple-select-label"
                 className="text-white"
@@ -117,7 +115,7 @@ const Resultados = () => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl className="w-full md:w-60 text-white">
+            <FormControl className="w-full sm:w-60 md:flex-1 lg:w-60 text-white">
               <InputLabel
                 id="demo-simple-select-label"
                 className="text-white"
@@ -175,8 +173,8 @@ const Resultados = () => {
               </Select>
             </FormControl>
           </div>
-          <div className="flex justify-center lg:justify-end px-4 lg:px-10 w-full lg:w-auto">
-            <FormControl className="w-full md:w-60">
+          <div className="flex justify-center lg:justify-end w-full md:w-full lg:w-auto">
+            <FormControl className="w-full sm:w-60 md:w-full lg:w-60">
               <Select
                 id="demo-simple-select"
                 displayEmpty
@@ -234,7 +232,7 @@ const Resultados = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-3   py-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3   py-6">
               {filtro.map((partido) => (
                 <CardResultados
                   resultados={partido}

@@ -24,8 +24,8 @@ const DetalleClub = () => {
   );
 
   return (
-    <div className="p-10 px-3 lg:px-10 lg:pt-25 numberFonts min-h-screen bg-[#0b0b0b] text-white">
-      <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest">
+    <div className="p-10 px-3 lg:px-10 pt-24 md:px-5 md:pt-15 lg:pt-25 numberFonts min-h-screen bg-[#0b0b0b] text-white">
+      <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest md:mt-4 lg:mt-0 justify-center md:justify-start">
         <span>Clubes</span>
         <span>/</span>
         <span className="text-amber-300">Perfil del Club</span>

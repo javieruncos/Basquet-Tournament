@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import PortadaNoticias from "./components/PortadaNoticias";
 import CardNoticias from "../../components/cards/CardNoticias";
 import SponsorCTA from "./components/SponsorCTA";
-import Sponsor from "../../components/common/Sponsor";
+import { motion } from "framer-motion";
 import {
   FormControl,
   InputLabel,
@@ -43,8 +43,8 @@ const Noticias = () => {
     <div className="md:px-0 main-container">
       <PortadaNoticias></PortadaNoticias>
 
-      <div className="w-full py-10   bg-white/5 backdrop-blur-3xl  flex flex-col lg:flex-row gap-4 lg:justify-between rounded-md">
-        <div className="flex flex-col md:flex-row gap-4 px-4 lg:px-10 items-center w-full lg:w-auto">
+      <div className="w-full py-10 bg-white/5 backdrop-blur-3xl flex flex-col sm:flex-row gap-4 justify-between rounded-md px-4 lg:px-10">
+        <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
           <FormControl className="w-full md:w-60 text-white">
             <InputLabel
               id="demo-simple-select-label"
@@ -104,7 +104,7 @@ const Noticias = () => {
             </Select>
           </FormControl>
         </div>
-        <div className="flex justify-center lg:justify-end px-4 lg:px-10 w-full lg:w-auto">
+        <div className="flex justify-center sm:justify-end w-full sm:w-auto">
           <FormControl className="w-full md:w-60">
             <Select
               id="demo-simple-select"
@@ -152,6 +152,13 @@ const Noticias = () => {
           </FormControl>
         </div>
       </div>
+      <motion.div 
+        className="relative z-30"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.03 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
       <div className="">
         {filterResult.length === 0 ? (
           <div className="h-50 w-full text-center bg-dark-gradient flex items-center justify-center">
@@ -166,6 +173,7 @@ const Noticias = () => {
         )}
        
       </div>
+      </motion.div>
       <div className="mt-10">
         <ProximosResultSection />
       </div>

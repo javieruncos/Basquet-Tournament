@@ -13,10 +13,14 @@ const ItemsFixture = ({partido,onDelete}) => {
         </td>
         <td className="p-4">
           <div className="flex items-center gap-3">
-            <span className="font-black text-sm">{partido?.local?.name}</span>
+            <span className="font-black text-sm">
+              <span className="lg:hidden">{partido?.local?.name?.substring(0, 5)}</span>
+              <span className="hidden lg:inline">{partido?.local?.name}</span>
+            </span>
             <span className="text-[10px] text-amber-300 font-bold">VS</span>
             <span className="font-black text-sm">
-              {partido?.visitante?.name}
+              <span className="lg:hidden">{partido?.visitante?.name?.substring(0, 5)}</span>
+              <span className="hidden lg:inline">{partido?.visitante?.name}</span>
             </span>
           </div>
         </td>
