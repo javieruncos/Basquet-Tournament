@@ -48,7 +48,7 @@ const DetalleNoticia = () => {
                                 {new Date(noticia.createdAt).toLocaleDateString()}
                             </span>
                         </div>
-                        <h1 className="text-4xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-4">
+                        <h1 className="text-4xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none mb-4">
                             {noticia.title}
                         </h1>
                     </div>
