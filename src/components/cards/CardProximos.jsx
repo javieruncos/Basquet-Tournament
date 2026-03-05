@@ -24,7 +24,7 @@ const CardProximos = ({ partido, clubes }) => {
           <div className="text-center">
             <p className="text-2xl font-black numberFonts text-white">VS</p>
             <p className="text-[10px] text-gray-400 mt-1 uppercase tracking-tighter">
-              Programado
+              {partido.estado}
             </p>
           </div>
 
@@ -48,7 +48,7 @@ const CardProximos = ({ partido, clubes }) => {
             {partido.fecha}
           </span>
           <span className="text-xs text-gray-500">
-            {partido.hora} HS - Estadio Central
+            {partido.hora} HS - {partido.estadio}
           </span>
           <Link to={`/detalleFixture/${partido._id}`}className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest text-center">
             Ver Previa

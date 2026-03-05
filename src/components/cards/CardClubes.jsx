@@ -33,7 +33,7 @@ const CardClubes = ({club}) => {
             <img
               src={club.logo.url}
               alt="escudo"
-              className="w-full h-30 object-contain"
+              className="object-cover "
             />
 
            

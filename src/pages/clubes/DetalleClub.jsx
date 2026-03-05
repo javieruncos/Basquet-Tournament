@@ -38,7 +38,7 @@ const DetalleClub = () => {
           <img
             src={club.logo?.url || "https://via.placeholder.com/150"}
             alt={club.name}
-            className="w-full h-full object-contain"
+            className=" h-33 object-cover"
           />
         </div>
 
@@ -49,7 +49,7 @@ const DetalleClub = () => {
           <div className="flex flex-wrap justify-center md:justify-start gap-6 mt-4">
             <div className="flex items-center gap-2 text-gray-400">
               <FaMapMarkerAlt className="text-amber-300" />
-              <span className="uppercase text-sm font-bold tracking-wider">{club.estadio || "Sede Central"}</span>
+              <span className="uppercase text-sm font-bold tracking-wider">{club?.city || "Sede Central"}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <FaUsers className="text-amber-300" />

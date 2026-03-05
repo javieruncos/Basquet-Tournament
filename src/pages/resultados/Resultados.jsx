@@ -1,14 +1,11 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useContext, useState } from "react";
 import CardResultados from "../../components/cards/CardResultados";
 import TournamentContext from "../../context/TournamentContext";
 import ClubesContext from "../../context/ClubesContext";
 import ProximosResultSection from "../../pages/home/components/ProximosResultSection";
+import { motion } from "framer-motion";
+
 
 const Resultados = () => {
   const { fixture, setFixture } = useContext(TournamentContext);
@@ -164,10 +161,10 @@ const Resultados = () => {
                   <MenuItem
                     key={partido._id}
                     value={
-                      new Date(partido.createdAt).toISOString().split("T")[0]
+                      new Date(partido.fecha).toISOString().split("T")[0]
                     }
                   >
-                    {new Date(partido.createdAt).toLocaleDateString()}
+                    {new Date(partido.fecha).toLocaleDateString()}
                   </MenuItem>
                 ))}
               </Select>
@@ -232,14 +229,21 @@ const Resultados = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3   py-6">
-              {filtro.map((partido) => (
-                <CardResultados
-                  resultados={partido}
-                  key={partido._id}
-                ></CardResultados>
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3   py-6">
+                {filtro.map((partido) => (
+                  <CardResultados
+                    resultados={partido}
+                    key={partido._id}
+                  ></CardResultados>
+                ))}
+              </div>
+            </motion.div>
           )}
         </div>
       </div>
