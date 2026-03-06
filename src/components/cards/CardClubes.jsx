@@ -35,8 +35,6 @@ const CardClubes = ({club}) => {
               alt="escudo"
               className="object-cover "
             />
-
-           
           </div>
         </div>
 
