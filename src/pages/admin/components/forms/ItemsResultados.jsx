@@ -10,9 +10,15 @@ const ItemsResultados = ({res,onDelete}) => {
         <td className="p-4 text-sm text-gray-400">{res.hora}</td>
         <td className="p-4">
           <div className="flex items-center gap-2 font-bold text-sm">
-            <span>{res.local?.name}</span>
+            <span>
+              <span className="lg:hidden">{res.local?.name?.substring(0, 5)}</span>
+              <span className="hidden lg:inline">{res.local?.name}</span>
+            </span>
             <span className="text-amber-300 text-[10px]">VS</span>
-            <span>{res.visitante?.name}</span>
+            <span>
+              <span className="lg:hidden">{res.visitante?.name?.substring(0, 5)}</span>
+              <span className="hidden lg:inline">{res.visitante?.name}</span>
+            </span>
           </div>
         </td>
         <td className="p-4">

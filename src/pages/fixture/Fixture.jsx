@@ -1,19 +1,47 @@
+import { useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import TournamentContext from "../../context/TournamentContext";
 import { useContext } from "react";
 import ClubesContext from "../../context/ClubesContext";
 import CardProximos from "../../components/cards/CardProximos";
+import { motion } from "framer-motion";
+
 
 const Fixture = () => {
   const { fixture } = useContext(TournamentContext);
   const { clubes } = useContext(ClubesContext);
+  const [filter, setFilter] = useState({
+    jornada: "",
+    fase: "",
+    categoria: "",
+  });
 
-  const partidosFilter = fixture.filter((item) => item.estado === "Programado");
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setFilter((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    console.log([name, value]);
+  };
+
+  const filterResult = (fixture) => {
+    return fixture.filter((item) => {
+      return (
+        (!filter.estado || item.estado === "Programado") &&
+        (!filter.jornada || item.jornada === filter.jornada) &&
+        (!filter.fase || item.fase === filter.fase) &&
+        (!filter.categoria || item.categoria === filter.categoria)
+      );
+    });
+  };
+
+  const partidosFilter = filterResult(fixture);
 
   return (
-    <div className="p-10 px-3 lg:px-10 lg:pt-30">
+    <div className="p-20 px-3 md:px-10 lg:px-10 lg:pt-30">
       <div>
-        <div className="py-5 w-full flex gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
+        <div className="py-5 w-full flex justify-center md:justify-start lg:justify-start gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
           <span>/</span>
           <span>Regional Amateur</span>
@@ -21,13 +49,13 @@ const Fixture = () => {
           <span className="">Fixture</span>
         </div>
       </div>
-      <div className="numberFonts ">
+      <div className="numberFonts text-center md:text-left">
         <div>
           <h1 className="text-5xl lg:text-7xl">Fixture Del Torneo</h1>
           <p className="text-amber-300">Temporada 2026 - Regional Amateur</p>
         </div>
-        <div className="w-full py-10  bg-[#191919] bg-dark-gradient mt-10 flex flex-col lg:flex-row gap-4  rounded-md px-10">
-          <FormControl className="w-full md:w-60 text-white ">
+        <div className="w-full py-10 bg-[#191919] bg-dark-gradient mt-10 flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-4 rounded-md px-4 lg:px-10">
+          <FormControl className="w-full md:flex-1 lg:w-60 text-white ">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -38,7 +66,10 @@ const Fixture = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              label="Equipos"
+              label="fecha"
+              name="jornada"
+              value={filter.jornada}
+              onChange={onChange}
               className="bg-[#171717] rounded-md"
               sx={{
                 color: "white",
@@ -70,12 +101,12 @@ const Fixture = () => {
                 },
               }}
             >
-              <MenuItem value={10}>Fecha 1</MenuItem>
-              <MenuItem value={20}>Fecha 2</MenuItem>
-              <MenuItem value={30}>Fecha 3</MenuItem>
+              <MenuItem value={1}>Fecha 1</MenuItem>
+              <MenuItem value={2}>Fecha 2</MenuItem>
+              <MenuItem value={3}>Fecha 3</MenuItem>
             </Select>
           </FormControl>
-          <FormControl className="w-full md:w-60 text-white">
+          <FormControl className="w-full md:flex-1 lg:w-60 text-white">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -86,7 +117,10 @@ const Fixture = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              label="Equipos"
+              label="fase"
+              name="fase"
+              value={filter.fase}
+              onChange={onChange}
               className="bg-[#171717] rounded-md"
               sx={{
                 color: "white",
@@ -118,18 +152,20 @@ const Fixture = () => {
                 },
               }}
             >
-              <MenuItem value={10}>Regular</MenuItem>
-              <MenuItem value={20}>Octavos</MenuItem>
-              <MenuItem value={30}>Cuartos</MenuItem>
-              <MenuItem value={40}>Semifinal</MenuItem>
-              <MenuItem value={50}>Final</MenuItem>
+              <MenuItem value={"Regular"}>Regular</MenuItem>
+              <MenuItem value={"Octavos"}>Octavos</MenuItem>
+              <MenuItem value={"Cuartos"}>Cuartos</MenuItem>
+              <MenuItem value={"Semifinal"}>Semifinal</MenuItem>
+              <MenuItem value={"Final"}>Final</MenuItem>
             </Select>
           </FormControl>
-          <FormControl className="w-full md:w-60">
+          <FormControl className="w-full md:w-full lg:w-60">
             <Select
               id="demo-simple-select"
               displayEmpty
-              defaultValue=""
+              name="categoria"
+              value={filter.categoria}
+              onChange={onChange}
               className="bg-amber-300"
               sx={{
                 color: "black",
@@ -164,21 +200,33 @@ const Fixture = () => {
               <MenuItem value="" disabled>
                 Categoria
               </MenuItem>
-              <MenuItem value={10}>Primera</MenuItem>
-              <MenuItem value={20}>Femenino</MenuItem>
-              <MenuItem value={30}>Juveniles</MenuItem>
+              <MenuItem value={"masculino"}>Masculino</MenuItem>
+              <MenuItem value={"femenino"}>Femenino</MenuItem>
             </Select>
           </FormControl>
         </div>
       </div>
       <div className=" gap-5 mt-10">
         <div className="col-span-3 h-auto numberFonts">
-          <div className="h-auto w-full bg-black/5 backdrop-blur rounded-md overflow-x-auto  ">
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              {partidosFilter.map((item) => (
-                <CardProximos key={item._id} partido={item} clubes={clubes} />
-              ))}
-            </div>
+          <div className="h-auto w-full bg-black/5 backdrop-blur rounded-md overflow-x-auto px-2 lg:px-0">
+            {partidosFilter.length === 0 ? (
+              <div className="h-30 w-full text-center flex items-center justify-center">
+                <p className="animate-pulse">No hay partidos programados</p>
+              </div>
+            ) : (
+              <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              >
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {partidosFilter.map((item) => (
+                  <CardProximos key={item._id} partido={item} clubes={clubes} />
+                ))}
+              </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

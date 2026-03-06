@@ -24,8 +24,8 @@ const DetalleClub = () => {
   );
 
   return (
-    <div className="p-10 px-3 lg:px-10 lg:pt-25 numberFonts min-h-screen bg-[#0b0b0b] text-white">
-      <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest">
+    <div className="p-10 px-3 lg:px-10 pt-24 md:px-5 md:pt-15 lg:pt-25 numberFonts min-h-screen bg-[#0b0b0b] text-white">
+      <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest md:mt-4 lg:mt-0 justify-center md:justify-start">
         <span>Clubes</span>
         <span>/</span>
         <span className="text-amber-300">Perfil del Club</span>
@@ -38,7 +38,7 @@ const DetalleClub = () => {
           <img
             src={club.logo?.url || "https://via.placeholder.com/150"}
             alt={club.name}
-            className="w-full h-full object-contain"
+            className=" h-33 object-cover"
           />
         </div>
 
@@ -49,7 +49,7 @@ const DetalleClub = () => {
           <div className="flex flex-wrap justify-center md:justify-start gap-6 mt-4">
             <div className="flex items-center gap-2 text-gray-400">
               <FaMapMarkerAlt className="text-amber-300" />
-              <span className="uppercase text-sm font-bold tracking-wider">{club.estadio || "Sede Central"}</span>
+              <span className="uppercase text-sm font-bold tracking-wider">{club?.city || "Sede Central"}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
               <FaUsers className="text-amber-300" />
