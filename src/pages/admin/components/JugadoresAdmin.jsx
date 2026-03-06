@@ -1,13 +1,100 @@
-import React, { useState } from 'react';
-import { FaChartBar, FaPlus, FaSearch, FaEdit, FaTrash, FaUser } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import { FaPlus, FaSearch, FaEdit, FaTrash, FaUser } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  eliminarJugador,
+  getJugadores,
+} from "../../../services/JugadoresService";
+import ClubesContext from "../../../context/ClubesContext";
+import { a } from "framer-motion/client";
+import Swal from "sweetalert2";
 
 const JugadoresAdmin = () => {
+  const { clubes } = useContext(ClubesContext);
   // Mock data for UI consistency, replace with context/service later
-  const [jugadores] = useState([]);
+  const [jugadores, setJugadores] = useState([]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [filter, setfilter] = useState({
+    nombre: "",
+    club: "",
+  });
 
-  const onDelete = (id) => {
-    // Logic for deletion following the pattern of other components
+  useEffect(() => {
+    getJugadores().then((data) => {
+      console.log(data);
+      setJugadores(data);
+    });
+
+    if (location.state?.update) {
+      navigate(location.pathname, { replace: true, state: null });
+    }
+  }, []);
+
+  const handleFilterChange = (e) => {
+    console.log(e.target.value);
+    setfilter({ ...filter, [e.target.name]: e.target.value });
+  };
+
+  const filterJugadores = (jugadores, filter) => {
+    return jugadores.filter((jugador) => {
+      return (
+        jugador.nombre.toLowerCase().includes(filter.nombre.toLowerCase()) &&
+        (!filter.club || jugador.clubId?._id === filter.club)
+      );
+    });
+  };
+
+  const filteredJugadores = filterJugadores(jugadores, filter);
+
+  const swalCustomConfig = {
+    background: "#111",
+    color: "#fff",
+    confirmButtonColor: "#fbbf24",
+    cancelButtonColor: "#333",
+    customClass: {
+      popup: "border border-white/10 rounded-2xl",
+      title: "font-black uppercase tracking-tighter",
+    },
+  };
+
+  const onDelete = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "¿Eliminar jugador?",
+        text: "No se puede revertir esta acción",
+        icon: "warning",
+        timer: 5000,
+        showCancelButton: true,
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar",
+        ...swalCustomConfig,
+      });
+
+      if (!result.isConfirmed) return;
+
+   
+      await eliminarJugador(id);
+
+      Swal.close();
+
+      Swal.fire({
+        icon: "success",
+        title: "Eliminado",
+        text: "El jugador fue eliminado correctamente",
+        ...swalCustomConfig,
+      });
+
+      const data = await getJugadores();
+      setJugadores(data);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "No se pudo eliminar el jugador",
+        ...swalCustomConfig,
+      });
+    }
   };
 
   return (
@@ -34,11 +121,24 @@ const JugadoresAdmin = () => {
           <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input
             type="text"
+            name="nombre"
+            value={filter.nombre}
+            onChange={handleFilterChange}
             placeholder="Buscar por nombre o club..."
             className="w-full bg-black/40 border border-white/10 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-amber-300 transition-colors text-white"
           />
         </div>
-        <select className="bg-[#111] border border-white/10 rounded-lg py-2 px-4 text-sm focus:outline-none focus:border-amber-300 text-white">
+        <select
+          className="bg-[#111] border border-white/10 rounded-lg py-2 px-4 text-sm focus:outline-none focus:border-amber-300 text-white"
+          name="club"
+          value={filter.club}
+          onChange={handleFilterChange}
+        >
+          {clubes.map((club) => (
+            <option key={club._id} value={club._id}>
+              {club.name}
+            </option>
+          ))}
           <option value="">Todos los Clubes</option>
         </select>
       </div>
@@ -55,14 +155,49 @@ const JugadoresAdmin = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {jugadores.map((jugador) => (
-              <tr key={jugador._id} className="hover:bg-white/5 transition-colors">
-                {/* Row content following ClubesAdmin pattern */}
-              </tr>
-            ))}
+            {filteredJugadores.map((jugador) => {
+              const club = clubes.find(
+                (c) => c._id === (jugador.clubId?._id || jugador.clubId),
+              );
+              return (
+                <tr
+                  key={jugador._id}
+                  className="hover:bg-white/5 transition-colors"
+                >
+                  <td className="p-4 text-sm font-bold">{jugador.nombre}</td>
+                  <td className="p-4 text-sm text-gray-400">
+                    {club ? club.shortname : "Sin Club"}
+                  </td>
+                  <td className="p-4 text-sm text-gray-400">
+                    {jugador.posicion}
+                  </td>
+                  <td className="p-4 text-sm text-gray-400">
+                    {jugador.numero}
+                  </td>
+                  <td className="p-4">
+                    <div className="flex justify-center gap-2">
+                      <Link
+                        to={`/admin/jugadoresAdmin/editar/${jugador._id}`}
+                        className="p-2 hover:bg-amber-500/20 hover:text-amber-400 rounded-lg transition-colors"
+                        title="Editar"
+                      >
+                        <FaEdit size={14} />
+                      </Link>
+                      <button
+                        onClick={() => onDelete(jugador._id)}
+                        className="p-2 hover:bg-red-500/20 hover:text-red-400 rounded-lg transition-colors"
+                        title="Eliminar"
+                      >
+                        <FaTrash size={14} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-        {jugadores.length === 0 && (
+        {filteredJugadores.length === 0 && (
           <div className="p-10 text-center text-gray-500">
             No hay jugadores registrados.
           </div>
