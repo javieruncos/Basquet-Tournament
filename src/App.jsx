@@ -27,6 +27,8 @@ import DetalleFixture from "./pages/detalleFixture/DetalleFixture";
 import DetalleClub from "./pages/clubes/DetalleClub";
 import Tabla from "./pages/tabla/Tabla";
 import Footer from "./components/layout/Footer";
+import JugadoresAdmind from "./pages/admin/components/JugadoresAdmin";
+import JugadoresForm from "./pages/admin/components/forms/JugadoresForm";
 
 
 function App() {
@@ -57,25 +59,18 @@ function App() {
                   <Route path="noticias" element={<NoticiasAdmin />} />
                   <Route path="fixtureAdmin" element={<FixtureAdmin />} />
                   <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
+                  <Route path="jugadoresAdmin" element={<JugadoresAdmind />} />
                   
                   <Route path="resultadosAdmin/fixture" element={<FormResultados />} />
                   <Route path="clubesAdmin" element={<ClubesAdmin />} />
                   <Route path="clubesAdmin/crear" element={<FormClubes />} />
                   <Route path="noticias/crear" element={<FormNoticias />} />
                   <Route path="fixtureAdmin/crear" element={<FormProgamado />} />
-                  <Route
-                    path="fixtureAdmin/editar/:id"
-                    element={<FormProgamado />}
-                  />
-                  <Route
-                    path="resultadosAdmin/editar/:id"
-                    element={<FormResultados />}
-                  />
-                  <Route
-                    path="noticias/editar/:id"
-                    element={<FormNoticias />}
-                  />
+                  <Route  path="fixtureAdmin/editar/:id" element={<FormProgamado />} />
+                  <Route  path="resultadosAdmin/editar/:id"  element={<FormResultados />}/>
+                  <Route  path="noticias/editar/:id"  element={<FormNoticias />}/>
                   <Route path="clubesAdmin/editar/:id" element={<FormClubes />} />
+                  <Route path="jugadoresAdmin/crear" element={<JugadoresForm />} />
 
                 </Route>
               </Routes>

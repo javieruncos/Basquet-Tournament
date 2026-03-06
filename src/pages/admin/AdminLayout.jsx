@@ -12,7 +12,7 @@ const AdminLayout = () => {
         { name: 'Resultados', icon: <FaTrophy />, path: 'resultadosAdmin' },
         { name: 'Clubes', icon: <FaShieldAlt />, path: 'clubesAdmin' },
         { name: 'Fixture', icon: <FaCalendarAlt />, path: 'fixtureAdmin' },
-        { name: 'Estadísticas', icon: <FaChartBar />, path: '/boxscore' },
+        { name: 'Jugadores', icon: <FaChartBar />, path: 'jugadoresAdmin' },
     ];
 
     return (
