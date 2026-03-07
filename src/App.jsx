@@ -29,6 +29,8 @@ import Tabla from "./pages/tabla/Tabla";
 import Footer from "./components/layout/Footer";
 import JugadoresAdmind from "./pages/admin/components/JugadoresAdmin";
 import JugadoresForm from "./pages/admin/components/forms/JugadoresForm";
+import Login from "./pages/login/Login";
+
 
 
 function App() {
@@ -54,6 +56,7 @@ function App() {
                 <Route path="/boxscore/:id" element={<BoxScore></BoxScore>}></Route>
                 <Route path="/tabla" element={<Tabla></Tabla>}></Route>
                 <Route path="/" element={<Inicio></Inicio>}></Route>
+                <Route path="/login" element={<Login></Login>}></Route>
                 <Route path="/admin" element={<AdminLayout></AdminLayout>}>
                   <Route index element={<NoticiasAdmin />} />
                   <Route path="noticias" element={<NoticiasAdmin />} />
