@@ -1,9 +1,19 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import UserContext from "../../context/UserContext";
+import { logout } from "../../services/LoginService";
 
 const MenuNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { user,setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+   const handleLogout = async () => {
+    await logout();
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <nav className="bg-black  text-white p-4 shadow-md border-b border-white/10 fixed top-0 left-0 w-full z-50">
@@ -53,15 +63,29 @@ const MenuNav = () => {
                 Clubes
               </Link>
             </li>
+            {user ? (
+              <li>
+                <Link
+                  to="/admin"
+                  className="hover:text-amber-300 transition-colors duration-300"
+                >
+                  Administrador
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </div>
         <div className="lg:flex lg:items-center gap-10 hidden">
-          <a
-            href="*"
+          {
+            user ? (
+              <button  className="text-sm w-40 text-center text-black px-3 py-2.5 bg-amber-400 rounded-md cursor-pointer" onClick={handleLogout}>Abandonar</button> 
+            ):<Link
+            to="/login"
             className="text-sm w-40 text-center px-3 py-2.5 bg-amber-400 rounded-md numberFonts"
           >
             Iniciar Sesion
-          </a>
+          </Link>
+          }
         </div>
         <div className="lg:hidden">
           <button

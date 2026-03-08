@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_APP_NEWS,
+  baseURL: import.meta.env.VITE_APP_URL,
 });
 
 export const getNoticias = async () => {
   try {
-    const response = await api.get(`/`);
+    const response = await api.get(`/noticias`);
     return response.data;
   } catch (error) {
     console.error("Error al obtener noticias:", error.message);
@@ -16,7 +16,7 @@ export const getNoticias = async () => {
 
 export const crearNoticia = async (formData) => {
   try {
-    const response = await api.post("/", formData);
+    const response = await api.post("/noticias", formData);
     return response.data;
   } catch (error) {
     console.error("Error al crear noticia:", error.message);
@@ -26,7 +26,7 @@ export const crearNoticia = async (formData) => {
 
 export const editarNoticia = async (id, formData) => {
   try {
-    const response = await api.put(`/${id}`, formData);
+    const response = await api.put(`/noticias/${id}`, formData);
     return response.data;
   } catch (error) {
     throw new Error("No se pudo editar la noticia");
@@ -35,7 +35,7 @@ export const editarNoticia = async (id, formData) => {
 
 export const obtenerNoticiaID = async (id) => {
   try {
-    const response = await api.get(`/${id}`);
+    const response = await api.get(`/noticias/${id}`);
     console.log(response.data);
     return response.data;
     } catch (error) {
@@ -46,7 +46,7 @@ export const obtenerNoticiaID = async (id) => {
 
 export const eliminarNoticia = async (id) => {
   try {
-    const response = await api.delete(`/${id}`);
+    const response = await api.delete(`/noticias/${id}`);
     return response.data;
   } catch (error) {
     throw new Error("No se pudo eliminar la noticia");
