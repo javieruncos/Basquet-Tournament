@@ -50,10 +50,6 @@ const FormProgamado = () => {
     }
   }, [id, reset]);
 
-  const localId = watch("local");
-  const visitanteId = watch("visitante");
- 
-
   const swalCustomConfig = {
     background: "#111",
     color: "#fff",

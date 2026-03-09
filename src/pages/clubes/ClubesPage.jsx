@@ -26,32 +26,11 @@ const ClubesPage = () => {
           <span>/</span>
           <span className="text-amber-300">Clubes</span>
         </div>
-
         <div className="flex flex-col items-center gap-5 md:items-start lg:gap-2 text-center md:text-left">
           <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Directorio de Clubes</h1>
           <p className="text-sm md:text-2xl text-amber-300 numberFonts">
-            32 clubes registrados compitiendo
+           {clubes.length} clubes registrados compitiendo
           </p>
-        </div>
-        <div className="w-full mt-5 flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-7 numberFonts pt-5 lg:pt-0">
-          <button
-            className="w-40 py-3 bg-[#171717] rounded-md hover:bg-amber-300 transition-all duration-300 hover:text-black cursor-pointer text-center"
-            onClick={() => setFilters({ categoria: "" })}
-          >
-            Todos
-          </button>
-          <button
-            className="w-40 py-3 bg-[#171717] rounded-md hover:bg-amber-300 transition-all duration-300 hover:text-black cursor-pointer text-center"
-            onClick={() => setFilters({ categoria: "Masculino" })}
-          >
-            Masculino
-          </button>
-          <button
-            className="w-40 py-3 bg-[#171717] rounded-md hover:bg-amber-300 transition-all duration-300 hover:text-black cursor-pointer text-center"
-            onClick={() => setFilters({ categoria: "Femenino" })}
-          >
-            Femenino
-          </button>
         </div>
         {filtro.length === 0 ? (
           <div className="p-20 w-full">

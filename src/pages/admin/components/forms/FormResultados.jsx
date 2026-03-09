@@ -620,10 +620,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.puntos`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -632,10 +634,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.rebotes`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -644,10 +648,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.asistencias`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -656,10 +662,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.faltas`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -668,8 +676,10 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(`estadisticasJugadores.${index}.robos`, {
                             valueAsNumber: true,
+                            min:0
                           })}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -677,10 +687,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.tapones`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -689,10 +701,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.perdidas`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -701,10 +715,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.minutos`,
                             {
                               valueAsNumber: true,
+                              min:0
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"

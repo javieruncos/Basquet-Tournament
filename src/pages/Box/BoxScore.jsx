@@ -38,6 +38,8 @@ const BoxScore = () => {
   const titularesVisitante = partido?.estadisticasJugadores?.filter(
     (j) => j.clubId === partido?.visitante?._id && j.titular,);
 
+    const arbitros = [partido?.arbitro1, partido?.arbitro2, partido?.arbitro3]
+
   return (
     <div className="p-10 px-3 lg:px-10 numberFonts mt-10">
       <div className="py-5 w-full flex gap-1 text-amber-300 text-sm lg:gap-4">
@@ -133,9 +135,8 @@ const BoxScore = () => {
               <tbody className="text-center">
                 {partido?.resultado?.cuartos?.map((q, i) => (
                   <tr key={i} className="border-t border-white/5">
-                    <td className="py-2 font-bold text-gray-400">{q.period}C</td>
+                    <td className="py-2 font-bold text-gray-400">{i + 1} C</td>
                     <td className="py-2">{q.local}</td>
-                    
                     <td className="py-2">{q.visitante}</td>
                   </tr>
                 ))}
@@ -156,8 +157,8 @@ const BoxScore = () => {
               Árbitros
             </h3>
             <div className="flex flex-col gap-2">
-              {partido?.arbitros?.length > 0 ? (
-                partido.arbitros.map((arbitro, index) => (
+              {arbitros?.length > 0 ? (
+                arbitros.map((arbitro, index) => (
                   <p key={index} className="text-white text-sm">
                     {arbitro}
                   </p>
