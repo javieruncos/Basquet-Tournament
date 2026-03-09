@@ -1,14 +1,14 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_APP_FIXTURE,
+  baseURL: import.meta.env.VITE_APP_URL,
+  withCredentials: true,
 });
 
 export const getFixtures = async () => {
     try {
-        const respose = await api.get("/");
-       
-        return respose.data;
+        const response = await api.get("/partidos");
+        return response.data;
     } catch (error) {
         console.error("Error al obtener noticias:", error.message);
         throw new Error("No se pudieron cargar las noticias");
@@ -18,7 +18,7 @@ export const getFixtures = async () => {
 
 export const crearFixture = async (data) => {
     try {
-        const response = await api.post("/", data);
+        const response = await api.post("/partidos", data);
         return response.data;
     } catch (error) {
         throw new Error("No se pudo crear el fixture");
@@ -28,7 +28,7 @@ export const crearFixture = async (data) => {
 
 export const obtenerFixtureID = async (id) => {
     try {
-        const response = await api.get(`/${id}`);
+        const response = await api.get(`/partidos/${id}`);
         console.log(response.data);
         return response.data;
     } catch (error) {
@@ -40,7 +40,7 @@ export const obtenerFixtureID = async (id) => {
 
 export const editarFixture = async (id, data) => {
     try {
-        const response = await api.put(`/${id}`, data);
+        const response = await api.put(`/partidos/${id}`, data);
         return response.data;
     } catch (error) {
         throw new Error("No se pudo editar el fixture");
@@ -49,7 +49,7 @@ export const editarFixture = async (id, data) => {
 
 export const editarResultadoFixture = async (id, data) => {
     try {
-        const response = await api.put(`/${id}/resultado`, data);
+        const response = await api.put(`/partidos/${id}/resultado`, data);
         return response.data;
     } catch (error) {
         throw new Error("No se pudo editar el fixture");
@@ -58,7 +58,7 @@ export const editarResultadoFixture = async (id, data) => {
 
 export const eliminarFixture = async (id) =>{
     try {
-        const response = await api.delete(`/${id}`);
+        const response = await api.delete(`/partidos/${id}`);
         return response.data;
     } catch (error) {
         throw new Error("No se pudo eliminar el fixture");

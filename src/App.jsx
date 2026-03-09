@@ -29,57 +29,97 @@ import Tabla from "./pages/tabla/Tabla";
 import Footer from "./components/layout/Footer";
 import JugadoresAdmind from "./pages/admin/components/JugadoresAdmin";
 import JugadoresForm from "./pages/admin/components/forms/JugadoresForm";
-
+import Login from "./pages/login/Login";
+import UserContext, { UserProvider } from "./context/UserContext";
+import ProtectedAdmin from "./components/auth/ProtectedAdmin";
 
 function App() {
   return (
     <>
-      <NewsContextProvider>
-        <TournamentContextProvider>
-          <ClubesContextProvider>
-          <BrowserRouter>
-          <ScrollToTop />
-            <div className="App">
-              <MenuNav></MenuNav>
-              <Routes>
-                <Route path="/noticias" element={<Noticias></Noticias>}></Route>
-                <Route path="/noticiasDetalle/:id" element={<NoticiaDetalle></NoticiaDetalle>}></Route>
-                <Route path="/resultados" element={<Resultados></Resultados>}></Route>
-                <Route path="/detalleFixture/:id"  element={<DetalleFixture></DetalleFixture>}></Route>
-                <Route path="/detelleClub/:id" element={<DetalleClub></DetalleClub>}></Route>
-                <Route path="/detalle"  element={<DetalleResultado></DetalleResultado>} ></Route>
-                <Route path="/clubes"  element={<ClubesPage></ClubesPage>}></Route>
-                <Route path="/club"  element={<ClubDetalle></ClubDetalle>}></Route>
-                <Route path="/fixture" element={<Fixture></Fixture>}></Route>
-                <Route path="/boxscore/:id" element={<BoxScore></BoxScore>}></Route>
-                <Route path="/tabla" element={<Tabla></Tabla>}></Route>
-                <Route path="/" element={<Inicio></Inicio>}></Route>
-                <Route path="/admin" element={<AdminLayout></AdminLayout>}>
-                  <Route index element={<NoticiasAdmin />} />
-                  <Route path="noticias" element={<NoticiasAdmin />} />
-                  <Route path="fixtureAdmin" element={<FixtureAdmin />} />
-                  <Route path="resultadosAdmin" element={<ResultadosAdmin />} />
-                  <Route path="jugadoresAdmin" element={<JugadoresAdmind />} />
-                  
-                  <Route path="resultadosAdmin/fixture" element={<FormResultados />} />
-                  <Route path="clubesAdmin" element={<ClubesAdmin />} />
-                  <Route path="clubesAdmin/crear" element={<FormClubes />} />
-                  <Route path="noticias/crear" element={<FormNoticias />} />
-                  <Route path="fixtureAdmin/crear" element={<FormProgamado />} />
-                  <Route  path="fixtureAdmin/editar/:id" element={<FormProgamado />} />
-                  <Route  path="resultadosAdmin/editar/:id"  element={<FormResultados />}/>
-                  <Route  path="noticias/editar/:id"  element={<FormNoticias />}/>
-                  <Route path="clubesAdmin/editar/:id" element={<FormClubes />} />
-                  <Route path="jugadoresAdmin/crear" element={<JugadoresForm />} />
-
-                </Route>
-              </Routes>
-              <Footer></Footer>
-            </div>
-          </BrowserRouter>
-          </ClubesContextProvider>
-        </TournamentContextProvider>
-      </NewsContextProvider>
+      <UserProvider>
+        <NewsContextProvider>
+          <TournamentContextProvider>
+            <ClubesContextProvider>
+              <BrowserRouter>
+                <ScrollToTop />
+                <div className="App">
+                  <MenuNav></MenuNav>
+                  <Routes>
+                    <Route
+                      path="/noticias"
+                      element={<Noticias></Noticias>}
+                    ></Route>
+                    <Route
+                      path="/noticiasDetalle/:id"
+                      element={<NoticiaDetalle></NoticiaDetalle>}
+                    ></Route>
+                    <Route
+                      path="/resultados"
+                      element={<Resultados></Resultados>}
+                    ></Route>
+                    <Route
+                      path="/detalleFixture/:id"
+                      element={<DetalleFixture></DetalleFixture>}
+                    ></Route>
+                    <Route
+                      path="/detelleClub/:id"
+                      element={<DetalleClub></DetalleClub>}
+                    ></Route>
+                    <Route
+                      path="/detalle"
+                      element={<DetalleResultado></DetalleResultado>}
+                    ></Route>
+                    <Route
+                      path="/clubes"
+                      element={<ClubesPage></ClubesPage>}
+                    ></Route>
+                    <Route
+                      path="/club"
+                      element={<ClubDetalle></ClubDetalle>}
+                    ></Route>
+                    <Route
+                      path="/fixture"
+                      element={<Fixture></Fixture>}
+                    ></Route>
+                    <Route
+                      path="/boxscore/:id"
+                      element={<BoxScore></BoxScore>}
+                    ></Route>
+                    <Route path="/tabla" element={<Tabla></Tabla>}></Route>
+                    <Route path="/" element={<Inicio></Inicio>}></Route>
+                    <Route path="/login" element={<Login></Login>}></Route>
+                    <Route
+                      path="/admin"
+                      element={
+                        <ProtectedAdmin>
+                          <AdminLayout />
+                        </ProtectedAdmin>
+                      }
+                    >
+                      <Route index element={<NoticiasAdmin />} />
+                      <Route path="noticias" element={<NoticiasAdmin />} />
+                      <Route path="fixtureAdmin" element={<FixtureAdmin />} />
+                      <Route path="resultadosAdmin"  element={<ResultadosAdmin />}/>
+                      <Route path="jugadoresAdmin"  element={<JugadoresAdmind />}/>
+                      <Route path="resultadosAdmin/fixture"  element={<FormResultados />}/>
+                      <Route path="clubesAdmin" element={<ClubesAdmin />} />
+                      <Route path="clubesAdmin/crear"  element={<FormClubes />}/>
+                      <Route path="noticias/crear" element={<FormNoticias />} />
+                      <Route path="fixtureAdmin/crear"  element={<FormProgamado />}/>
+                      <Route path="fixtureAdmin/editar/:id"  element={<FormProgamado />}/>
+                      <Route path="resultadosAdmin/editar/:id"  element={<FormResultados />}/>
+                      <Route path="noticias/editar/:id"  element={<FormNoticias />}/>
+                      <Route path="clubesAdmin/editar/:id"  element={<FormClubes />}/>
+                      <Route path="jugadoresAdmin/crear"  element={<JugadoresForm />}/>
+                    </Route>
+                  </Routes>
+                  <Footer></Footer>
+                </div>
+              </BrowserRouter>
+            </ClubesContextProvider>
+          </TournamentContextProvider>
+        </NewsContextProvider>
+      </UserProvider>
     </>
   );
 }

@@ -31,7 +31,15 @@ const FormResultados = () => {
     reset,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      resultado: {
+        cuartos: Array.from({ length: 4 }, () => ({ local: 0, visitante: 0 })),
+        total: { local: 0, visitante: 0 },
+      },
+      estadisticasJugadores: [],
+    },
+  });
 
   const swalCustomConfig = {
     background: "#111",
@@ -40,11 +48,9 @@ const FormResultados = () => {
     cancelButtonColor: "#333",
   };
 
-  const { fields: cuartosFields } = useFieldArray({
+  const { fields: cuartosFields, replace: replaceCuartos } = useFieldArray({
     control,
     name: "resultado.cuartos",
-    rules: { minLength: 4, maxLength: 4 },
-    defaultValues: Array(4).fill({ local: 0, visitante: 0 }),
   });
 
   // --- LÓGICA DE ESTADÍSTICAS ---
@@ -100,16 +106,17 @@ const FormResultados = () => {
   };
 
   useEffect(() => {
+    if (id) {
     obtenerFixtureID(id).then((data) => {
       const formatDate = (date) => {
         return date?.split("T")[0];
       };
       reset({
-        fecha: formatDate(data?.fecha),
-        hora: data?.hora,
-        estado: data?.estado,
-        local: data?.local._id,
-        visitante: data?.visitante._id,
+        fecha: formatDate(data?.fecha) || "",
+        hora: data?.hora || "",
+        estado: data?.estado || "Programado",
+        local: data?.local?._id || "",
+        visitante: data?.visitante?._id || "",
         resultado: {
           total: {
             local: Number(data?.resultado?.total?.local) || 0,
@@ -120,18 +127,19 @@ const FormResultados = () => {
               ? data.resultado.cuartos
               : Array(4).fill({ local: 0, visitante: 0 }),
         },
-        fase: data?.fase,
-        jornada: data?.jornada,
-        arbitro1: data?.arbitro1,
-        arbitro2: data?.arbitro2,
-        arbitro3: data?.arbitro3,
-        estadio: data?.estadio,
-        ganador: data?.ganador._id,
-        mvp: data?.mvp,
+        fase: data?.fase || "Regular",
+        jornada: data?.jornada || "",
+        arbitro1: data?.arbitro1 || "",
+        arbitro2: data?.arbitro2 || "",
+        arbitro3: data?.arbitro3 || "",
+        estadio: data?.estadio || "",
+        ganador: data?.ganador?._id || null,
+        mvp: data?.mvp || null,
         estadisticasJugadores: data?.estadisticasJugadores || [],
-        id: data._id,
+        id: data?._id || null,
       });
     });
+    }
   }, [id, reset]);
 
   const onSubmit = async (data) => {
