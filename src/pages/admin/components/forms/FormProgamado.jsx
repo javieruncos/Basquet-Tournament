@@ -254,9 +254,7 @@ const FormProgamado = () => {
               Número de Jornada
             </label>
             <select
-              {...register("jornada", {
-                valueAsNumber: true,
-              })}
+              {...register("jornada")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none appearance-none"
             >
               <option value="" className="bg-[#111]">

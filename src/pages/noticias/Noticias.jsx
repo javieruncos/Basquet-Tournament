@@ -7,17 +7,24 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import ProximosResultSection from "../home/components/ProximosResultSection";
 import NewsContext from "../../context/NewsContext";
 import ClubesContext from "../../context/ClubesContext";
+import SkeletonCard from "../../components/cards/CardSkeleton";
 
 const Noticias = () => {
-  const { noticias } = useContext(NewsContext);
-  const { clubes } = useContext(ClubesContext);
+  const { noticias, loading: contextLoading } = useContext(NewsContext);
   const [filters, setFilters] = useState({
     fecha: "",
     categoria: "",
   });
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
+    setIsFiltering(true);
+    
+    setTimeout(() => {
+      setIsFiltering(false);
+    }, 800);
+
     setFilters((prev) => ({
       ...prev,
       [name]: value,
@@ -39,67 +46,7 @@ const Noticias = () => {
       <div className="lg:px-10 lg:pt-10">
         <div className="w-full py-10 bg-dark-gradient flex flex-col sm:flex-row gap-4 justify-between rounded-md px-4 lg:px-10">
           <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto ">
-            <FormControl className="w-full md:w-60 text-white">
-              <InputLabel
-                id="demo-simple-select-label"
-                className="text-white"
-                sx={{ color: "white", "&.Mui-focused": { color: "white" } }}
-              >
-                Fecha
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Equipos"
-                name="fecha"
-                value={filters.fecha}
-                onChange={HandleChange}
-                sx={{
-                  color: "white",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131 !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white",
-                  },
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#191919",
-                      color: "white",
-                      "& .MuiMenuItem-root": {
-                        bgcolor: "#191919",
-                        "&:hover": {
-                          bgcolor: "#333",
-                        },
-                      },
-                    },
-                  },
-                }}
-              >
-                {[
-                  ...new Set(
-                    noticias.map(
-                      (not) =>
-                        new Date(not.createdAt).toISOString().split("T")[0],
-                    ),
-                  ),
-                ]
-                  .slice(0, 6)
-                  .map((fechaIso) => (
-                    <MenuItem key={fechaIso} value={fechaIso}>
-                      {new Date(fechaIso + "T12:00:00").toLocaleDateString()}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
+           <h2 className="text-5xl">Noticias Destacadas</h2>
           </div>
           <div className="flex justify-center sm:justify-end w-full sm:w-auto">
             <FormControl className="w-full md:w-60">
@@ -159,7 +106,13 @@ const Noticias = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <div className="">
-          {filterResult.length === 0 ? (
+          {contextLoading || isFiltering ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10">
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <SkeletonCard key={n} />
+              ))}
+            </div>
+          ) : filterResult.length === 0 ? (
             <div className="h-50 w-full text-center bg-dark-gradient flex items-center justify-center">
               <p className="text-gray-500 text-4xl animate-pulse">
                 No hay Resultados relacionados

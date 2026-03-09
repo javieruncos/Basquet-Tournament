@@ -5,10 +5,11 @@ import { useContext } from "react";
 import ClubesContext from "../../context/ClubesContext";
 import CardProximos from "../../components/cards/CardProximos";
 import { motion } from "framer-motion";
+import SkeletonCard from "../../components/cards/CardSkeleton";
 
 
 const Fixture = () => {
-  const { fixture } = useContext(TournamentContext);
+  const { fixture, loading: contextLoading } = useContext(TournamentContext);
   const { clubes } = useContext(ClubesContext);
   const [filter, setFilter] = useState({
     jornada: "",
@@ -16,8 +17,15 @@ const Fixture = () => {
     categoria: "",
   });
 
+  const [isFiltering, setIsFiltering] = useState(false);
+
   const onChange = (e) => {
     const { name, value } = e.target;
+    setIsFiltering(true);
+    setTimeout(() => {
+      setIsFiltering(false);
+    }, 600);
+
     setFilter((prev) => ({
       ...prev,
       [name]: value,
@@ -55,7 +63,7 @@ const Fixture = () => {
           <p className="text-amber-300">Temporada 2026 - Regional Amateur</p>
         </div>
         <div className="w-full py-10 bg-[#191919] bg-dark-gradient mt-10 flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-4 rounded-md px-4 lg:px-10">
-          <FormControl className="w-full md:flex-1 lg:w-60 text-white ">
+          <FormControl className="w-full md:w-48 lg:w-48 text-white ">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -106,7 +114,7 @@ const Fixture = () => {
               <MenuItem value={3}>Fecha 3</MenuItem>
             </Select>
           </FormControl>
-          <FormControl className="w-full md:flex-1 lg:w-60 text-white">
+          <FormControl className="w-full md:w-48 lg:w-48 text-white">
             <InputLabel
               id="demo-simple-select-label"
               className="text-white"
@@ -159,7 +167,7 @@ const Fixture = () => {
               <MenuItem value={"Final"}>Final</MenuItem>
             </Select>
           </FormControl>
-          <FormControl className="w-full md:w-full lg:w-60">
+          {/* <FormControl className="w-full md:w-full lg:w-60">
             <Select
               id="demo-simple-select"
               displayEmpty
@@ -203,15 +211,21 @@ const Fixture = () => {
               <MenuItem value={"masculino"}>Masculino</MenuItem>
               <MenuItem value={"femenino"}>Femenino</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
         </div>
       </div>
       <div className=" gap-5 mt-10">
         <div className="col-span-3 h-auto numberFonts">
           <div className="h-auto w-full bg-black/5 backdrop-blur rounded-md overflow-x-auto px-2 lg:px-0">
-            {partidosFilter.length === 0 ? (
+            {contextLoading || isFiltering ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map((n) => (
+                  <SkeletonCard key={n} />
+                ))}
+              </div>
+            ) : partidosFilter.length === 0 ? (
               <div className="h-30 w-full text-center flex items-center justify-center">
-                <p className="animate-pulse">No hay partidos programados</p>
+                <p className="animate-pulse text-4xl">No hay partidos programados</p>
               </div>
             ) : (
               <motion.div 

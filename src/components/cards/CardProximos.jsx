@@ -50,6 +50,9 @@ const CardProximos = ({ partido, clubes }) => {
           <span className="text-xs text-gray-500">
             {partido.hora} HS - {partido.estadio}
           </span>
+          <span className="text-xs text-gray-500">
+            jornada  - {partido.jornada}
+          </span>
           <Link to={`/detalleFixture/${partido._id}`}className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest text-center">
             Ver Previa
           </Link>

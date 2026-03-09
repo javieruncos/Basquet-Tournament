@@ -5,10 +5,11 @@ import TournamentContext from "../../context/TournamentContext";
 import ClubesContext from "../../context/ClubesContext";
 import ProximosResultSection from "../../pages/home/components/ProximosResultSection";
 import { motion } from "framer-motion";
+import SkeletonCard from "../../components/cards/CardSkeleton";
 
 
 const Resultados = () => {
-  const { fixture, setFixture } = useContext(TournamentContext);
+  const { fixture, loading: contextLoading } = useContext(TournamentContext);
   const { clubes } = useContext(ClubesContext);
 
   const [filters, setFilters] = useState({
@@ -17,9 +18,16 @@ const Resultados = () => {
     jornada: "",
     fecha: "",
   });
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const onChange = (e) => {
     const { name, value } = e.target;
+    setIsFiltering(true);
+    
+    setTimeout(() => {
+      setIsFiltering(false);
+    }, 600);
+
     setFilters((prev) => ({
       ...prev,
       [name]: value,
@@ -112,63 +120,6 @@ const Resultados = () => {
                 ))}
               </Select>
             </FormControl>
-            <FormControl className="w-full sm:w-60 md:flex-1 lg:w-60 text-white">
-              <InputLabel
-                id="demo-simple-select-label"
-                className="text-white"
-                sx={{ color: "white", "&.Mui-focused": { color: "white" } }}
-              >
-                Fecha
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Equipos"
-                name="fecha"
-                value={filters.fecha}
-                onChange={onChange}
-                sx={{
-                  color: "white",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131 !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white",
-                  },
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#191919",
-                      color: "white",
-                      "& .MuiMenuItem-root": {
-                        bgcolor: "#191919",
-                        "&:hover": {
-                          bgcolor: "#333",
-                        },
-                      },
-                    },
-                  },
-                }}
-              >
-                {fixture.map((partido) => (
-                  <MenuItem
-                    key={partido._id}
-                    value={
-                      new Date(partido.fecha).toISOString().split("T")[0]
-                    }
-                  >
-                    {new Date(partido.fecha).toLocaleDateString()}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
           </div>
           <div className="flex justify-center lg:justify-end w-full md:w-full lg:w-auto">
             <FormControl className="w-full sm:w-60 md:w-full lg:w-60">
@@ -222,9 +173,15 @@ const Resultados = () => {
           </div>
         </div>
         <div className="">
-          {filtro.length === 0 ? (
+          {contextLoading || isFiltering ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 py-6">
+              {[1, 2, 3, 4].map((n) => (
+                <SkeletonCard key={n} />
+              ))}
+            </div>
+          ) : filtro.length === 0 ? (
             <div className="h-50 w-full text-center  flex items-center justify-center">
-              <p className="text-gray-500 text-4xl animate-pulse">
+              <p className="text-gray-500 text-4xl animate-pulse numberFonts">
                 No hay Resultados relacionados
               </p>
             </div>
