@@ -14,7 +14,7 @@ const CardReultados = ({resultados,clubes}) => {
         <div className="flex flex-col items-center text-center">
           <img
             src={resultados?.local.logo.url}
-            className="w-10 h-10 mb-1"
+            className="w-20 h-10 mb-1"
           />
           <span className="text-lg font-medium">{
             clubes?.find((club) => club._id === resultados?.local._id)?.shortname
@@ -29,7 +29,7 @@ const CardReultados = ({resultados,clubes}) => {
         <div className="flex flex-col items-center text-center">
            <img
             src={resultados?.visitante.logo.url}
-            className="w-10 h-10 mb-1"
+            className="w-20 h-10 mb-1"
           />
           <span className="text-lg font-medium">
             {clubes?.find((club) => club._id === resultados?.visitante._id)?.shortname}

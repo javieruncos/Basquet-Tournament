@@ -31,21 +31,23 @@ const FormProgamado = () => {
   } = useForm();
 
   useEffect(() => {
-    obtenerFixtureID(id).then((data) => {
-      reset({
-        fecha: data?.fecha?.split("T")[0], // 🔥 importante
-        hora: data?.hora,
-        estado: data?.estado,
-        local: data?.local?._id,
-        visitante: data?.visitante?._id,
-        fase: data?.fase,
-        jornada: Number(data?.jornada),
-        arbitro1: data?.arbitro1,
-        arbitro2: data?.arbitro2,
-        arbitro3: data?.arbitro3,
-        estadio: data?.estadio,
+    if (id) {
+      obtenerFixtureID(id).then((data) => {
+        reset({
+          fecha: data?.fecha?.split("T")[0], // 🔥 importante
+          hora: data?.hora,
+          estado: data?.estado,
+          local: data?.local?._id,
+          visitante: data?.visitante?._id,
+          fase: data?.fase,
+          jornada: String(data?.jornada),
+          arbitro1: data?.arbitro1,
+          arbitro2: data?.arbitro2,
+          arbitro3: data?.arbitro3,
+          estadio: data?.estadio,
+        });
       });
-    });
+    }
   }, [id, reset]);
 
   const localId = watch("local");
