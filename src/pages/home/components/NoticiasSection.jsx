@@ -8,7 +8,7 @@ const NoticiasSection = () => {
   const { noticias } = useContext(NewsContext);
 
   return (
-    <section className="relative px-5 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative px-5 sm:px-6  overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-12 flex justify-between items-center">
           <div>

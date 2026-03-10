@@ -15,16 +15,18 @@ import Banner from "../../components/layout/Banner";
 
 export const Inicio = () => {
   return (
-    <div className=" text-white mt-0">
-      <PortadaInicio />
+    <>
+    <PortadaInicio />
+    <div className=" text-white mt-0 max-w-7xl mx-auto px-4 md:px-10">
       <ResultadosSection />
       <NoticiasSection />
       <ProximosResultSection />
       <ClubesSection />
       <LideresSection />
       <TablaPosicionesSection />
-      <Banner></Banner>
     </div>
+      <Banner></Banner>
+    </>
   );
 };
 

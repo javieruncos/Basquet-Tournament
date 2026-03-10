@@ -47,7 +47,7 @@ const Fixture = () => {
   const partidosFilter = filterResult(fixture);
 
   return (
-    <div className="p-20 px-3 md:px-10 lg:px-10 lg:pt-30">
+    <div className="p-20 px-3 max-widht-7xl md:px-10 lg:px-20 lg:pt-30">
       <div>
         <div className="py-5 w-full flex justify-center md:justify-start lg:justify-start gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
@@ -167,51 +167,7 @@ const Fixture = () => {
               <MenuItem value={"Final"}>Final</MenuItem>
             </Select>
           </FormControl>
-          {/* <FormControl className="w-full md:w-full lg:w-60">
-            <Select
-              id="demo-simple-select"
-              displayEmpty
-              name="categoria"
-              value={filter.categoria}
-              onChange={onChange}
-              className="bg-amber-300"
-              sx={{
-                color: "black",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "black",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "black",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "black !important",
-                },
-                "& .MuiSvgIcon-root": {
-                  color: "black",
-                },
-              }}
-              MenuProps={{
-                PaperProps: {
-                  sx: {
-                    bgcolor: "#191919",
-                    color: "white",
-                    "& .MuiMenuItem-root": {
-                      bgcolor: "#191919",
-                      "&:hover": {
-                        bgcolor: "#333",
-                      },
-                    },
-                  },
-                },
-              }}
-            >
-              <MenuItem value="" disabled>
-                Categoria
-              </MenuItem>
-              <MenuItem value={"masculino"}>Masculino</MenuItem>
-              <MenuItem value={"femenino"}>Femenino</MenuItem>
-            </Select>
-          </FormControl> */}
+       
         </div>
       </div>
       <div className=" gap-5 mt-10">

@@ -20,7 +20,7 @@ const Noticias = () => {
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setIsFiltering(true);
-    
+
     setTimeout(() => {
       setIsFiltering(false);
     }, 800);
@@ -41,12 +41,15 @@ const Noticias = () => {
   );
 
   return (
-    <div className="md:px-0 main-container ">
+    <div className="md:px-0 main-container">
       <PortadaNoticias></PortadaNoticias>
-      <div className="lg:px-10 lg:pt-10">
+      <div className=" lg:pt-10 max-w-7xl mx-auto px-4 md:px-10">
         <div className="w-full py-10 bg-dark-gradient flex flex-col sm:flex-row gap-4 justify-between rounded-md px-4 lg:px-10">
           <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto ">
-           <h2 className="text-5xl">Noticias Destacadas</h2>
+            <h2 className="text-5xl">Noticias Destacadas</h2>
+            <span className="text-gray-400 text-3xl ml-2">
+              ({filterResult.length})
+            </span>
           </div>
           <div className="flex justify-center sm:justify-end w-full sm:w-auto">
             <FormControl className="w-full md:w-60">
@@ -55,10 +58,10 @@ const Noticias = () => {
                 displayEmpty
                 name="categoria"
                 value={filters.categoria}
-                className="bg-amber-300"
+                className="bg-neutral-900 border border-gray-400/60 text-white"
                 onChange={HandleChange}
                 sx={{
-                  color: "black",
+                  color: "white",
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "black",
                   },
@@ -69,7 +72,7 @@ const Noticias = () => {
                     borderColor: "black !important",
                   },
                   "& .MuiSvgIcon-root": {
-                    color: "black",
+                    color: "white",
                   },
                 }}
                 MenuProps={{
@@ -97,9 +100,10 @@ const Noticias = () => {
           </div>
         </div>
       </div>
+      
 
       <motion.div
-        className="relative z-30"
+        className="relative z-30 max-w-7xl mx-auto "
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.03 }}
@@ -107,11 +111,14 @@ const Noticias = () => {
       >
         <div className="">
           {contextLoading || isFiltering ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10">
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10"
+            >
               {[1, 2, 3, 4, 5, 6].map((n) => (
                 <SkeletonCard key={n} />
               ))}
-            </div>
+            </motion.div>
           ) : filterResult.length === 0 ? (
             <div className="h-50 w-full text-center bg-dark-gradient flex items-center justify-center">
               <p className="text-gray-500 text-4xl animate-pulse">
@@ -119,7 +126,10 @@ const Noticias = () => {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10">
+            <div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10"
+            >
               {filterResult.map((noticia) => (
                 <CardNoticias
                   noticia={noticia}
@@ -130,10 +140,10 @@ const Noticias = () => {
           )}
         </div>
       </motion.div>
-      <div className="mt-10">
+      <div className="mt-24 max-w-7xl mx-auto px-2">
         <ProximosResultSection />
       </div>
-      <div className="mt-20">
+      <div className="mt-32">
         <SponsorCTA />
       </div>
     </div>

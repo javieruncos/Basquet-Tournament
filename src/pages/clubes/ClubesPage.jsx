@@ -20,7 +20,7 @@ const ClubesPage = () => {
 
   return (
     <>
-      <div className="p-5 pt-24 lg:pt-30 lg:px-8">
+      <div className="p-5 pt-24 lg:pt-30 max-w-7xl mx-auto px-4 md:px-10">
         <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest md:justify-start justify-center">
           <span>Torneo</span>
           <span>/</span>

@@ -11,7 +11,7 @@ const ProximosResultSection = () => {
   const partidosFilter = fixture.filter((item) => item.estado === "Programado");
 
   return (
-    <section className="pt-10 px-5 sm:px-6 lg:px-8">
+    <section className="pt-32 px-5 sm:px-6 ">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 flex justify-between items-center">
           <div>
@@ -33,7 +33,7 @@ const ProximosResultSection = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {partidosFilter.map((item) => (
+            {partidosFilter.slice(0, 6).map((item) => (
               <CardProximos key={item._id} partido={item} clubes={clubes} />
             ))}
           </div>
