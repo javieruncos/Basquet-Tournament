@@ -325,7 +325,7 @@ const FormResultados = () => {
             </label>
             <input
               type="number"
-              {...register("jornada")}
+              {...register("jornada", { valueAsNumber: true })}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
             />
           </div>

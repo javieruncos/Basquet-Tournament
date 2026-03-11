@@ -192,7 +192,7 @@ const Resultados = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3   py-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3   pt-10">
                 {filtro.map((partido) => (
                   <CardResultados
                     resultados={partido}
@@ -204,7 +204,7 @@ const Resultados = () => {
           )}
         </div>
       </div>
-      <div className="mb-20 lg:px-15">
+      <div className="mb-10 lg:px-15">
         <ProximosResultSection></ProximosResultSection>
       </div>
     </>

@@ -40,7 +40,7 @@ const FormProgamado = () => {
           local: data?.local?._id,
           visitante: data?.visitante?._id,
           fase: data?.fase,
-          jornada: String(data?.jornada),
+          jornada: data?.jornada,
           arbitro1: data?.arbitro1,
           arbitro2: data?.arbitro2,
           arbitro3: data?.arbitro3,
@@ -63,6 +63,12 @@ const FormProgamado = () => {
 
   const onSubmit = async (data) => {
     try {
+      const payload = {
+        ...data,
+        jornada: Number(data.jornada),
+      };
+
+      console.log(payload);
 
       if (id) {
         const result = await Swal.fire({
@@ -77,7 +83,7 @@ const FormProgamado = () => {
 
         if (!result.isConfirmed) return;
 
-        await editarFixture(id, data);
+        await editarFixture(id, payload);
 
         await Swal.fire({
           icon: "success",
@@ -90,7 +96,7 @@ const FormProgamado = () => {
           state: { update: true },
         });
 
-        return; 
+        return;
       }
 
       Swal.fire({
@@ -102,7 +108,7 @@ const FormProgamado = () => {
         ...swalCustomConfig,
       });
 
-      await crearFixture(data);
+      await crearFixture(payload);
 
       Swal.close();
 
@@ -126,8 +132,6 @@ const FormProgamado = () => {
         ...swalCustomConfig,
       });
     }
-
-    console.log(data);
   };
 
   return (
@@ -146,7 +150,6 @@ const FormProgamado = () => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               <FaUsers /> Equipo Local
@@ -219,7 +222,6 @@ const FormProgamado = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Fase / Jornada
@@ -254,7 +256,9 @@ const FormProgamado = () => {
               Número de Jornada
             </label>
             <select
-              {...register("jornada")}
+              {...register("jornada", {
+                required: "La jornada es obligatoria",
+              })}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none appearance-none"
             >
               <option value="" className="bg-[#111]">
@@ -266,11 +270,15 @@ const FormProgamado = () => {
                 </option>
               ))}
             </select>
+            {errors.jornada && (
+              <span className="text-red-500 text-[10px] font-bold uppercase">
+                {errors.jornada.message}
+              </span>
+            )}
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-         
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Principal
@@ -283,7 +291,7 @@ const FormProgamado = () => {
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />
           </div>
-        
+
           <div className="space-y-2">
             <label className="text-[10px] uppercase font-bold tracking-widest text-amber-300 flex items-center gap-2">
               Árbitro Secundario
@@ -304,7 +312,7 @@ const FormProgamado = () => {
             <input
               type="text"
               placeholder="Nombre del árbitro"
-               autoComplete="off"
+              autoComplete="off"
               {...register("arbitro3")}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:border-amber-300 outline-none"
             />

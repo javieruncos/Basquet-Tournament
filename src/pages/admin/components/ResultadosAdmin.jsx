@@ -1,13 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FaTrophy, FaEdit, FaTrash, FaPlus, FaChartBar } from 'react-icons/fa';
 import TournamentContext from '../../../context/TournamentContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ItemsResultados from './forms/ItemsResultados';
 import Swal from 'sweetalert2';
 import { eliminarFixture, getFixtures } from '../../../services/FixtureService';
 
 const ResultadosAdmin = () => {
     const { fixture ,setFixture} = useContext(TournamentContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(location.state?.update){
+          getFixtures().then((res) => {
+            setFixture(res);
+          });
+        }
+    },[location.state,navigate,setFixture])
+
+
 
     const swalCustomConfig = {
     background: "#111",
