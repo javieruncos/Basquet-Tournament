@@ -23,7 +23,7 @@ const CardReultados = ({resultados,clubes}) => {
 
         <div className="text-center">
           <p className="text-xs text-gray-400">{resultados?.estado}</p>
-          <p className="text-md font-bold"> {resultados?.fecha}</p>
+          <p className="text-sm font-bold"> {resultados?.fecha}</p>
         </div>
 
         <div className="flex flex-col items-center text-center">

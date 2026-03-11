@@ -3,18 +3,26 @@ import { useParams } from "react-router-dom";
 import { obtenerFixtureID } from "../../services/FixtureService";
 import ClubesContext from "../../context/ClubesContext";
 import { jugadoresClub } from "../../services/ClubesService";
+import { FaCalendar, FaClock, FaTrophy, FaMapMarkerAlt } from "react-icons/fa";
+import SkeletonDetalle from "./components/SkeletonDetalle";
 
 const BoxScore = () => {
   const [partido, setpartido] = useState({});
   const [jugadoresLocal, setJugadoresLocal] = useState([]);
   const [jugadoresVisitante, setJugadoresVisitante] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const { clubes } = useContext(ClubesContext);
 
   useEffect(() => {
+    setLoading(true);
     obtenerFixtureID(id).then((data) => {
       console.log(data);
       setpartido(data);
+    }).finally(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     });
   }, []);
 
@@ -41,23 +49,27 @@ const BoxScore = () => {
     const arbitros = [partido?.arbitro1, partido?.arbitro2, partido?.arbitro3]
 
   return (
+    <>
+    {loading ? (
+      <SkeletonDetalle />
+    ) : (
     <div className="p-10 px-3 lg:px-10 numberFonts mt-10">
-      <div className="py-5 w-full flex gap-1 text-amber-300 text-sm lg:gap-4">
-        <span>{partido?.fecha}</span>
+      <div className="py-5 w-full flex items-center gap-1 text-amber-300 text-sm lg:gap-4">
+        <span className="flex items-center gap-1"><FaCalendar className="text-[10px]" /> {partido?.fecha}</span>
         <span>/</span>
-        <span>{partido?.hora} hs.</span>
+        <span className="flex items-center gap-1"><FaClock className="text-[10px]" /> {partido?.hora} hs.</span>
         <span>/</span>
-        <span>Fase</span>
+        <span className="flex items-center gap-1"><FaTrophy className="text-[10px]" /> Fase</span>
         <span>/</span>
         <span>{partido?.fase}</span>
       </div>
       <div className="bg-[#171717] border border-white/10 rounded-md p-6 mb-10">
-        <div className="grid grid-cols-3 items-center max-w-4xl mx-auto">
-          <div className="flex flex-col items-center gap-2 justify-self-start">
+        <div className="flex items-center justify-between max-w-6xl mx-auto gap-4">
+          <div className="flex flex-col items-center gap-4 flex-1">
             <img
               src={
                 clubes?.find((c) => c._id === partido?.local?._id)?.logo.url }
-              className="h-16 w-16 lg:h-24 lg:w-24"
+              className="h-20 w-20 lg:h-32 lg:w-52 object-contain"
               alt="local"
             />
             <span className="text-white font-bold text-center">
@@ -65,13 +77,13 @@ const BoxScore = () => {
             </span>
           </div>
 
-          <div className="flex flex-col items-center justify-self-center">
+          <div className="flex flex-col items-center justify-center flex-1">
             <div className="flex items-center gap-6">
-              <span className="text-5xl lg:text-7xl font-bold text-white">
+              <span className="text-7xl lg:text-9xl font-bold text-white">
                 {partido?.resultado?.total.local}
               </span>
-              <span className="text-2xl text-gray-500">-</span>
-              <span className="text-5xl lg:text-7xl font-bold text-white">
+              <span className="text-4xl text-gray-500">-</span>
+              <span className="text-5xl lg:text-9xl font-bold text-white">
                 {partido?.resultado?.total.visitante}
               </span>
             </div>
@@ -80,11 +92,11 @@ const BoxScore = () => {
             </span>
           </div>
 
-          <div className="flex flex-col items-center gap-2 justify-self-end">
+          <div className="flex flex-col items-center gap-4 flex-1">
            <img
               src={
                 clubes?.find((c) => c._id === partido?.visitante?._id)?.logo.url }
-              className="h-16 w-16 lg:h-24 lg:w-24"
+              className="h-20 w-20 lg:h-32 lg:w-52 object-contain"
               alt="visitante"
             />
             <span className="text-white font-bold text-center">
@@ -108,7 +120,7 @@ const BoxScore = () => {
                 return (
                   <li
                     key={player.jugadorId || i}
-                    className="flex items-center gap-3 border-b border-white/5 pb-2"
+                    className="flex items-center gap-3 border-b border-white/5 pb-2 hover:text-amber-300 transition-all"
                   >
                     <span className="text-gray-500 text-xs">#{datosJugador?.nro || i + 1}</span>
                     {datosJugador?.nombre || "Cargando..."}
@@ -148,8 +160,7 @@ const BoxScore = () => {
             <h3 className="text-amber-300 font-bold mb-2 uppercase text-sm tracking-widest">
               Sede del Encuentro
             </h3>
-            <p className="text-white">Estadio "El Coloso de las Flores"</p>
-            <p className="text-gray-500 text-sm mt-1">Las Talitas, Tucumán</p>
+            <p className="text-white">{partido?.estadio}</p>
           </div>
 
           <div className="bg-[#171717] p-6 rounded-md border border-white/10 text-center">
@@ -183,7 +194,7 @@ const BoxScore = () => {
                 return (
                   <li
                     key={player.jugadorId || i}
-                    className="flex items-center gap-3 border-b border-white/5 pb-2"
+                    className="flex items-center gap-3 border-b border-white/5 pb-2 hover:text-amber-300 transition-all"
                   >
                     <span className="text-gray-500 text-xs">#{datosJugador?.nro || i + 1}</span>
                     {datosJugador?.nombre || "Cargando..."}
@@ -195,6 +206,8 @@ const BoxScore = () => {
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 
