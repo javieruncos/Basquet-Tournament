@@ -10,7 +10,7 @@ const ResultadosSection = () => {
   const { clubes } = useContext(ClubesContext);
 
   return (
-    <section className="py-32 px-5 sm:px-6 ">
+    <section className="py-16 md:py-12 px-5 sm:px-6 lg:hidden block">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 flex justify-between items-center">
           <div>
@@ -33,7 +33,7 @@ const ResultadosSection = () => {
           viewport={{ once: true, amount: 0.03 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-3">
             {fixture
               .filter((item) => item.estado !== "Programado")
               .map((item) => (

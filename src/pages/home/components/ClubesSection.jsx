@@ -7,11 +7,11 @@ const ClubesSection = () => {
   const { clubes } = useContext(ClubesContext);
 
   return (
-    <section className="py-32 px-5 sm:px-6 ">
+    <section className="py-16 md:py-12 px-5 sm:px-6 ">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12 flex justify-between items-center">
+        <div className="mb-8 md:mb-12 flex justify-between items-end md:items-center">
           <div>
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight">
               Nuestros <span className="text-amber-300">Clubes</span>
             </h2>
             <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
