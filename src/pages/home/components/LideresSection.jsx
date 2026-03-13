@@ -13,14 +13,18 @@ const LideresSection = () => {
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
-            <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight">
-              Líderes de la <span className="text-amber-300">Temporada</span>
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+              lideres de la{" "}
+              <span
+                className="text-transparent stroke-amber-400 stroke-1"
+                style={{ WebkitTextStroke: "1px #fbbf24" }}
+              >
+                temporada
+              </span>
             </h2>
             <div className="w-24 h-1 bg-amber-300 mt-4 rounded"></div>
           </div>
-          <button className="text-amber-300 hover:text-white transition-colors font-bold uppercase tracking-widest text-sm border-b border-amber-300 pb-1 whitespace-nowrap flex items-center gap-2">
-            <span className="inline">Ver Estadísticas Completas</span>
-          </button>
+          
         </div>
 
         <motion.div

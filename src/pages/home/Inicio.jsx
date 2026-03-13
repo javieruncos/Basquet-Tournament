@@ -8,22 +8,22 @@ import TablaPosicionesSection from "./components/TablaPosicionesSection";
 import Banner from "../../components/layout/Banner";
 import SliderResult from "./components/SliderResult";
 import Proximos from "./components/Proximos";
+import SponsorCTA from "../noticias/components/SponsorCTA";
 
 export const Inicio = () => {
   return (
     <>
-    <PortadaInicio />
-    <SliderResult />
-    <div className="text-white mt-0 px-0 sm:px-4 md:px-6 lg:px-5 overflow-hidden">
-      <ResultadosSection />
-      <ProximosResultSection />
-      <TablaPosicionesSection />
-      <Proximos></Proximos>
-      <NoticiasSection />
-      <ClubesSection />
-      <LideresSection />
-    </div>
-      <Banner></Banner>
+      <PortadaInicio />
+      <SliderResult />
+      <div className="text-white mt-0 px-0 sm:px-4 md:px-6 lg:px-5 overflow-hidden">
+        <ResultadosSection />
+        <ProximosResultSection />
+        <TablaPosicionesSection />
+        <NoticiasSection />
+        <ClubesSection />
+        <LideresSection />
+      </div>
+      <SponsorCTA></SponsorCTA>
     </>
   );
 };

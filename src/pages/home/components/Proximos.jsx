@@ -28,7 +28,7 @@ const Proximos = () => {
                     transition={{ duration: 0.5 }}
                 >
                     {proximosPartidos.length > 0 ? (
-                        proximosPartidos.slice(0, 3).map((partido) => (
+                        proximosPartidos.slice(0, 6).map((partido) => (
                             <CardProximos key={partido._id} partido={partido} clubes={clubes} />
                         ))
                     ) : (
