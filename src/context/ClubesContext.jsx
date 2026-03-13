@@ -10,7 +10,6 @@ export const ClubesContextProvider = ({children}) => {
 
     useEffect(() => {
         getClubes().then((res) => {
-            console.log(res)
             setClubes(res)
         })
     }, [])

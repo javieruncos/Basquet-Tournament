@@ -41,11 +41,11 @@ const SliderResult = () => {
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1">
                         <img 
                           src={resultado?.local?.logo?.url} 
                           alt="logo" 
-                          className="h-8 w-8 object-contain"
+                          className="h-15 w-18 object-contain"
                         />
                         <span className="text-xs font-bold text-gray-200 uppercase tracking-tight">{resultado?.local?.name}</span>
                       </div>
@@ -55,11 +55,11 @@ const SliderResult = () => {
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1">
                         <img 
                           src={resultado?.visitante?.logo?.url} 
                           alt="logo" 
-                          className="h-8 w-8 object-contain"
+                          className="h-15 w-18 object-contain"
                         />
                         <span className="text-xs font-bold text-gray-200 uppercase tracking-tight">{resultado?.visitante?.name}</span>
                       </div>

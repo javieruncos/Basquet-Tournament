@@ -3,7 +3,6 @@ import PortadaNoticias from "./components/PortadaNoticias";
 import CardNoticias from "../../components/cards/CardNoticias";
 import SponsorCTA from "./components/SponsorCTA";
 import { motion } from "framer-motion";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import ProximosResultSection from "../home/components/ProximosResultSection";
 import NewsContext from "../../context/NewsContext";
 import ClubesContext from "../../context/ClubesContext";
@@ -16,20 +15,19 @@ const Noticias = () => {
     categoria: "",
   });
   const [isFiltering, setIsFiltering] = useState(false);
+  const categorias = [
+    { label: "Todas", value: "" },
+    { label: "Masculino", value: "masculino" },
+    { label: "Femenino", value: "femenino" },
+  ];
 
-  const HandleChange = (e) => {
-    const { name, value } = e.target;
+  const handleFilterClick = (value) => {
     setIsFiltering(true);
-
-    setTimeout(() => {
-      setIsFiltering(false);
-    }, 800);
-
+    setTimeout(() => setIsFiltering(false), 800);
     setFilters((prev) => ({
       ...prev,
-      [name]: value,
+      categoria: value,
     }));
-    console.log(name, value);
   };
 
   const filterResult = noticias.filter(
@@ -43,60 +41,31 @@ const Noticias = () => {
   return (
     <div className="md:px-0 main-container">
       <PortadaNoticias></PortadaNoticias>
-      <div className=" lg:pt-10 max-w-7xl mx-auto px-4 md:px-10">
-        <div className="w-full py-10 bg-dark-gradient flex flex-col sm:flex-row gap-4 justify-between rounded-md px-4 lg:px-10">
-          <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto ">
-            <h2 className="text-5xl">Noticias Destacadas</h2>
-            <span className="text-gray-400 text-3xl ml-2">
-              ({filterResult.length})
-            </span>
+      <div className="pt-16 max-w-7xl mx-auto px-4 md:px-10">
+        <div className="w-full pb-8 border-b border-white/10 flex flex-col md:flex-row gap-6 justify-between items-end">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-1 bg-amber-400 rounded-full"></div>
+              <span className="text-amber-400 font-black tracking-[0.3em] text-xs uppercase">Explorar</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+              Noticias <span className="text-transparent stroke-amber-400 stroke-1" style={{ WebkitTextStroke: "1px #fbbf24" }}>Destacadas</span>
+            </h2>
           </div>
-          <div className="flex justify-center sm:justify-end w-full sm:w-auto">
-            <FormControl className="w-full md:w-60">
-              <Select
-                id="demo-simple-select"
-                displayEmpty
-                name="categoria"
-                value={filters.categoria}
-                className="bg-neutral-900 border border-gray-400/60 text-white"
-                onChange={HandleChange}
-                sx={{
-                  color: "white",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white",
-                  },
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#191919",
-                      color: "white",
-                      "& .MuiMenuItem-root": {
-                        bgcolor: "#191919",
-                        "&:hover": {
-                          bgcolor: "#333",
-                        },
-                      },
-                    },
-                  },
-                }}
+          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            {categorias.map((cat) => (
+              <button
+                key={cat.value}
+                onClick={() => handleFilterClick(cat.value)}
+                className={`px-6 py-2 rounded-md text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer border-2 ${
+                  filters.categoria === cat.value
+                    ? "bg-amber-400 border-amber-400 text-black"
+                    : "bg-transparent border-white/10 text-gray-400 hover:border-amber-400/50 hover:text-amber-400"
+                }`}
               >
-                <MenuItem value="" disabled>
-                  Categoria
-                </MenuItem>
-                <MenuItem value={"masculino"}>Masculino</MenuItem>
-                <MenuItem value={"femenino"}>Femenino</MenuItem>
-              </Select>
-            </FormControl>
+                {cat.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>

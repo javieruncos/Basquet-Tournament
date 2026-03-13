@@ -11,7 +11,6 @@ export  const NewsContextProvider = ({children}) => {
      
     useEffect(()=>{
         getNoticias().then((res)=>{
-            console.log(res);
             setNoticias(res);
             setLoading(false);
         }).catch((error)=>{

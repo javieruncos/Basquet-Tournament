@@ -32,6 +32,7 @@ import JugadoresForm from "./pages/admin/components/forms/JugadoresForm";
 import Login from "./pages/login/Login";
 import UserContext, { UserProvider } from "./context/UserContext";
 import ProtectedAdmin from "./components/auth/ProtectedAdmin";
+import MatchBoxScore from "./pages/detalleResultado/components/MatchBoxScore";
 
 function App() {
   return (
@@ -83,7 +84,7 @@ function App() {
                     ></Route>
                     <Route
                       path="/boxscore/:id"
-                      element={<BoxScore></BoxScore>}
+                      element={<MatchBoxScore></MatchBoxScore>}
                     ></Route>
                     <Route path="/tabla" element={<Tabla></Tabla>}></Route>
                     <Route path="/" element={<Inicio></Inicio>}></Route>

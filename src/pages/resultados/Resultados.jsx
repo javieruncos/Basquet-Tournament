@@ -52,7 +52,7 @@ const Resultados = () => {
 
   return (
     <>
-      <div className="md:px-10 lg:px-20 px-5 main-container mt-30">
+      <div className="md:px-10 lg:px-10 px-5 main-container mt-30">
         <div className="py-5 w-full flex justify-center md:justify-start gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
           <span>/</span>
@@ -204,7 +204,7 @@ const Resultados = () => {
           )}
         </div>
       </div>
-      <div className="mb-10 lg:px-15">
+      <div className="mb-10 lg:px-5">
         <ProximosResultSection></ProximosResultSection>
       </div>
     </>

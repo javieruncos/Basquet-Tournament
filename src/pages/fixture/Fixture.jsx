@@ -47,7 +47,7 @@ const Fixture = () => {
   const partidosFilter = filterResult(fixture);
 
   return (
-    <div className="p-20 px-3 max-widht-7xl md:px-10 lg:px-20 lg:pt-30">
+    <div className="p-20 px-3 max-widht-7xl md:px-10 lg:px-10 lg:pt-30">
       <div>
         <div className="py-5 w-full flex justify-center md:justify-start lg:justify-start gap-1 text-gray-400 numberFonts text-sm lg:gap-4">
           <span>Torneo</span>
