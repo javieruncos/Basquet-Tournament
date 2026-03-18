@@ -13,7 +13,6 @@ const HeroNews = ({ noticias }) => {
   return (
     <section className="max-w-7xl mx-auto px-4 md:px-6 py-12">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-15">
-        {/* Noticia Principal (Izquierda) */}
 
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -41,7 +40,6 @@ const HeroNews = ({ noticias }) => {
           </Link>
         </motion.div>
 
-        {/* Noticia Secundaria (Derecha) */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
