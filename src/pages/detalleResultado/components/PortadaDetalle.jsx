@@ -5,12 +5,7 @@ const PortadaDetalle = ({ partido }) => {
     <div className="relative w-full h-112.5 md:h-157.5 overflow-hidden rounded-b-3xl shadow-2xl group border-b border-white/5">
       {/* Background with parallax-like feel */}
       <div className="absolute inset-0">
-         <img
-          src="https://objetos.estaticos-marca.com/assets/multimedia/imagenes/2016/04/08/14600951269464.jpg"
-          className="w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-1000 ease-out"
-          alt="Stadium"
-        />
-        <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#050505]/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-[#111] to-[#1a1a1a]"></div>
         <div className="absolute inset-0 bg-linear-to-b from-[#050505] to-transparent opacity-80"></div>
       </div>
 
@@ -48,14 +43,24 @@ const PortadaDetalle = ({ partido }) => {
                 </div>
             </div>
 
-            {/* Score */}
-            <div className="flex flex-col items-center justify-center relative z-20">
-                <div className="flex items-center gap-3 md:gap-8">
-                     <span className="text-5xl md:text-8xl lg:text-9xl font-black text-white numberFonts tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]">88</span>
-                     <div className="h-8 md:h-12 w-0.5 md:w-1 bg-white/10 -skew-x-12"></div>
-                     <span className="text-5xl md:text-8xl lg:text-9xl font-black text-white/40 numberFonts tracking-tighter">74</span>
-                </div>
+          {/* Score */}
+          <div className="flex flex-col items-center justify-center relative z-20">
+            <div className="flex items-center gap-4 md:gap-10">
+              <span className="text-6xl md:text-8xl lg:text-9xl font-black text-white numberFonts tracking-tighter drop-shadow-[0_0_30px_rgba(251,191,36,0.3)]">
+                {partido?.resultado?.total?.local || 0}
+              </span>
+              <div className="flex flex-col items-center gap-2">
+                <div className="h-10 md:h-20 w-1 bg-linear-to-b from-amber-400 to-transparent rounded-full opacity-50"></div>
+                <span className="text-amber-400 font-black italic text-xl md:text-2xl opacity-40">
+                  VS
+                </span>
+                <div className="h-10 md:h-20 w-1 bg-linear-to-t from-amber-400 to-transparent rounded-full opacity-50"></div>
+              </div>
+              <span className="text-6xl md:text-8xl lg:text-9xl font-black text-white/40 numberFonts tracking-tighter">
+                {partido?.resultado?.total?.visitante || 0}
+              </span>
             </div>
+          </div>
 
             {/* Visitor Team */}
             <div className="flex flex-col items-center gap-4 md:gap-8 text-center group/team">

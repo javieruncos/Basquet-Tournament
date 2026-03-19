@@ -21,6 +21,7 @@ const ProximosResultSection = () => {
   const partidosFilter = Array.isArray(fixture)
     ? fixture.filter((item) => item.estado === "Programado")
     : [];
+    
   const goleadores = Array.isArray(jugadores)
     ? [...jugadores]
         .sort((a, b) => b.estadisticas.puntos - a.estadisticas.puntos)
@@ -162,10 +163,10 @@ const ProximosResultSection = () => {
                 {noticias?.slice(0, 2).map((noticia) => (
                   <Link
                     key={noticia._id}
-                    to={`/noticia/${noticia._id}`}
+                    to={`/noticiasDetalle/${noticia._id}`}
                     className="flex gap-4 group bg-white/5 p-3 rounded-xl border border-white/5 hover:border-amber-300/30 transition-all"
                   >
-                    <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-white/10">
+                    <div className="w-32 h-20 shrink-0 rounded-lg overflow-hidden border border-white/10">
                       <img
                         src={noticia.image?.url}
                         alt=""

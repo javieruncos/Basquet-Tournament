@@ -6,11 +6,13 @@ import SponsorCTA from "../noticias/components/SponsorCTA";
 import { motion } from "framer-motion";
 import { obtenerNoticiaID } from "../../services/NewsService";
 import TournamentContext from "../../context/TournamentContext";
+import CardResultados from "../../components/cards/CardResultados";
+import Tabla from "../../components/common/Tabla";
 
 const DetalleNoticia = () => {
   const { id } = useParams();
   const [noticia, setNoticia] = useState({});
-  const { fixture } = useContext(TournamentContext);
+  const { fixture, clubes } = useContext(TournamentContext);
   const { noticias } = useContext(NewsContext);
 
   useEffect(() => {
@@ -162,7 +164,12 @@ const DetalleNoticia = () => {
       </div>
       <div className=" mx-auto mt-12">
         <div className="grid grid-cols-1 md:grid-cols-6">
-          <div className=" col-span-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className=" col-span-4">
             <div className="lg:col-span-3">
               <p className="text-xl text-gray-300 font-medium leading-relaxed mb-8 border-l-4 border-amber-400 pl-6 italic">
                 {noticia.summary ||
@@ -198,17 +205,39 @@ const DetalleNoticia = () => {
                   ))}
                 </div>
               </div>
-            
+
+              <div className="mt-16">
+                <h3 className="text-white text-4xl font-black uppercase tracking-tighter mb-6">
+                  Resultados <span className="text-amber-400">Recientes</span>
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {fixture
+                    ?.filter((item) => item.estado === "Finalizado")
+                    .slice(0, 6)
+                    .map((item) => (
+                      <CardResultados
+                        key={item._id}
+                        resultados={item}
+                        clubes={clubes}
+                      />
+                    ))}
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="col-span-2 hidden lg:block pl-8">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="col-span-2 hidden lg:block pl-8">
             <h3 className="text-amber-400 font-black uppercase tracking-tighter text-xl mb-6 border-b border-white/10 pb-2">
               Otras Noticias
             </h3>
             <div className="flex flex-col gap-6">
               {noticias
                 ?.filter((n) => n._id !== id)
-                .slice(0, 4)
+                .slice(0, 3)
                 .map((item) => (
                   <Link
                     to={`/noticiasDetalle/${item._id}`}
@@ -234,7 +263,14 @@ const DetalleNoticia = () => {
                   </Link>
                 ))}
             </div>
-          </div>
+
+            <div className="mt-17">
+              <h3 className="text-white font-black uppercase tracking-tighter text-4xl mb-6 border-b border-white/10 pb-2">
+                Posiciones
+              </h3>
+              <Tabla />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

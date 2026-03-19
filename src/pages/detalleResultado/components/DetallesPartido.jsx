@@ -6,7 +6,7 @@ const DetallesPartido = () => {
     <div className="h-80 bg-[#121212] rounded-2xl border border-white/5 overflow-hidden relative group">
         <div className="absolute top-0 right-0 p-32 bg-amber-400/5 rounded-full blur-[80px] -mr-16 -mt-16 pointer-events-none"></div>
         
-        <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+        <div className="p-6 border-b border-white/5 flex justify-between items-center bg-white/2">
              <h3 className="text-sm font-black uppercase tracking-[0.2em] text-white">Información</h3>
              <div className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_#fbbf24]"></div>
         </div>

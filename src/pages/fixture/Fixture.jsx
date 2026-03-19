@@ -6,8 +6,12 @@ import SkeletonCard from "../../components/cards/CardSkeleton";
 import Tabla from "../../components/common/Tabla";
 import CardResultados from "../../components/cards/CardResultados";
 import useTournamentFilter from "../../hooks/useTournamentFilter";
+import GridPortada from "../noticias/components/GridPortada";
+import NewsContext from "../../context/NewsContext";
+import { useContext } from "react";
 
 const Fixture = () => {
+const { noticias } = useContext(NewsContext);
 const {
   partidosFilter,
   filter,
@@ -221,7 +225,7 @@ const {
           Resultado Recientes
         </h3>
         <hr className="text-white/10" />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 my-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
           {fixture
             .filter((item) => item.estado !== "Programado")
             .slice(0, 6)
@@ -233,6 +237,10 @@ const {
               />
             ))}
         </div>
+      </div>
+
+      <div className="">
+        <GridPortada noticias={noticias} />
       </div>
     </div>
   );
