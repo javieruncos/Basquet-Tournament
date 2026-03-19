@@ -2,9 +2,12 @@ import React, { useContext, useState } from "react";
 import CardClubes from "../../components/cards/CardClubes";
 import Sponsor from "../../components/common/Sponsor";
 import ClubesContext from "../../context/ClubesContext";
+import TournamentContext from "../../context/TournamentContext";
+import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const ClubesPage = () => {
   const { clubes } = useContext(ClubesContext);
+  const { fixture } = useContext(TournamentContext);
 
   const [filters, setFilters] = useState({
     categoria: "",
@@ -18,19 +21,83 @@ const ClubesPage = () => {
 
   const filtro = filterClubes(clubes);
 
+  // Obtener el próximo partido (el primero que no tenga resultado definido)
+  const proximoPartido = fixture?.find(p => !p.resultado?.total?.local) || fixture?.[0];
+
   return (
     <>
-      <div className="p-5 pt-24 lg:pt-30 max-w-7xl mx-auto px-4 md:px-10">
-        <div className="py-5 w-full flex gap-4 text-gray-400 text-sm uppercase tracking-widest md:justify-start justify-center">
-          <span>Torneo</span>
-          <span>/</span>
-          <span className="text-amber-300">Clubes</span>
-        </div>
-        <div className="flex flex-col items-center gap-5 md:items-start lg:gap-2 text-center md:text-left">
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic">Directorio de Clubes</h1>
-          <p className="text-sm md:text-2xl text-amber-300 numberFonts">
-           {clubes.length} clubes registrados compitiendo
-          </p>
+    
+      <div className="p-5 pt-24 lg:pt-30  px-4 md:px-10">
+        
+
+        {proximoPartido && (
+          <div className="mb-12 bg-[#111] border-y-4 border-amber-400 rounded-xl overflow-hidden shadow-2xl">
+            <div className="bg-amber-400 px-6 py-2 flex justify-between items-center">
+              <span className="text-black font-black uppercase tracking-tighter text-sm flex items-center gap-2">
+                <FaCalendarAlt /> Próximo Partido
+              </span>
+              <span className="text-black font-bold text-xs uppercase tracking-widest">
+                {proximoPartido.jornada || "Fase Regular"}
+              </span>
+            </div>
+
+            <div className="p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
+              {/* Local */}
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-end">
+                <div className="text-center md:text-right">
+                  <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
+                    {proximoPartido.local.name}
+                  </h4>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">Local</span>
+                </div>
+                <img 
+                  src={proximoPartido.local.logo?.url} 
+                  alt="Local" 
+                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                />
+              </div>
+
+              {/* Divider / Info */}
+              <div className="flex flex-col items-center px-4 md:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
+                <div className="text-amber-400 font-black text-4xl md:text-5xl italic mb-2">VS</div>
+                <div className="text-center">
+                  <p className="text-xl font-bold numberFonts">{new Date(proximoPartido.fecha).toLocaleDateString("es-AR", { day: '2-digit', month: '2-digit' })}</p>
+                  <p className="text-amber-300 font-black text-lg">21:00 HS</p>
+                </div>
+              </div>
+
+              {/* Visitante */}
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-start">
+                <img 
+                  src={proximoPartido.visitante.logo?.url} 
+                  alt="Visitante" 
+                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-2 md:order-1" 
+                />
+                <div className="text-center md:text-left order-1 md:order-2">
+                  <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
+                    {proximoPartido.visitante.name}
+                  </h4>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">Visitante</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/5 p-4 flex justify-center items-center gap-3 text-gray-400 text-xs font-bold uppercase tracking-widest">
+              <FaMapMarkerAlt className="text-amber-400" />
+              {proximoPartido.estadio || "Estadio a confirmar"}
+            </div>
+          </div>
+        )}
+
+       <div className="flex flex-col items-center gap-4 md:items-start text-center md:text-left mb-10">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-1 bg-amber-300"></div>
+            <span className="text-amber-300 font-bold tracking-[0.3em] uppercase text-xs md:text-sm">Instituciones</span>
+          </div>
+          <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter italic leading-none">
+            Nuestros <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">Clubes compitiendo</span>
+          </h1>
+       
         </div>
         {filtro.length === 0 ? (
           <div className="p-20 w-full">

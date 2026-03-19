@@ -11,13 +11,13 @@ const HeroNews = ({ noticias }) => {
     .slice(0, 2);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-6 py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-15">
+    <section className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10 md:mt-15">
 
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="relative h-100 md:h-125 rounded-3xl overflow-hidden group cursor-pointer col-span-3"
+          className="relative h-80 sm:h-100 md:h-125 rounded-2xl md:rounded-3xl overflow-hidden group cursor-pointer lg:col-span-3"
         >
           <Link to={`/noticiasDetalle/${noticias[2]?._id}`}>
             <img
@@ -30,7 +30,7 @@ const HeroNews = ({ noticias }) => {
               <span className="bg-amber-400 text-black text-[10px] font-black uppercase px-3 py-1 rounded-full mb-4 inline-block">
                 Destacado
               </span>
-              <h2 className="text-3xl md:text-6xl font-black text-white uppercase italic leading-none tracking-tighter">
+              <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white uppercase italic leading-tight md:leading-none tracking-tighter">
                 {noticias[2]?.title}
               </h2>
               <p className="text-gray-300 mt-4 text-sm max-w-md line-clamp-2">
@@ -41,29 +41,29 @@ const HeroNews = ({ noticias }) => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative h-100 md:h-125  overflow-hidden group cursor-pointer col-span-1 flex flex-col justify-end gap-4"
+          className="relative h-auto lg:h-125 overflow-hidden group cursor-pointer lg:col-span-1 flex flex-col sm:flex-row lg:flex-col justify-end gap-4"
         >
-          <div className="h-50 rounded-md overflow-hidden">
+          <div className="h-auto sm:w-1/2 lg:w-full lg:h-50 rounded-md overflow-hidden">
             <Link to={`/noticiasDetalle/${noticias[3]?._id}`}>
-              <div className="h-35 bg-amber-600 flex flex-col gap-3">
+              <div className="h-full bg-white/5 flex flex-col gap-3">
                 <img
                   src={noticias[3]?.image?.url}
                   alt="Main News"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="">
-                  <p className="text-[12px] line-clamp-2">
+                <div className="p-2">
+                  <p className="text-[12px] line-clamp-2 text-white">
                     {noticias[3]?.content}
                   </p>
                 </div>
               </div>
             </Link>
           </div>
-          <div className="h-70 bg-white/5 rounded-md">
-            <div class="w-full h-full bg-  border-l-4 border-amber-300 rounded-md p-5 text-white font-sans">
+          <div className="h-auto sm:w-1/2 lg:w-full lg:h-70 bg-white/5 rounded-md">
+            <div class="w-full h-full border-l-4 border-amber-300 rounded-md p-4 md:p-5 text-white font-sans">
               <h3 class="text-center text-2xl font-bold tracking-wider uppercase mb-5 text-amber-300">
                 Resultados Recientes
               </h3>

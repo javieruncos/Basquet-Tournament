@@ -45,7 +45,7 @@ const Tabla = () => {
           </thead>
 
           <tbody>
-            {tabla?.map((pos, index) => (
+            {tabla?.slice(0, 7).map((pos, index) => (
               <tr
                 key={pos._id}
                 className="group border-b border-white/5 hover:bg-amber-300/2 transition-colors"

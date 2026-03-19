@@ -58,9 +58,9 @@ const Noticias = () => {
               Noticias del torneo
             </span>
 
-            <h2 className="text-3xl md:text-6xl font-extrabold uppercase tracking-tight">
-              Últimas novedades
-            </h2>
+            <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter italic leading-none">
+            noticias <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">del torneo</span>
+          </h1>
           </div>
 
           {/* filtros tipo APP */}

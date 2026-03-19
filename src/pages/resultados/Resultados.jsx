@@ -61,7 +61,9 @@ const Resultados = () => {
           <span className="">Resultados</span>
         </div>
         <div className="flex flex-col gap-2 text-center md:text-left">
-          <h1 className="text-5xl lg:text-7xl">Resultados Destacados</h1>
+           <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter italic leading-none">
+            resultados <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">destacados</span>
+          </h1>
           <p className="numberFonts text-amber-300 uppercase font-bold tracking-wider">
             Torneo Regional Amateur de Basquet - Temporada 2026
           </p>
