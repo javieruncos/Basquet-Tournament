@@ -3,6 +3,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import TournamentContext from "../../../context/TournamentContext";
 import ClubesContext from "../../../context/ClubesContext";
+import { Link } from "react-router-dom";
 
 const SliderResult = () => {
   const { fixture } = useContext(TournamentContext);
@@ -23,7 +24,11 @@ const SliderResult = () => {
           {fixture
             .filter((item) => item.estado !== "Programado")
             .map((resultado) => (
-              <SwiperSlide key={resultado?._id} className="p-2">
+              <SwiperSlide
+                key={resultado?._id}
+                className="p-2"
+              >
+                <Link to={`/boxscore/${resultado._id}`} className="block h-full">
                 <div className="h-full bg-white/5 hover:bg-white/10 transition-colors border border-white/5 rounded-xl p-4 flex flex-col justify-center shadow-lg">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex flex-col">
@@ -69,6 +74,7 @@ const SliderResult = () => {
                     </div>
                   </div>
                 </div>
+                </Link>
               </SwiperSlide>
             ))}
         </Swiper>
@@ -77,4 +83,4 @@ const SliderResult = () => {
   );
 };
 
-export default SliderResult;
+export default React.memo(SliderResult);
