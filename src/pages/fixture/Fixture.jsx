@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import CardProximos from "../../components/cards/CardProximos";
 import { motion } from "framer-motion";
 import SkeletonCard from "../../components/cards/CardSkeleton";
@@ -23,68 +24,68 @@ const {
 
   return (
     <div className="p-5 pt-24 md:p-20 md:pt-30 px-3 w-full md:px-10 lg:px-10">
-      {/* Resultado Reciente Estilo ESPN/FoxSports */}
-      <div className="bg-[#111] border-l-4 border-amber-400 rounded-r-xl overflow-hidden shadow-2xl w-full mb-10">
-        <div className="bg-[#1a1a1a] px-6 py-2 flex justify-between items-center border-b border-white/5">
-          <div className="flex items-center gap-3">
-            <span className="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded animate-pulse">FINAL</span>
-            <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-              Jornada {resultadoReciente[0]?.jornada} • {resultadoReciente[0]?.fase || "Fase Regular"}
+      {resultadoReciente[0] && (
+        <div className="mb-12 bg-[#111] border-y-4 border-amber-400 rounded-xl overflow-hidden shadow-2xl">
+          <div className="bg-amber-400 px-6 py-2 flex justify-between items-center">
+            <span className="text-black font-black uppercase tracking-tighter text-sm flex items-center gap-2">
+              <FaCalendarAlt /> Último Resultado
+            </span>
+            <span className="text-black font-bold text-xs uppercase tracking-widest">
+              Jornada {resultadoReciente[0].jornada || "Fase Regular"}
             </span>
           </div>
-          <span className="text-gray-500 text-[10px] font-bold uppercase tracking-tighter">
-            {resultadoReciente[0]?.fecha}
-          </span>
-        </div>
 
-        <div className="p-6 md:p-10 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-          {/* Local */}
-          <div className="flex flex-col md:flex-row items-center justify-end gap-4 md:gap-6 flex-1 w-full">
-            <div className="text-center md:text-right order-2 md:order-1">
-              <h3 className="text-xl md:text-4xl font-black uppercase tracking-tighter leading-none">
-                {resultadoReciente[0]?.local?.name}
-              </h3>
-              <span className="text-gray-500 text-[10px] font-bold tracking-widest block md:inline">LOCAL</span>
+          <div className="p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-end">
+              <div className="text-center md:text-right">
+                <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
+                  {resultadoReciente[0].local?.name}
+                </h4>
+                <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">Local</span>
+              </div>
+              <img
+                src={resultadoReciente[0].local?.logo?.url}
+                alt="Local"
+                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              />
             </div>
-            <img
-              src={resultadoReciente[0]?.local?.logo?.url}
-              className="h-14 w-34 md:h-24 md:w-24 object-contain order-1 md:order-2"
-              alt="Local"
-            />
-          </div>
 
-          {/* Marcador Central */}
-          <div className="flex items-center px-6 md:px-8 py-4 md:py-0 border-y md:border-y-0 md:border-x border-white/10 w-full md:w-auto justify-center">
-            <div className="flex items-center gap-4 numberFonts">
-              <span className={`text-5xl md:text-8xl font-black ${resultadoReciente[0]?.resultado?.total?.local > resultadoReciente[0]?.resultado?.total?.visitante ? 'text-white' : 'text-gray-600'}`}>
-                {resultadoReciente[0]?.resultado?.total?.local}
-              </span>
-              <span className="text-2xl text-amber-400 font-bold">-</span>
-              <span className={`text-5xl md:text-8xl font-black ${resultadoReciente[0]?.resultado?.total?.visitante > resultadoReciente[0]?.resultado?.total?.local ? 'text-white' : 'text-gray-600'}`}>
-                {resultadoReciente[0]?.resultado?.total?.visitante}
-              </span>
+            <div className="flex flex-col items-center px-4 md:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
+              <div className="flex items-center gap-4 numberFonts">
+                <span className="text-5xl md:text-7xl font-black text-white">
+                  {resultadoReciente[0].resultado?.total?.local}
+                </span>
+                <span className="text-2xl text-amber-400 font-bold">-</span>
+                <span className="text-5xl md:text-7xl font-black text-white">
+                  {resultadoReciente[0].resultado?.total?.visitante}
+                </span>
+              </div>
+              <div className="text-center mt-2">
+                <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">{resultadoReciente[0].fecha}</p>
+              </div>
             </div>
-          </div>
 
-          {/* Visitante */}
-          <div className="flex flex-col md:flex-row items-center justify-start gap-4 md:gap-6 flex-1 w-full">
-            <img
-              src={resultadoReciente[0]?.visitante?.logo?.url}
-              className="h-14 w-34 md:h-24 md:w-24 object-contain"
-              alt="Visitante"
-            />
-            <div className="text-center md:text-left">
-              <h3 className="text-xl md:text-4xl font-black uppercase tracking-tighter leading-none">
-                {resultadoReciente[0]?.visitante?.name}
-              </h3>
-              <span className="text-gray-500 text-[10px] font-bold tracking-widest">VISITANTE</span>
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-start">
+              <img
+                src={resultadoReciente[0].visitante?.logo?.url}
+                alt="Visitante"
+                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-2 md:order-1"
+              />
+              <div className="text-center md:text-left order-1 md:order-2">
+                <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
+                  {resultadoReciente[0].visitante?.name}
+                </h4>
+                <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">Visitante</span>
+              </div>
             </div>
           </div>
+
+          <div className="bg-white/5 p-4 flex justify-center items-center gap-3 text-gray-400 text-xs font-bold uppercase tracking-widest">
+            <FaMapMarkerAlt className="text-amber-400" />
+            {resultadoReciente[0].estadio || "Estadio a confirmar"}
+          </div>
         </div>
-        <div className="bg-white/5 p-3 text-center text-[10px] text-gray-500 font-bold uppercase tracking-[0.2em]">
-          Sede: {resultadoReciente[0]?.estadio || "Estadio a confirmar"}
-        </div>
-      </div>
+      )}
 
       <div className="w-full py-10 bg-[#191919] bg-dark-gradient mt-10 flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap justify-between items-center gap-4 rounded-md px-4 lg:px-10">
         <FormControl className="w-full md:w-48 lg:w-48 text-white ">

@@ -6,6 +6,7 @@ import ClubesContext from "../../context/ClubesContext";
 import ProximosResultSection from "../../pages/home/components/ProximosResultSection";
 import { motion } from "framer-motion";
 import SkeletonCard from "../../components/cards/CardSkeleton";
+import Tabla from "../../components/common/Tabla";
 
 
 const Resultados = () => {
@@ -205,8 +206,20 @@ const Resultados = () => {
             </motion.div>
           )}
         </div>
+
+        <div className="mt-20 mb-10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-1 bg-amber-300"></div>
+            <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter italic">
+              Tabla de <span className="text-amber-300">Posiciones</span>
+            </h2>
+          </div>
+          <div className="bg-[#111] rounded-xl overflow-hidden border border-white/5">
+            <Tabla />
+          </div>
+        </div>
       </div>
-      <div className="mb-10 lg:px-5">
+      <div className="mb-20 lg:px-5">
         <ProximosResultSection></ProximosResultSection>
       </div>
     </>

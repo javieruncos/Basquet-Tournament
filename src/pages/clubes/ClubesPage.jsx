@@ -3,11 +3,17 @@ import CardClubes from "../../components/cards/CardClubes";
 import Sponsor from "../../components/common/Sponsor";
 import ClubesContext from "../../context/ClubesContext";
 import TournamentContext from "../../context/TournamentContext";
-import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import NewsContext from "../../context/NewsContext";
+import { FaCalendarAlt, FaMapMarkerAlt, FaNewspaper } from "react-icons/fa";
+import CardNoticias from "../../components/cards/CardNoticias";
+import Tabla from "../../components/common/Tabla";
+import CardResultados from "../../components/cards/CardResultados";
 
 const ClubesPage = () => {
   const { clubes } = useContext(ClubesContext);
   const { fixture } = useContext(TournamentContext);
+  const { noticias } = useContext(NewsContext);
+
 
   const [filters, setFilters] = useState({
     categoria: "",
@@ -21,7 +27,6 @@ const ClubesPage = () => {
 
   const filtro = filterClubes(clubes);
 
-  // Obtener el próximo partido (el primero que no tenga resultado definido)
   const proximoPartido = fixture?.find(p => !p.resultado?.total?.local) || fixture?.[0];
 
   return (
@@ -94,7 +99,7 @@ const ClubesPage = () => {
             <div className="w-12 h-1 bg-amber-300"></div>
             <span className="text-amber-300 font-bold tracking-[0.3em] uppercase text-xs md:text-sm">Instituciones</span>
           </div>
-          <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter italic leading-none">
+          <h1 className="text-6xl md:text-6xl font-black uppercase tracking-tighter italic leading-none">
             Nuestros <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">Clubes compitiendo</span>
           </h1>
        
@@ -112,6 +117,51 @@ const ClubesPage = () => {
             ))}
           </div>
         )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-20">
+          <div className="w-full">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-1 bg-amber-300"></div>
+              <h3 className="text-5xl font-black uppercase tracking-tighter italic">Tabla de Posiciones</h3>
+            </div>
+            <Tabla />
+          </div>
+          <div className="w-full">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-1 bg-amber-300"></div>
+              <h3 className="text-5xl font-black uppercase tracking-tighter italic">Resultados Recientes</h3>
+            </div>
+            <div className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+              {fixture?.filter(p => p.estado !== "Programado").slice(0, 6).map((item) => (
+                <CardResultados key={item._id} resultados={item} clubes={clubes} />
+              ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-20">
+          <div className="flex flex-col items-center gap-4 md:items-start text-center md:text-left mb-10">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-1 bg-amber-300"></div>
+              <span className="text-amber-300 font-bold tracking-[0.3em] uppercase text-xs md:text-sm">Actualidad</span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter italic leading-none">
+              Últimas <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">Noticias</span>
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {noticias?.slice(0, 3).map((noticia, index) => (
+              <CardNoticias key={noticia._id || index} noticia={noticia} />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-20">
+          <Sponsor />
+        </div>
       </div>
     </>
   );
