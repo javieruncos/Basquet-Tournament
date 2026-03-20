@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CardReultados = ({resultados,clubes}) => {
+const CardResultados = ({resultados,clubes}) => {
   return (
     <Link to={`/boxscore/${resultados._id}`}href="">
        <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl hover:bg-white/10 transition-all duration-300 shadow-xl p-5">
@@ -23,7 +23,7 @@ const CardReultados = ({resultados,clubes}) => {
 
         <div className="text-center">
           <p className="text-xs text-gray-400">{resultados?.estado}</p>
-          <p className="text-md font-bold"> {resultados?.fecha}</p>
+          <p className="text-sm font-bold"> {resultados?.fecha}</p>
         </div>
 
         <div className="flex flex-col items-center text-center">
@@ -59,4 +59,4 @@ const CardReultados = ({resultados,clubes}) => {
   );
 };
 
-export default CardReultados;
+export default CardResultados;

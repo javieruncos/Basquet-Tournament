@@ -7,9 +7,7 @@ const api = axios.create({
 
 export const login = async (data) => {
   try {
-    const response = await api.post("/auth/login", data,{
-        withCredentials: true,
-    });
+    const response = await api.post("/auth/login", data);
     return response.data;
   } catch (error) {
     throw new Error("No se pudo iniciar sesión");

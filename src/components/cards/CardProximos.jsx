@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const CardProximos = ({ partido, clubes }) => {
   return (
-    <div  className="w-full rounded-2xl p-1">
+    <div className="w-full rounded-2xl p-1">
       <div className="bg-white/5 backdrop-blur-3xl border border-white/10  hover:bg-white/10 transition-all duration-300 shadow-xl rounded-md p-6 text-white relative overflow-hidden group hover:border-amber-300/30 ">
         <p className="text-center text-xs text-amber-300 mb-4 tracking-[0.2em] uppercase font-bold numberFonts">
           Regional Amateur
@@ -17,7 +17,10 @@ const CardProximos = ({ partido, clubes }) => {
               alt="Local"
             />
             <span className="text-2xl font-bold uppercase tracking-tighter">
-              {clubes?.find((club) => club._id === partido.local._id)?.shortname}
+              {
+                clubes?.find((club) => club._id === partido.local._id)
+                  ?.shortname
+              }
             </span>
           </div>
 
@@ -50,7 +53,17 @@ const CardProximos = ({ partido, clubes }) => {
           <span className="text-xs text-gray-500">
             {partido.hora} HS - {partido.estadio}
           </span>
-          <Link to={`/detalleFixture/${partido._id}`}className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest text-center">
+          <span className="text-xs text-gray-500">
+            jornada - {partido.jornada}
+          </span>
+          <Link
+            to={
+              partido.estado === "Programado"
+                ? `/detalleFixture/${partido._id}`
+                : `/boxscore/${partido._id}`
+            }
+            className="mt-4 w-full py-2 bg-white/5 hover:bg-amber-300 hover:text-black transition-colors rounded-lg text-xs font-bold uppercase tracking-widest text-center"
+          >
             Ver Previa
           </Link>
         </div>

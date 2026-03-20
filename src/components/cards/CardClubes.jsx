@@ -26,10 +26,10 @@ const CardClubes = ({club}) => {
         </div>
 
         <div className="relative flex items-center justify-center mt-10 mb-8">
-          <div className="absolute w-52 h-52 rounded-full bg-amber-400/30 blur-3xl"></div>
+          <div className="absolute w-52 h-52 rounded-full bg-white/10 blur-3xl"></div>
 
           <div className="relative w-44 h-44 rounded-full bg-black  flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full border  border-amber-300/30"></div>
+            <div className="absolute inset-0 rounded-full border  border-white/10"></div>
             <img
               src={club.logo.url}
               alt="escudo"

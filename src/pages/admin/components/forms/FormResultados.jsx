@@ -107,38 +107,38 @@ const FormResultados = () => {
 
   useEffect(() => {
     if (id) {
-    obtenerFixtureID(id).then((data) => {
-      const formatDate = (date) => {
-        return date?.split("T")[0];
-      };
-      reset({
-        fecha: formatDate(data?.fecha) || "",
-        hora: data?.hora || "",
-        estado: data?.estado || "Programado",
-        local: data?.local?._id || "",
-        visitante: data?.visitante?._id || "",
-        resultado: {
-          total: {
-            local: Number(data?.resultado?.total?.local) || 0,
-            visitante: Number(data?.resultado?.total?.visitante) || 0,
+      obtenerFixtureID(id).then((data) => {
+        const formatDate = (date) => {
+          return date?.split("T")[0];
+        };
+        reset({
+          fecha: formatDate(data?.fecha) || "",
+          hora: data?.hora || "",
+          estado: data?.estado || "Programado",
+          local: data?.local?._id || "",
+          visitante: data?.visitante?._id || "",
+          resultado: {
+            total: {
+              local: Number(data?.resultado?.total?.local) || 0,
+              visitante: Number(data?.resultado?.total?.visitante) || 0,
+            },
+            cuartos:
+              data?.resultado?.cuartos?.length === 4
+                ? data.resultado.cuartos
+                : Array(4).fill({ local: 0, visitante: 0 }),
           },
-          cuartos:
-            data?.resultado?.cuartos?.length === 4
-              ? data.resultado.cuartos
-              : Array(4).fill({ local: 0, visitante: 0 }),
-        },
-        fase: data?.fase || "Regular",
-        jornada: data?.jornada || "",
-        arbitro1: data?.arbitro1 || "",
-        arbitro2: data?.arbitro2 || "",
-        arbitro3: data?.arbitro3 || "",
-        estadio: data?.estadio || "",
-        ganador: data?.ganador?._id || null,
-        mvp: data?.mvp || null,
-        estadisticasJugadores: data?.estadisticasJugadores || [],
-        id: data?._id || null,
+          fase: data?.fase || "Regular",
+          jornada: data?.jornada || "",
+          arbitro1: data?.arbitro1 || "",
+          arbitro2: data?.arbitro2 || "",
+          arbitro3: data?.arbitro3 || "",
+          estadio: data?.estadio || "",
+          ganador: data?.ganador?._id || null,
+          mvp: data?.mvp || null,
+          estadisticasJugadores: data?.estadisticasJugadores || [],
+          id: data?._id || null,
+        });
       });
-    });
     }
   }, [id, reset]);
 
@@ -325,7 +325,7 @@ const FormResultados = () => {
             </label>
             <input
               type="number"
-              {...register("jornada")}
+              {...register("jornada", { valueAsNumber: true })}
               className="w-full bg-white/5 border border-white/10 rounded-lg py-2 px-3 text-white focus:border-amber-300 outline-none"
             />
           </div>
@@ -451,19 +451,25 @@ const FormResultados = () => {
                 <div className="flex gap-2">
                   <input
                     type="number"
+                    min={0}
+                    max={50}
                     placeholder="L"
-                     autoComplete="off"
+                    autoComplete="off"
                     {...register(`resultado.cuartos.${index}.local`, {
                       valueAsNumber: true,
+                      min: 0,
                     })}
                     className="w-full bg-black/50 border border-white/10 rounded py-1 text-center text-sm"
                   />
                   <input
                     type="number"
+                    min={0}
+                    max={50}
                     placeholder="V"
-                     autoComplete="off"
+                    autoComplete="off"
                     {...register(`resultado.cuartos.${index}.visitante`, {
                       valueAsNumber: true,
+                      min: 0,
                     })}
                     className="w-full bg-black/50 border border-white/10 rounded py-1 text-center text-sm"
                   />
@@ -480,7 +486,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
-               autoComplete="off"
+              autoComplete="off"
               value={
                 watch("resultado.total.local") >
                 watch("resultado.total.visitante")
@@ -497,7 +503,7 @@ const FormResultados = () => {
             </label>
             <input
               type="text"
-               autoComplete="off"
+              autoComplete="off"
               value={
                 jugadoresLocal.find((j) => j._id === watch("mvp"))?.nombre ||
                 jugadoresVisitante.find((j) => j._id === watch("mvp"))
@@ -620,10 +626,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.puntos`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -632,10 +640,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.rebotes`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -644,10 +654,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.asistencias`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -656,10 +668,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.faltas`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -668,8 +682,10 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(`estadisticasJugadores.${index}.robos`, {
                             valueAsNumber: true,
+                            min: 0,
                           })}
                           className="w-12 bg-black border border-white/10 rounded text-center"
                         />
@@ -677,10 +693,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.tapones`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -689,10 +707,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.perdidas`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"
@@ -701,10 +721,12 @@ const FormResultados = () => {
                       <td className="p-2">
                         <input
                           type="number"
+                          min={0}
                           {...register(
                             `estadisticasJugadores.${index}.minutos`,
                             {
                               valueAsNumber: true,
+                              min: 0,
                             },
                           )}
                           className="w-12 bg-black border border-white/10 rounded text-center"

@@ -11,7 +11,6 @@ import Swal from "sweetalert2";
 
 const JugadoresAdmin = () => {
   const { clubes } = useContext(ClubesContext);
-  // Mock data for UI consistency, replace with context/service later
   const [jugadores, setJugadores] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();

@@ -1,16 +1,55 @@
-# React + Vite
+# Basquet Tournament Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema de gestión integral para torneos de básquetbol desarrollado con React y Vite. Esta aplicación permite administrar fixtures, clubes, jugadores y noticias, ofreciendo una interfaz moderna y responsiva diseñada para administradores y usuarios.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Core:** React + Vite
+*   **Estilos:** Tailwind CSS
+*   **Enrutamiento:** React Router DOM
+*   **Peticiones HTTP:** Axios
+*   **Formularios:** React Hook Form
+*   **UI/UX:** SweetAlert2, Swiper, React Icons
 
-## React Compiler
+## 📋 Características Principales
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 🏀 Gestión Deportiva
+*   **Fixture:** Programación de partidos, edición de resultados y gestión de jornadas.
+*   **Clubes:** Administración completa de clubes participantes.
+*   **Jugadores:** Gestión de plantillas y visualización de estadísticas (Top jugadores).
 
-## Expanding the ESLint configuration
+### 📰 Contenido y Administración
+*   **Noticias:** CMS integrado para crear, editar y publicar novedades con imágenes y categorización.
+*   **Autenticación:** Sistema de login seguro para el panel de administración.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Instalación y Configuración
+
+Sigue estos pasos para levantar el proyecto localmente:
+
+1.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+2.  **Configurar variables de entorno:**
+    Crea un archivo `.env` en la raíz del proyecto basándote en la configuración de los servicios:
+    
+    ```env
+    VITE_APP_URL
+    ```
+
+3.  **Ejecutar en desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+## 📂 Estructura del Proyecto
+
+*   `src/services`: Capa de integración con la API (`FixtureService`, `ClubesService`, etc.).
+*   `src/pages/admin`: Componentes del panel de administración.
+*   `src/components`: Componentes reutilizables de la UI.
+*   `src/context`: Gestión del estado global de la aplicación.
+
+## 🤝 Contribución
+
+Las contribuciones son bienvenidas. Si deseas mejorar el sistema, por favor crea un Pull Request o abre un Issue para discutir los cambios.

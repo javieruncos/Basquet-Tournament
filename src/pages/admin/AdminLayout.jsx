@@ -17,7 +17,6 @@ const AdminLayout = () => {
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen bg-[#111]">
-            {/* MOBILE HEADER */}
             <div className="lg:hidden flex items-center justify-between p-4 bg-black border-b border-white/10 sticky top-0 z-50">
                 <h2 className="text-xl font-black uppercase tracking-tighter text-amber-300">
                     Admin<span className="text-white">Panel</span> 
@@ -30,7 +29,6 @@ const AdminLayout = () => {
                 </button>
             </div>
 
-            {/* SIDEBAR */}
             <aside className={`
                 fixed lg:sticky top-0 left-0 z-40 w-64 h-screen bg-black text-white p-5 border-r border-white/10 transition-transform duration-300 ease-in-out
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}

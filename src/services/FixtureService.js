@@ -29,7 +29,6 @@ export const crearFixture = async (data) => {
 export const obtenerFixtureID = async (id) => {
     try {
         const response = await api.get(`/partidos/${id}`);
-        console.log(response.data);
         return response.data;
     } catch (error) {
         throw new Error("No se pudo obtener el fixture");

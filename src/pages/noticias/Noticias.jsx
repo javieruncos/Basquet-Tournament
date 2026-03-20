@@ -1,28 +1,38 @@
-import React, { useContext, useState } from "react";
-import PortadaNoticias from "./components/PortadaNoticias";
+
+
+import { useContext, useState } from "react";
+import GridPortada from "./components/GridPortada";
 import CardNoticias from "../../components/cards/CardNoticias";
 import SponsorCTA from "./components/SponsorCTA";
 import { motion } from "framer-motion";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import ProximosResultSection from "../home/components/ProximosResultSection";
 import NewsContext from "../../context/NewsContext";
-import ClubesContext from "../../context/ClubesContext";
+import SkeletonCard from "../../components/cards/CardSkeleton";
 
 const Noticias = () => {
-  const { noticias } = useContext(NewsContext);
-  const { clubes } = useContext(ClubesContext);
+  const { noticias, loading: contextLoading } = useContext(NewsContext);
+
   const [filters, setFilters] = useState({
     fecha: "",
     categoria: "",
   });
 
-  const HandleChange = (e) => {
-    const { name, value } = e.target;
+  const [isFiltering, setIsFiltering] = useState(false);
+
+  const categorias = [
+    { label: "Todas", value: "" },
+    { label: "Masculino", value: "masculino" },
+    { label: "Femenino", value: "femenino" },
+  ];
+
+  const handleFilterClick = (value) => {
+    setIsFiltering(true);
+    setTimeout(() => setIsFiltering(false), 600);
+
     setFilters((prev) => ({
       ...prev,
-      [name]: value,
+      categoria: value,
     }));
-    console.log(name, value);
   };
 
   const filterResult = noticias.filter(
@@ -34,155 +44,92 @@ const Noticias = () => {
   );
 
   return (
-    <div className="md:px-0 main-container ">
-      <PortadaNoticias></PortadaNoticias>
-      <div className="lg:px-10 lg:pt-10">
-        <div className="w-full py-10 bg-dark-gradient flex flex-col sm:flex-row gap-4 justify-between rounded-md px-4 lg:px-10">
-          <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto ">
-            <FormControl className="w-full md:w-60 text-white">
-              <InputLabel
-                id="demo-simple-select-label"
-                className="text-white"
-                sx={{ color: "white", "&.Mui-focused": { color: "white" } }}
-              >
-                Fecha
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Equipos"
-                name="fecha"
-                value={filters.fecha}
-                onChange={HandleChange}
-                sx={{
-                  color: "white",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#313131 !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "white",
-                  },
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#191919",
-                      color: "white",
-                      "& .MuiMenuItem-root": {
-                        bgcolor: "#191919",
-                        "&:hover": {
-                          bgcolor: "#333",
-                        },
-                      },
-                    },
-                  },
-                }}
-              >
-                {[
-                  ...new Set(
-                    noticias.map(
-                      (not) =>
-                        new Date(not.createdAt).toISOString().split("T")[0],
-                    ),
-                  ),
-                ]
-                  .slice(0, 6)
-                  .map((fechaIso) => (
-                    <MenuItem key={fechaIso} value={fechaIso}>
-                      {new Date(fechaIso + "T12:00:00").toLocaleDateString()}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
+    <div className="main-container">
+
+      {/* HERO */}
+      <GridPortada noticias={noticias} />
+
+      {/* HEADER + FILTROS */}
+      <div className="pt-10 max-w-7xl mx-auto px-4 md:px-6">
+        <div className="w-full pb-6 border-b border-white/5 flex flex-col md:flex-row gap-4 justify-between items-center">
+
+          <div className="flex flex-col gap-1">
+            <span className="text-amber-400 font-black tracking-[0.25em] text-[10px] uppercase">
+              Noticias del torneo
+            </span>
+
+            <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter italic leading-none">
+            noticias <span className="text-transparent bg-clip-text bg-linear-to-r from-white to-white/40">del torneo</span>
+          </h1>
           </div>
-          <div className="flex justify-center sm:justify-end w-full sm:w-auto">
-            <FormControl className="w-full md:w-60">
-              <Select
-                id="demo-simple-select"
-                displayEmpty
-                name="categoria"
-                value={filters.categoria}
-                className="bg-amber-300"
-                onChange={HandleChange}
-                sx={{
-                  color: "black",
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "black !important",
-                  },
-                  "& .MuiSvgIcon-root": {
-                    color: "black",
-                  },
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      bgcolor: "#191919",
-                      color: "white",
-                      "& .MuiMenuItem-root": {
-                        bgcolor: "#191919",
-                        "&:hover": {
-                          bgcolor: "#333",
-                        },
-                      },
-                    },
-                  },
-                }}
+
+          {/* filtros tipo APP */}
+          <div className="flex items-center bg-white/5 rounded-xl p-1">
+            {categorias.map((cat) => (
+              <button
+                key={cat.value}
+                onClick={() => handleFilterClick(cat.value)}
+                className={`px-4 py-1.5 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-300 ${
+                  filters.categoria === cat.value
+                    ? "bg-amber-400 text-black"
+                    : "text-gray-400 hover:text-amber-400"
+                }`}
               >
-                <MenuItem value="" disabled>
-                  Categoria
-                </MenuItem>
-                <MenuItem value={"masculino"}>Masculino</MenuItem>
-                <MenuItem value={"femenino"}>Femenino</MenuItem>
-              </Select>
-            </FormControl>
+                {cat.label}
+              </button>
+            ))}
           </div>
+
         </div>
       </div>
 
+      {/* GRID */}
       <motion.div
-        className="relative z-30"
-        initial={{ opacity: 0, y: 60 }}
+        className="relative z-30  mx-auto  md:px-10"
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.03 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.05 }}
+        transition={{ duration: 0.6 }}
       >
-        <div className="">
-          {filterResult.length === 0 ? (
-            <div className="h-50 w-full text-center bg-dark-gradient flex items-center justify-center">
-              <p className="text-gray-500 text-4xl animate-pulse">
-                No hay Resultados relacionados
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 md:px-10 mt-10">
-              {filterResult.map((noticia) => (
-                <CardNoticias
-                  noticia={noticia}
-                  key={noticia._id}
-                ></CardNoticias>
-              ))}
-            </div>
-          )}
-        </div>
+        {contextLoading || isFiltering ? (
+          <motion.div
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 md:px-6 mt-8"
+          >
+            {[1, 2, 3, 4, 5, 6].map((n) => (
+              <SkeletonCard key={n} />
+            ))}
+          </motion.div>
+        ) : filterResult.length === 0 ? (
+          <div className="h-60 w-full text-center flex items-center justify-center">
+            <p className="text-gray-500 text-2xl animate-pulse">
+              No hay noticias relacionadas
+            </p>
+          </div>
+        ) : (
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-4 md:px-6 mt-8"
+          >
+            {filterResult.map((noticia) => (
+              <CardNoticias
+                noticia={noticia}
+                key={noticia._id}
+              />
+            ))}
+          </div>
+        )}
       </motion.div>
-      <div className="mt-10">
+
+      {/* PROXIMOS PARTIDOS (ANTES DEL SPONSOR → producto thinking) */}
+      <div className="md:mt-20  mx-auto  md:px-10">
         <ProximosResultSection />
       </div>
-      <div className="mt-20">
+
+      {/* SPONSOR */}
+      <div className="mt-28">
         <SponsorCTA />
       </div>
+
     </div>
   );
 };

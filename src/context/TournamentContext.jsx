@@ -10,7 +10,6 @@ export const TournamentContextProvider = ({children}) => {
 
     useEffect(() => {
         getFixtures().then((res) => {
-            console.log(res)
             setFixture(res)
         })
     }, [])

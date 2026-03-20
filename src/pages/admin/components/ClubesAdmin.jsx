@@ -91,24 +91,6 @@ const ClubesAdmin = () => {
           <FaPlus /> Nuevo Club
         </Link>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/5 p-4 rounded-xl border border-white/10">
-        <div className="relative">
-          <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-          <input
-            type="text"
-            placeholder="Buscar club por nombre o ciudad..."
-            className="w-full bg-black/40 border border-white/10 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-amber-300 transition-colors"
-          />
-        </div>
-        <select className="bg-[#111] border border-white/10 rounded-lg py-2 px-4 text-sm focus:outline-none focus:border-amber-300 text-white">
-          <option value="">Todas las Ciudades</option>
-          <option value="talitas">Las Talitas</option>
-          <option value="tafi">Tafí Viejo</option>
-          <option value="capital">San Miguel</option>
-        </select>
-      </div>
-
       <div className="bg-white/5 border border-white/10 rounded-xl overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-200">
           <thead>

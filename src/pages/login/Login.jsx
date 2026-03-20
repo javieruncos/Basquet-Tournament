@@ -18,7 +18,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
-      setUser(response);
+      setUser(response.user);
       Swal.fire({
         title: "¡Bienvenido!",
         text: "Sesión iniciada correctamente",

@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 const CardNoticias = ({ noticia }) => {
   return (
-    <div className="h-140 lg:h-120 md:h-130 flex flex-col my-1 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-md overflow-hidden">
+    <Link 
+      to={`/noticiasDetalle/${noticia._id}`}
+      className="group h-140 lg:h-110 md:h-110 flex flex-col my-1 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-md overflow-hidden hover:scale-[1.02] transition-all duration-300"
+    >
       <div className="h-70 md:h-50 w-full relative">
         <img
           src={noticia?.image?.url}
@@ -22,11 +25,8 @@ const CardNoticias = ({ noticia }) => {
             ? noticia?.content?.split(" ").slice(0, 20).join(" ") + "..."
             : noticia?.content + "..."}
         </p>
-        <Link to={`/noticiasDetalle/${noticia._id}`}className=" py-2 px-10 w-60 mt-auto bg-amber-300 rounded-sm  hover:bg-[#191919] hover:text-white transition duration-300 ease-in-out cursor-pointer">
-          Leer más...
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 };
 

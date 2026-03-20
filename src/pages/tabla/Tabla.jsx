@@ -1,15 +1,11 @@
 import React, { useEffect ,useState} from "react";
-import TablaPosicionesSection from "../home/components/TablaPosicionesSection";
-import Footer from "../../components/layout/Footer";
 import { getTabla } from "../../services/tablaService";
-import Sponsor from "../../components/common/Sponsor";
 
 const Tabla = () => {
   const [tabla, setTabla] = useState([]);
 
   useEffect(() => {
     getTabla().then((res) => {
-      console.log(res);
       setTabla(res);
     });
   }, []);
@@ -36,7 +32,7 @@ const Tabla = () => {
                 (h) => (
                   <th
                     key={h}
-                    className="p-3 md:p-5 text-amber-300 uppercase text-xs md:text-sm tracking-widest text-center font-bold numberFonts"
+                    className={`p-3 md:p-5 text-amber-300 uppercase text-xs md:text-sm tracking-widest font-bold numberFonts ${h === "Equipo" ? "text-left pl-8" : "text-center"}`}
                   >
                     {h}
                   </th>
@@ -56,7 +52,7 @@ const Tabla = () => {
                 </td>
 
                 <td className="p-3 md:p-5">
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex items-center justify-start pl-8 gap-3">
                     <img
                       src={pos.club.logo.url}
                       className="w-6 h-6 md:w-8 md:h-8 object-contain"

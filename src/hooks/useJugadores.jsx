@@ -1,17 +1,8 @@
-import React, { useEffect ,useState} from "react";
-import { getJugadoresTop } from "../services/JugadoresService";
+import { useContext } from "react";
+import JugadoresContext from "../context/JugadoresContext";
 
 const useJugadores = () => {
-  const [jugadores, setjugadores] = useState(null);
-
-  useEffect(() => {
-    getJugadoresTop().then((res) => {
-        console.log(res);
-      setjugadores(res);
-    });
-  }, []);
-
-  return {jugadores, setjugadores};
+    return useContext(JugadoresContext);
 };
 
 export default useJugadores;

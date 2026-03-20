@@ -24,21 +24,7 @@ const DetalleFixture = () => {
     });
   }, [id]);
 
-  // Datos simulados basados en la instrucción
-  // const partido = {
-  //     arbitro1: "Carlos perez",
-  //     arbitro2: "Juan Juniors",
-  //     arbitro3: "Sebastian luna",
-  //     estadio: "Las talitas",
-  //     estado: "Programado",
-  //     fase: "Regular",
-  //     fecha: "2026-02-26",
-  //     hora: "21:00",
-  //     jornada: 2,
-  //     local: { name: 'Talleres', logo: { url: 'https://via.placeholder.com/80' } },
-  //     visitante: { name: 'Est. Experimental', logo: { url: 'https://via.placeholder.com/80' } },
-  //     resultado: { local: 0, visitante: 0 }
-  // };
+ 
 
   const historial = fixture.filter((item) => {
     return (
@@ -102,7 +88,6 @@ const DetalleFixture = () => {
             </div>
           </div>
 
-          {/* Visitante */}
           <div className="flex flex-col items-center gap-4 w-full md:w-1/3">
             <div className="w-24 h-24 md:w-32 md:h-32 bg-white/5 rounded-full flex items-center justify-center border border-white/10 p-4">
               <img
@@ -170,7 +155,6 @@ const DetalleFixture = () => {
           </div>
         </div>
 
-        {/* Referees Box */}
         <div className="bg-[#171717] border border-white/10 rounded-xl p-6">
           <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
             <FaUserTie className="text-amber-300" />
@@ -201,7 +185,6 @@ const DetalleFixture = () => {
         </div>
       </div>
 
-      {/* Historial de Enfrentamientos */}
       <div className="mt-10 bg-[#171717] border border-white/10 rounded-xl p-6">
         <div className="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
           <FaHistory className="text-amber-300" />

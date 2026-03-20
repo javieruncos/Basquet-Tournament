@@ -8,7 +8,7 @@ const ItemsFixture = ({partido,onDelete}) => {
       <tr key={partido._id} className="hover:bg-white/5 transition-colors">
         <td className="p-4">
           <span className="text-xs font-bold text-gray-400 uppercase">
-            {partido.hora}
+            {partido.jornada}
           </span>
         </td>
         <td className="p-4">
