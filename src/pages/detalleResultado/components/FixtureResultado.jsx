@@ -1,7 +1,7 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaBasketballBall } from "react-icons/fa";
 
-const fixtureResultado = () => {
+const FixtureResultado = () => {
   return (
     <div className="h-auto w-full grid grid-cols-1 md:grid-cols-4 gap-5 my-10">
       <div className=" bg-white/3 backdrop-blur-3xl border border-white/10 h-full w-full col-span-2 md:col-span-4 lg:col-span-3 rounded-md px-5 py-5">
@@ -60,4 +60,4 @@ const fixtureResultado = () => {
   );
 };
 
-export default fixtureResultado;
+export default FixtureResultado;
