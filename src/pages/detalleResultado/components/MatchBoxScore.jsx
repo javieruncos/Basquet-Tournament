@@ -19,7 +19,10 @@ const MatchBoxScore = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    obtenerFixtureID(id).then((res) => setpartido(res));
+    obtenerFixtureID(id).then((res) => {
+      console.log(res);
+      setpartido(res);
+    });
   }, []);
 
   const estadisticaMVP = partido?.estadisticasJugadores?.find(
@@ -43,7 +46,7 @@ const MatchBoxScore = () => {
 
       <div className=" mx-auto px-4 md:px-10 py-16 md:py-14  md:mt-5 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -52,9 +55,7 @@ const MatchBoxScore = () => {
           >
             <EstadisticasEquipos partido={partido} />
 
-            <div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <LineupCard
                 team={partido?.local?.name}
                 players={partido?.estadisticasJugadores?.filter(
@@ -74,7 +75,7 @@ const MatchBoxScore = () => {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -139,12 +140,12 @@ const MatchBoxScore = () => {
               </div>
             </motion.div>
 
-            <DetallesPartido />
+            <DetallesPartido partido={partido} />
           </motion.div>
         </div>
 
         {/* Sección de Resultados Recientes */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -158,10 +159,16 @@ const MatchBoxScore = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {fixture
-              ?.filter((item) => item.estado === "Finalizado" && item._id !== id)
+              ?.filter(
+                (item) => item.estado === "Finalizado" && item._id !== id,
+              )
               .slice(0, 3)
               .map((item) => (
-                <CardResultados key={item._id} resultados={item} clubes={clubes} />
+                <CardResultados
+                  key={item._id}
+                  resultados={item}
+                  clubes={clubes}
+                />
               ))}
           </div>
         </motion.div>

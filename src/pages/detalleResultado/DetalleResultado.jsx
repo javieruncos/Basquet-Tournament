@@ -1,6 +1,6 @@
 import React from 'react';
 import PortadaDetalle from './components/PortadaDetalle';
-import FixtureResultado from './components/fixtureResultado';
+import FixtureResultado from './components/FixtureResultado';
 import EstadisticasEquipos from './components/EstadisticasEquipos';
 import DetallesPartido from './components/DetallesPartido';
 
