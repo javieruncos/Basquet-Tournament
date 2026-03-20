@@ -3,11 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MenuNav from "./components/common/MenuNav";
 import Noticias from "./pages/noticias/Noticias";
 import Resultados from "./pages/resultados/Resultados";
-import DetalleResultado from "./pages/detalleResultado/DetalleResultado";
 import ClubesPage from "./pages/clubes/ClubesPage";
 import ClubDetalle from "./pages/detalleClub/ClubDetalle";
 import Fixture from "./pages/fixture/Fixture";
-import BoxScore from "./pages/Box/BoxScore";
 import Inicio from "./pages/home/Inicio";
 import AdminLayout from "./pages/admin/AdminLayout";
 import NoticiasAdmin from "./pages/admin/components/NoticiasAdmin";
@@ -67,10 +65,6 @@ function App() {
                       <Route
                         path="/detelleClub/:id"
                         element={<DetalleClub></DetalleClub>}
-                      ></Route>
-                      <Route
-                        path="/detalle"
-                        element={<DetalleResultado></DetalleResultado>}
                       ></Route>
                       <Route
                         path="/clubes"
