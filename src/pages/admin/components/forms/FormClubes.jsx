@@ -281,7 +281,6 @@ const FormClubes = () => {
           </label>
         </div>
 
-        {/* Botones de Acción */}
         <div className="flex gap-4 pt-4">
           <button
             type="submit"

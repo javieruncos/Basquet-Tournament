@@ -11,14 +11,12 @@ export const NewsContextProvider = ({ children }) => {
   useEffect(() => {
     getNoticias()
       .then((res) => {
-        console.log(res);
         setNoticias(res);
         setLoading(false);
       })
       .catch((error) => {
         setError(error);
         setLoading(false);
-        console.log(error);
       });
   }, []);
 

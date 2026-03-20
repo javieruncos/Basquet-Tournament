@@ -1,15 +1,11 @@
 import React, { useEffect ,useState} from "react";
-import TablaPosicionesSection from "../home/components/TablaPosicionesSection";
-import Footer from "../../components/layout/Footer";
 import { getTabla } from "../../services/tablaService";
-import Sponsor from "../../components/common/Sponsor";
 
 const Tabla = () => {
   const [tabla, setTabla] = useState([]);
 
   useEffect(() => {
     getTabla().then((res) => {
-      console.log(res);
       setTabla(res);
     });
   }, []);

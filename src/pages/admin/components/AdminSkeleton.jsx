@@ -15,15 +15,12 @@ const AdminSkeleton = () => {
         </div>
       </aside>
 
-      {/* Main */}
       <main className="flex-1 p-8 space-y-8">
-        {/* Header */}
         <div className="flex justify-between items-center">
           <div className="h-8 bg-white/10 rounded w-40"></div>
           <div className="h-10 w-10 bg-white/10 rounded-full"></div>
         </div>
 
-        {/* Stats cards */}
         <div className="grid grid-cols-4 gap-6">
           <div className="h-28 bg-white/5 border border-white/10 rounded-xl p-4 space-y-3">
             <div className="h-4 bg-white/10 rounded w-1/2"></div>

@@ -12,7 +12,6 @@ const TablaPosicionesSection = () => {
 
   useEffect(() => {
     getTabla().then((res) => {
-      console.log(res);
       setTabla(res);
     });
   }, []);

@@ -62,7 +62,6 @@ const ClubesPage = () => {
                 />
               </div>
 
-              {/* Divider / Info */}
               <div className="flex flex-col items-center px-4 md:px-6 lg:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
                 <div className="text-amber-400 font-black text-4xl md:text-5xl italic mb-2">VS</div>
                 <div className="text-center">
@@ -71,7 +70,6 @@ const ClubesPage = () => {
                 </div>
               </div>
 
-              {/* Visitante */}
               <div className="flex flex-col md:flex-col lg:flex-row items-center gap-4 lg:gap-6 flex-1 w-full lg:justify-start">
                 <img 
                   src={proximoPartido.visitante.logo?.url} 
