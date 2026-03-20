@@ -94,4 +94,4 @@ const FixtureProximos = () => {
     );
 };
 
-export default FixtureProximos;
+export default React.memo(FixtureProximos); 

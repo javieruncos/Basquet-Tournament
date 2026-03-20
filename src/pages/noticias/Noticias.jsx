@@ -85,7 +85,7 @@ const Noticias = () => {
 
       {/* GRID */}
       <motion.div
-        className="relative z-30 max-w-7xl mx-auto"
+        className="relative z-30  mx-auto  md:px-10"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.05 }}
@@ -121,7 +121,7 @@ const Noticias = () => {
       </motion.div>
 
       {/* PROXIMOS PARTIDOS (ANTES DEL SPONSOR → producto thinking) */}
-      <div className="mt-20 max-w-7xl mx-auto px-4 md:px-6">
+      <div className="md:mt-20  mx-auto  md:px-10">
         <ProximosResultSection />
       </div>
 

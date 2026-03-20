@@ -5,7 +5,7 @@ const CardNoticias = ({ noticia }) => {
   return (
     <Link 
       to={`/noticiasDetalle/${noticia._id}`}
-      className="group h-140 lg:h-110 md:h-130 flex flex-col my-1 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-md overflow-hidden hover:scale-[1.02] transition-all duration-300"
+      className="group h-140 lg:h-110 md:h-110 flex flex-col my-1 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-md overflow-hidden hover:scale-[1.02] transition-all duration-300"
     >
       <div className="h-70 md:h-50 w-full relative">
         <img

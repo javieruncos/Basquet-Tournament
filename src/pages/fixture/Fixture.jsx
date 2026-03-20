@@ -39,9 +39,9 @@ const {
             </span>
           </div>
 
-          <div className="p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
-            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-end">
-              <div className="text-center md:text-right">
+          <div className="p-6 md:p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
+            <div className="flex flex-col md:flex-col lg:flex-row items-center gap-4 lg:gap-6 flex-1 w-full lg:justify-end">
+              <div className="text-center md:text-center lg:text-right order-2 lg:order-1">
                 <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
                   {resultadoReciente[0].local?.name}
                 </h4>
@@ -50,17 +50,17 @@ const {
               <img
                 src={resultadoReciente[0].local?.logo?.url}
                 alt="Local"
-                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-1 lg:order-2"
               />
             </div>
 
-            <div className="flex flex-col items-center px-4 md:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
+            <div className="flex flex-col items-center px-4 md:px-6 lg:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
               <div className="flex items-center gap-4 numberFonts">
-                <span className="text-5xl md:text-7xl font-black text-white">
+                <span className="text-5xl md:text-6xl lg:text-7xl font-black text-white">
                   {resultadoReciente[0].resultado?.total?.local}
                 </span>
                 <span className="text-2xl text-amber-400 font-bold">-</span>
-                <span className="text-5xl md:text-7xl font-black text-white">
+                <span className="text-5xl md:text-6xl lg:text-7xl font-black text-white">
                   {resultadoReciente[0].resultado?.total?.visitante}
                 </span>
               </div>
@@ -69,13 +69,13 @@ const {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-start">
+            <div className="flex flex-col md:flex-col lg:flex-row items-center gap-4 lg:gap-6 flex-1 w-full lg:justify-start">
               <img
                 src={resultadoReciente[0].visitante?.logo?.url}
                 alt="Visitante"
-                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-2 md:order-1"
+                className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-1 lg:order-1"
               />
-              <div className="text-center md:text-left order-1 md:order-2">
+              <div className="text-center md:text-center lg:text-left order-2 lg:order-2">
                 <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
                   {resultadoReciente[0].visitante?.name}
                 </h4>
@@ -167,15 +167,15 @@ const {
       </div>
 
       <div>
-        <div className="grid grid-col-1 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-4">
           {contextLoading || isFiltering ? (
-            <div className="col-span-4 mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="lg:col-span-4 mt-10 grid grid-cols-1 md:grid-cols-2 gap-5">
               {[1, 2, 3, 4].map((n) => (
                 <SkeletonCard key={n} />
               ))}
             </div>
           ) : filtroVacio ? (
-            <div className="col-span-4  h-auto">
+            <div className="lg:col-span-4 h-auto">
               <div className="h-auto w-full">
                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-10">
@@ -195,7 +195,7 @@ const {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="col-span-4 mt-10"
+              className="lg:col-span-4 mt-10"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {partidosFilter.map((item) => (
@@ -204,7 +204,7 @@ const {
               </div>
             </motion.div>
           ) : (
-            <div className="col-span-4 mt-20 text-center">
+            <div className="lg:col-span-4 mt-20 text-center">
               <h3 className="text-gray-500 text-3xl font-black uppercase tracking-tighter opacity-50">
                 No se encontraron{" "}
                 <span className="text-amber-300/50">partidos</span>
@@ -212,7 +212,7 @@ const {
             </div>
           )}
 
-          <div className="hidden md:block md:col-span-2 mt-10">
+          <div className="hidden lg:block lg:col-span-2 mt-10">
             <div className="sticky top-28">
               <Tabla />
             </div>
@@ -221,7 +221,7 @@ const {
       </div>
 
       <div className="h-auto w-full mt-14">
-        <h3 className="text-white text-4xl font-bold my-4">
+        <h3 className="text-white text-4xl font-bold my-4 text-center md:text-left">
           Resultado Recientes
         </h3>
         <hr className="text-white/10" />

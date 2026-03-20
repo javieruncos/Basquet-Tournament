@@ -46,10 +46,10 @@ const ClubesPage = () => {
               </span>
             </div>
 
-            <div className="p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
+            <div className="p-6 md:p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8 relative">
               {/* Local */}
-              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-end">
-                <div className="text-center md:text-right">
+              <div className="flex flex-col md:flex-col lg:flex-row items-center gap-4 lg:gap-6 flex-1 w-full lg:justify-end">
+                <div className="text-center md:text-center lg:text-right order-2 lg:order-1">
                   <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
                     {proximoPartido.local.name}
                   </h4>
@@ -58,12 +58,12 @@ const ClubesPage = () => {
                 <img 
                   src={proximoPartido.local.logo?.url} 
                   alt="Local" 
-                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-1 lg:order-2" 
                 />
               </div>
 
               {/* Divider / Info */}
-              <div className="flex flex-col items-center px-4 md:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
+              <div className="flex flex-col items-center px-4 md:px-6 lg:px-8 border-y md:border-y-0 md:border-x border-white/10 py-4 md:py-0 w-full md:w-auto">
                 <div className="text-amber-400 font-black text-4xl md:text-5xl italic mb-2">VS</div>
                 <div className="text-center">
                   <p className="text-xl font-bold numberFonts">{new Date(proximoPartido.fecha).toLocaleDateString("es-AR", { day: '2-digit', month: '2-digit' })}</p>
@@ -72,13 +72,13 @@ const ClubesPage = () => {
               </div>
 
               {/* Visitante */}
-              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 flex-1 w-full md:justify-start">
+              <div className="flex flex-col md:flex-col lg:flex-row items-center gap-4 lg:gap-6 flex-1 w-full lg:justify-start">
                 <img 
                   src={proximoPartido.visitante.logo?.url} 
                   alt="Visitante" 
-                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-2 md:order-1" 
+                  className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] order-1 lg:order-1" 
                 />
-                <div className="text-center md:text-left order-1 md:order-2">
+                <div className="text-center md:text-center lg:text-left order-2 lg:order-2">
                   <h4 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tighter leading-tight">
                     {proximoPartido.visitante.name}
                   </h4>
@@ -152,15 +152,11 @@ const ClubesPage = () => {
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
             {noticias?.slice(0, 3).map((noticia, index) => (
               <CardNoticias key={noticia._id || index} noticia={noticia} />
             ))}
           </div>
-        </div>
-
-        <div className="mt-20">
-          <Sponsor />
         </div>
       </div>
     </>
