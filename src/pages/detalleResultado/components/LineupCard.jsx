@@ -29,7 +29,7 @@ const LineupCard = ({ team, players, logo, clubes }) => {
                     </div>
 
                     <div>
-                      <p className="text-sm font-bold text-gray-200 uppercase group-hover:text-amber-300 transition-colors">
+                      <p className="text-sm md:text-xs lg:text-xl  font-bold text-gray-200 uppercase group-hover:text-amber-300 transition-colors">
                         {player.jugadorId.nombre}
                       </p>
 

@@ -46,7 +46,7 @@ const DetalleNoticia = () => {
           animate={{ opacity: 1, x: 0 }}
           className="relative h-100 md:h-125 rounded-3xl overflow-hidden group cursor-pointer col-span-3"
         >
-          <Link to={`/noticiasDetalle/`}>
+          <Link to={`/noticiasDetalle/${noticia?._id}`}>
             <img
               src={noticia?.image?.url}
               alt="Main News"

@@ -11,7 +11,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import FixtureProximos from "./fixtureProximos";
+import FixtureProximos from "./FixtureProximos";
 import Goleadores from "./Goleadores";
 import UltimasNoticias from "./UltimasNoticias";
 
