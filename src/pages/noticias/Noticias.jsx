@@ -50,10 +50,10 @@ const Noticias = () => {
       <GridPortada noticias={noticias} />
 
       {/* HEADER + FILTROS */}
-      <div className="pt-10 max-w-7xl mx-auto px-4 md:px-6">
+      <div className="pt-10  mx-auto px-4 md:px-10">
         <div className="w-full pb-6 border-b border-white/5 flex flex-col md:flex-row gap-4 justify-between items-center">
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 ">
             <span className="text-amber-400 font-black tracking-[0.25em] text-[10px] uppercase">
               Noticias del torneo
             </span>
@@ -85,7 +85,7 @@ const Noticias = () => {
 
       {/* GRID */}
       <motion.div
-        className="relative z-30  mx-auto  md:px-10"
+        className="relative z-30  md:px-6"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.05 }}
@@ -121,7 +121,7 @@ const Noticias = () => {
       </motion.div>
 
       {/* PROXIMOS PARTIDOS (ANTES DEL SPONSOR → producto thinking) */}
-      <div className="md:mt-20  mx-auto  md:px-10">
+      <div className="md:mt-20  mx-auto  md:px-6">
         <ProximosResultSection />
       </div>
 

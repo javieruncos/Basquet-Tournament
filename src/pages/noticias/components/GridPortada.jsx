@@ -11,7 +11,7 @@ const HeroNews = ({ noticias }) => {
     .slice(0, 2);
 
   return (
-    <section className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-12">
+    <section className=" mx-auto px-4 md:px-10 py-6 md:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10 md:mt-15">
 
         <motion.div

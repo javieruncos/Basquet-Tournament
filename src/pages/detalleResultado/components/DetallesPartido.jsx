@@ -21,7 +21,6 @@ const DetallesPartido = ({ partido }) => {
                 <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mt-0.5">Tucuman</p>
             </div>
 
-             {/* Referees */}
             <div className="relative pl-4 border-l-2 border-white/10 hover:border-amber-400 transition-colors duration-300">
                 <div className="flex items-center gap-2 mb-2 text-gray-400 text-xs font-black uppercase tracking-widest">
                     <FaFlag /> Árbitros
